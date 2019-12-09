@@ -1,6 +1,21 @@
 <resources>
+    <string name="USER_ID_KEY">USER_ID</string>
+    <string name="USER_ROLE_KEY">USER_ROLE</string>
+    <string name="ACCESS_TOKEN_KEY">ACCESS_TOKEN</string>
+
     <string name="app_name">YerbApp</string>
     <string name="TRAINING">Training</string>
     <string name="EXPLORE">Explore</string>
     <string name="PROFILE">Profile</string>
+    <string name="LOGIN">Login</string>
+    <string name="PASSWORD">Password</string>
+    <string name="REGISTER">Register</string>
+    <string name="ERROR">Error!</string>
+    <string name="PASSWORD_EMPTY">Password must not be empty!</string>
+    <string name="USERNAME_EMPTY">Login must not be empty!</string>
+    <string name="EMAIL_EMPTY">Email must not be empty!</string>
+    <string name="INVALID_CREDENTIALS">Provide valid credentials</string>
+    <string name="NO_INTERNET">No internet connection. Try again later.</string>
+    <string name="LOADING">Loading</string>
+    <string name="EMAIL">Email</string>
 </resources>

@@ -1,13 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".presentation.ui.profile.login.LoginFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+    <data>
 
-</FrameLayout>
+        <variable
+            name="viewmodel"
+            type="com.polsl.yerbapp.presentation.ui.profile.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:visible="@{!viewmodel.loading}">
+
+            <EditText
+                android:id="@+id/etLogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="35dp"
+                android:hint="@string/LOGIN"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:text="@={viewmodel.loginInput}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:hint="@string/PASSWORD"
+                android:imeOptions="actionSend"
+                android:inputType="textPassword"
+                android:text="@={viewmodel.passwordInput}"
+                app:layout_constraintEnd_toEndOf="@id/etLogin"
+                app:layout_constraintStart_toStartOf="@id/etLogin"
+                app:layout_constraintTop_toBottomOf="@id/etLogin" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="35dp"
+                android:onClick="@{()->viewmodel.loginClick()}"
+                android:text="@string/LOGIN"
+                app:layout_constraintEnd_toEndOf="@id/etPassword"
+                app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
+            <Button
+                android:id="@+id/btnRegister"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="35dp"
+                android:onClick="@{()->viewmodel.registerClick()}"
+                android:text="@string/REGISTER"
+                app:layout_constraintStart_toStartOf="@id/etPassword"
+                app:layout_constraintTop_toTopOf="@id/btnLogin"
+                app:visible="@{viewmodel.registerVisible}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:visible="@{viewmodel.loading}">
+
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/LOADING"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/pbLoading"
+                app:layout_constraintStart_toStartOf="@id/pbLoading"
+                app:layout_constraintTop_toBottomOf="@id/pbLoading" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

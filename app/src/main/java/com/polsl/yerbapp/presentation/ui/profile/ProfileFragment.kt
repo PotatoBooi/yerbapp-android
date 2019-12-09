@@ -11,7 +11,7 @@ import com.polsl.yerbapp.presentation.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class ProfileFragment : BaseFragment<ProfileViewModel>() {
+class ProfileFragment : BaseFragment<ProfileViewModel>(), AuthListener {
     override val viewModel: ProfileViewModel? by viewModel { parametersOf(this) }
     private lateinit var binding: ProfileFragmentBinding
     override fun onCreateView(
@@ -23,5 +23,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         return binding.root
     }
 
-
+    override fun checkUserStatus() {
+        viewModel?.checkAuthStatus()
+    }
 }
