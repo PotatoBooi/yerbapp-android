@@ -1,5 +1,6 @@
 package com.polsl.yerbapp.presentation.ui.profile.register
 
+import android.text.TextUtils
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -25,8 +26,9 @@ class RegisterViewModel(private val registerUserCase: RegisterUserCase) : BaseVi
                 _message.value = R.string.USERNAME_EMPTY
                 return
             }
-            (loginInput.get()?.length ?: 0) < 8 -> {
-
+            (loginInput.get()?.length ?: 0) < 7 -> {
+                    _message.value = R.string.USERNAME_TOO_SHORT
+                return
             }
         }
         when {
@@ -35,7 +37,7 @@ class RegisterViewModel(private val registerUserCase: RegisterUserCase) : BaseVi
                 return
             }
             (passwordInput.get()?.length ?: 0) < 8 -> {
-
+                _message.value = R.string.PASSWORD_TOO_SHORT
             }
         }
         when {
@@ -43,8 +45,9 @@ class RegisterViewModel(private val registerUserCase: RegisterUserCase) : BaseVi
                 _message.value = R.string.EMAIL_EMPTY
                 return
             }
-            (emailInput.get()?.length ?: 0) < 8 -> {
-
+            !android.util.Patterns.EMAIL_ADDRESS.matcher(emailInput.get()).matches() -> {
+                _message.value = R.string.EMAIL_BAD_PATTER
+                return
             }
         }
         viewModelScope.launch(Dispatchers.Main) {
