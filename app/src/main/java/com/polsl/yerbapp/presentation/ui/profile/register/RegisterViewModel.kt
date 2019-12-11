@@ -70,4 +70,8 @@ class RegisterViewModel(private val registerUserCase: RegisterUserCase) : BaseVi
     private fun handleErrors(exception: Exception) {
         _message.postValue(R.string.ERROR)
     }
+
+    fun loginClick(){
+        _navigationId.value = R.id.action_registerFragment_to_profileFragment
+    }
 }
