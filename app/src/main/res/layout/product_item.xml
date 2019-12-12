@@ -6,7 +6,7 @@
     <data>
         <variable
                 name="product"
-                type="String"/>
+                type="com.polsl.yerbapp.presentation.ui.explore.Product"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,13 +24,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:gravity="center"
-                android:text="@{product}"
                 android:background="@color/colorAccent"
-                android:height="100dp"/>
+                android:height="100dp"
+                android:text="@{product.name}"
+              />
         <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:productImage="@{product}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

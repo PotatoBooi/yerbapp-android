@@ -4,8 +4,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.polsl.yerbapp.databinding.ProductItemBinding
+import com.polsl.yerbapp.presentation.ui.explore.Product
 
-class ProductGridAdapter : ListAdapter <String, ProductGridAdapter.ViewHolder>(ProductDiffCallback()) {
+class ProductsAdapter : ListAdapter <Product, ProductsAdapter.ViewHolder>(ProductDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
@@ -19,7 +20,7 @@ class ProductGridAdapter : ListAdapter <String, ProductGridAdapter.ViewHolder>(P
     class ViewHolder private constructor(val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: String) {
+        fun bind(item: Product) {
             binding.product = item
             binding.executePendingBindings()
         }
@@ -33,14 +34,14 @@ class ProductGridAdapter : ListAdapter <String, ProductGridAdapter.ViewHolder>(P
         }
     }
 
-    class ProductDiffCallback : DiffUtil.ItemCallback<String>() {
+    class ProductDiffCallback : DiffUtil.ItemCallback<Product>() {
 
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem == newItem
             //return oldItem.nightId == newItem.nightId
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem == newItem
         }
     }

@@ -1,6 +1,6 @@
 package com.polsl.yerbapp.presentation.ui.explore
 
-import ProductGridAdapter
+import ProductsAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +32,7 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
         binding = DataBindingUtil.inflate(inflater, R.layout.explore_fragment, container, false)
         binding.viewmodel = viewModel
 
-        val adapter = ProductGridAdapter()
+        val adapter = ProductsAdapter()
         binding.productList.adapter = adapter
 
         viewModel?.products?.observe(viewLifecycleOwner, Observer {
