@@ -20,7 +20,7 @@ class ProductGridAdapter : ListAdapter <String, ProductGridAdapter.ViewHolder>(P
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: String) {
-            binding.sleep = item
+            binding.product = item
             binding.executePendingBindings()
         }
 
