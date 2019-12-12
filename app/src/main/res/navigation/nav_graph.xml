@@ -16,9 +16,9 @@
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment">
         <action
-            android:id="@+id/action_profileFragment_to_registerFragment"
-            app:destination="@id/registerFragment"
-            app:enterAnim="@anim/slide_in" />
+        android:id="@+id/action_profileFragment_to_registerFragment"
+        app:destination="@id/registerFragment"
+        app:enterAnim="@anim/slide_in" />
     </fragment>
     <fragment
         android:id="@+id/trainingFragment"
@@ -29,7 +29,12 @@
         android:id="@+id/registerFragment"
         android:name="com.polsl.yerbapp.presentation.ui.profile.register.RegisterFragment"
         android:label="register_fragment"
-        tools:layout="@layout/register_fragment" />
+        tools:layout="@layout/register_fragment">
+        <action
+        android:id="@+id/action_registerFragment_to_profileFragment"
+        app:destination="@id/profileFragment"
+        app:enterAnim="@anim/slide_in" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.polsl.yerbapp.presentation.ui.profile.login.LoginFragment"

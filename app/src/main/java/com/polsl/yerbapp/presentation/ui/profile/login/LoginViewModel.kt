@@ -63,7 +63,7 @@ class LoginViewModel(private val loginUserCase: LoginUserCase) : BaseViewModel()
     private fun handleErrors(ex: Exception) {
         when (ex) {
             is UserNotFoundException -> {
-                _message.postValue(R.string.INVALID_CREDENTIALS)
+                _message.postValue(R.string.USER_NOT_FOUND)
             }
             is InvalidCredentialsException -> {
                 _message.postValue(R.string.INVALID_CREDENTIALS)
