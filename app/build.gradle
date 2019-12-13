@@ -8,6 +8,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+apply plugin: 'com.apollographql.android'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
@@ -27,6 +29,28 @@ android {
     }
     dataBinding {
         enabled = true
+    }
+
+//    compileOptions {
+//        sourceCompatibility = 1.8
+//        targetCompatibility = 1.8
+//    }
+//
+//    kotlinOptions {
+//        jvmTarget = "1.8"
+//    }
+}
+
+apollo {
+    generateKotlinModels = true // or false
+}
+
+repositories {
+    jcenter()
+    maven {
+        // The coroutines artifact is not deployed on jcenter yet
+        // See https://github.com/apollographql/apollo-android/issues/1325
+        url "https://dl.bintray.com/apollographql/android"
     }
 }
 
@@ -67,5 +91,15 @@ dependencies {
 
     // picasso library for loading images
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // apollo graphql client
+    implementation 'com.apollographql.apollo:apollo-runtime:1.0.0'
+    implementation 'com.apollographql.apollo:apollo-android-support:1.0.0'
+
+    // TODO remove after change to retrofit
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
+
+    // apollo coroutines
+    implementation 'com.apollographql.apollo:apollo-coroutines-support:1.2.2'
 
 }
