@@ -31,14 +31,14 @@ android {
         enabled = true
     }
 
-//    compileOptions {
-//        sourceCompatibility = 1.8
-//        targetCompatibility = 1.8
-//    }
-//
-//    kotlinOptions {
-//        jvmTarget = "1.8"
-//    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 apollo {
@@ -95,9 +95,6 @@ dependencies {
     // apollo graphql client
     implementation 'com.apollographql.apollo:apollo-runtime:1.0.0'
     implementation 'com.apollographql.apollo:apollo-android-support:1.0.0'
-
-    // TODO remove after change to retrofit
-    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
 
     // apollo coroutines
     implementation 'com.apollographql.apollo:apollo-coroutines-support:1.2.2'

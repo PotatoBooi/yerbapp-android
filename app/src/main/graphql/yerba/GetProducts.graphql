@@ -1,0 +1,15 @@
+# TODO pagination
+query GetProducts {
+    products {
+        name,
+        details,
+        manufacturer{
+            name,
+            country
+        },
+        type{
+            name
+        }
+    }
+}
+

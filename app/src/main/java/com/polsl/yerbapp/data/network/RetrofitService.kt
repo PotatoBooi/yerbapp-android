@@ -15,7 +15,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
-const val API_URL = "http://157.230.108.68:4000/"
+private const val API_URL = "http://157.230.108.68:4000/"
 
 interface RetrofitService {
 
