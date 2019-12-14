@@ -18,5 +18,4 @@ class AppNameGlideModule : AppGlideModule() {
             ObjectKey(System.currentTimeMillis().toShort())
         ) }
     }
-
 }
