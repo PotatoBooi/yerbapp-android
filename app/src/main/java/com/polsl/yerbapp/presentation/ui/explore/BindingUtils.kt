@@ -4,15 +4,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.polsl.yerbapp.R
+import com.polsl.yerbapp.domain.models.ProductModel
 
 @BindingAdapter("productName")
-fun TextView.setSleepDurationFormatted(item: Product) {
+fun TextView.setSleepDurationFormatted(item: ProductModel) {
     text = item.name
 }
 
 @BindingAdapter("productImage")
-fun ImageView.setSleepImage(item: Product) {
-    setImageResource(when (item.image) {
+fun ImageView.setSleepImage(item: ProductModel) {
+    setImageResource(when (item.photoUrl) {
         else -> R.drawable.ic_launcher_foreground
         // 0 -> R.drawable.ic_sleep_0
         // 1 -> R.drawable.ic_sleep_1

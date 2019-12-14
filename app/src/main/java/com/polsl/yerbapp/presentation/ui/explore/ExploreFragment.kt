@@ -35,7 +35,7 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
         val adapter = ProductsAdapter()
         binding.productList.adapter = adapter
 
-        viewModel?.products?.observe(viewLifecycleOwner, Observer {
+        viewModel?.getProducts()?.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }

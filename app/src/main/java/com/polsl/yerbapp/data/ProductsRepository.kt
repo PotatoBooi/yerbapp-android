@@ -1,32 +1,34 @@
 package com.polsl.yerbapp.data
 
+import android.accounts.NetworkErrorException
 import android.util.Log
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.network.GraphqlService
 import yerba.GetProductsQuery
+import com.polsl.yerbapp.domain.models.ProductModel
+import yerba.GetProductQuery
+import java.lang.IllegalStateException
 
 class ProductsRepository(private val graphqlService: GraphqlService){
 
-    fun getProducts(){
+    suspend fun getProducts(): ProductModel{
+        val productsQuery = GetProductsQuery
+            .builder()
+            .build()
 
-        graphqlService.getClient().query(GetProductsQuery())
-            .enqueue(object : ApolloCall.Callback<GetProductsQuery.Data>(){
-
-                override fun onResponse(response: Response<GetProductsQuery.Data>) {
-                    if (!response.hasErrors()) {
-                        // Here response().data() contains the data you requested
-                        Log.d("TEST", "Response data:  ${response.data()}")
-
-                    } else {
-                        Log.d("TEST", "Request Failure ${response.errors()}")
-                    }
-                }
-                override fun onFailure(e: ApolloException) {
-                    e.printStackTrace()
-                }
-            })
+        try {
+            val productsData =
+                graphqlService.getClient().query(productsQuery).toDeferred().await()
+            return productsData.data()?.products()?.get(0)?.let { product ->
+                ProductModel(product.id(), product.name(), product.photoUrl(), null, null, null)
+            } ?: run {
+                throw IllegalStateException()
+            }
+        }catch(apollo: ApolloException){
+            throw NetworkErrorException()
+        }
     }
-
 }
