@@ -22,9 +22,6 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
         fun newInstance() = ExploreFragment()
     }
 
-
-   // private lateinit var viewModel: ExploreViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,7 +37,6 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
                 adapter.submitList(it)
             }
         })
-
 
         val manager = GridLayoutManager(activity, 3)
         binding.productList.layoutManager = manager

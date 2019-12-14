@@ -13,21 +13,6 @@ import kotlinx.coroutines.launch
 class ExploreViewModel(private val productsRepository: ProductsRepository) : BaseViewModel() {
     // TODO: Implement the ViewModel
 
-//
-//    private fun getTempProducts(): LiveData<List<Product>> {
-//        var temp = MutableLiveData<List<Product>>()
-//        temp.postValue(listOf(Product("item 1", "image 1"), Product("item 2", "image 2"),
-//            Product("item 3", "image 3"), Product("item 4", "image 4")))
-//
-//       productsCase.testProducts()
-//
-//        return temp
-//    }
-//
-//    val products = getTempProducts()
-
-
-   // val products = getProduct()
 
     private lateinit var products: MutableLiveData<List<ProductModel>>
 
@@ -36,19 +21,12 @@ class ExploreViewModel(private val productsRepository: ProductsRepository) : Bas
             products = MutableLiveData()
             // very temporary
             CoroutineScope(Dispatchers.IO).launch {
-                products.postValue(listOf(productsRepository.getProducts()))
+                products.postValue(productsRepository.getProducts())
             }
         }
         return products
     }
-//    val products:LiveData<ProductModel>
-//        get() = _products
-
+    
 }
 
-//// temporary for testing
-//data class Product(
-//    var name: String,
-//    var image: String
-//)
 

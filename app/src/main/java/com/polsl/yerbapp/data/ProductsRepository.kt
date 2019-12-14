@@ -14,7 +14,8 @@ import java.lang.IllegalStateException
 
 class ProductsRepository(private val graphqlService: GraphqlService){
 
-    suspend fun getProducts(): ProductModel{
+
+    suspend fun getProducts(): List<ProductModel>{
         val productsQuery = GetProductsQuery
             .builder()
             .build()
@@ -22,8 +23,9 @@ class ProductsRepository(private val graphqlService: GraphqlService){
         try {
             val productsData =
                 graphqlService.getClient().query(productsQuery).toDeferred().await()
-            return productsData.data()?.products()?.get(0)?.let { product ->
-                ProductModel(product.id(), product.name(), product.photoUrl(), null, null, null)
+            return productsData.data()?.products()?.let { items ->
+                items.map{ProductModel(it.id(), it.name(), it.photoUrl(),
+                    null, null, null)}
             } ?: run {
                 throw IllegalStateException()
             }
