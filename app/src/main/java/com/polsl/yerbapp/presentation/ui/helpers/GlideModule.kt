@@ -1,4 +1,4 @@
-package com.polsl.yerbapp.presentation.ui.explore
+package com.polsl.yerbapp.presentation.ui.helpers
 
 import android.content.Context
 import com.bumptech.glide.GlideBuilder

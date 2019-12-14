@@ -1,10 +1,11 @@
-package com.polsl.yerbapp.presentation.ui.explore
+package com.polsl.yerbapp.presentation.ui.explore.binding
 
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.request.RequestOptions
 import com.polsl.yerbapp.domain.models.ProductModel
+import com.polsl.yerbapp.presentation.ui.explore.GlideApp
 
 
 @BindingAdapter("productName")
