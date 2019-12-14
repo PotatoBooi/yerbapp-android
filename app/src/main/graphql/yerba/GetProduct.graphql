@@ -1,0 +1,14 @@
+query GetProduct( $productId:  ID!){
+    product(productId: $productId){
+        name,
+        details,
+        photoUrl,
+        manufacturer{
+            name,
+            country
+        },
+        type{
+            name
+        }
+    }
+}

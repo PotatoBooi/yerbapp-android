@@ -1,0 +1,5 @@
+mutation AddReview($review: AddReviewInput!){
+    addReview(review: $review){
+        id
+    }
+}

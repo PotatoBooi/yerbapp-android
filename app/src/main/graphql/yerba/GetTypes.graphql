@@ -1,0 +1,6 @@
+query GetTypes {
+    types{
+        id,
+        name
+    }
+}

@@ -1,0 +1,14 @@
+mutation EditUser ( $userId: ID!, $user: EditUserInput!){
+    editUser(userId: $userId, user: $user){
+        id
+#        profile{
+#            aromaImportance,
+#            bitternessImportance,
+#            energyImportance,
+#            priceImportance,
+#            tasteImportance,
+#            overallImportance
+#        }
+    }
+}
+
