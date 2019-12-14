@@ -38,7 +38,7 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
             }
         })
 
-        val manager = GridLayoutManager(activity, 3)
+        val manager = GridLayoutManager(activity, 2)
         binding.productList.layoutManager = manager
 
         return binding.root

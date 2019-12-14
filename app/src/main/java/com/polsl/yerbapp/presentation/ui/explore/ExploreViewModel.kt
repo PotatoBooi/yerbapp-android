@@ -26,7 +26,7 @@ class ExploreViewModel(private val productsRepository: ProductsRepository) : Bas
         }
         return products
     }
-    
+
 }
 
 
