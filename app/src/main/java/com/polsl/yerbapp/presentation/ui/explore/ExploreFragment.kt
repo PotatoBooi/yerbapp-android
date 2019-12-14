@@ -1,6 +1,6 @@
 package com.polsl.yerbapp.presentation.ui.explore
 
-import ProductsAdapter
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +11,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.databinding.ExploreFragmentBinding
 import com.polsl.yerbapp.presentation.base.BaseFragment
+import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class ExploreFragment : BaseFragment<ExploreViewModel>() {
     override val viewModel: ExploreViewModel? by viewModel { parametersOf(this) }
     private lateinit var binding: ExploreFragmentBinding
-
+    private lateinit var adapter: ProductsAdapter
     companion object {
         fun newInstance() = ExploreFragment()
     }
@@ -29,19 +30,20 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
         binding = DataBindingUtil.inflate(inflater, R.layout.explore_fragment, container, false)
         binding.viewmodel = viewModel
 
-        val adapter = ProductsAdapter()
+        adapter = ProductsAdapter(binding.viewmodel)
         binding.productList.adapter = adapter
-
-        viewModel?.getProducts()?.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitList(it)
-            }
-        })
 
         val manager = GridLayoutManager(activity, 2)
         binding.productList.layoutManager = manager
 
         return binding.root
+    }
+
+    override fun setupLiveData() {
+        super.setupLiveData()
+        viewModel?.products?.observe(viewLifecycleOwner, Observer {
+                adapter.submitList(it)
+        })
     }
 
 }

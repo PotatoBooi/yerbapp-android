@@ -31,7 +31,7 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
                 throw IllegalStateException()
             }
         }catch(apollo: ApolloException){
-            throw NetworkErrorException()
+            throw NetworkErrorException() as Throwable
         }
     }
 }
