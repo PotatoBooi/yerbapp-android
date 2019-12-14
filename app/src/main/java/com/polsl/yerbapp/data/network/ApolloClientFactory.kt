@@ -2,25 +2,24 @@ package com.polsl.yerbapp.data.network
 
 import com.apollographql.apollo.ApolloClient
 import com.polsl.yerbapp.data.device.SharedPreferencesManager
-import com.polsl.yerbapp.domain.models.LoginDto
-import com.polsl.yerbapp.domain.models.LoginResponse
-import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import retrofit2.http.Body
 
 
 private const val GRAPHQL_API_URL = "http://157.230.108.68:4000/graphql"
 
-class GraphqlService(private val connectivityInterceptor: ConnectivityInterceptor, private val sharedPreferencesManager: SharedPreferencesManager){
-// it is more like factory
-    // make not authorized too
-    fun getClient(): ApolloClient{
+class ApolloClientFactory( private val connectivityInterceptor: ConnectivityInterceptor,
+                           private val sharedPreferencesManager: SharedPreferencesManager) {
+
+    fun create() : ApolloClient{
         return invoke(connectivityInterceptor, sharedPreferencesManager)
     }
 
-    companion object {
-        operator fun invoke(connectivityInterceptor: ConnectivityInterceptor, sharedPreferencesManager: SharedPreferencesManager): ApolloClient {
+    companion object{
+        operator fun invoke(
+            connectivityInterceptor: ConnectivityInterceptor,
+            sharedPreferencesManager: SharedPreferencesManager
+        ): ApolloClient {
             val token = sharedPreferencesManager.getUserData().accessToken
             val requestInterceptor = Interceptor { chain ->
 
@@ -41,7 +40,6 @@ class GraphqlService(private val connectivityInterceptor: ConnectivityIntercepto
                 .addInterceptor(requestInterceptor)
                 .addInterceptor(connectivityInterceptor)
                 .build()
-            val moshi = Moshi.Builder().build()
             return ApolloClient
                 .builder()
                 .serverUrl(GRAPHQL_API_URL)
@@ -49,4 +47,8 @@ class GraphqlService(private val connectivityInterceptor: ConnectivityIntercepto
                 .build()
         }
     }
+
 }
+
+
+
