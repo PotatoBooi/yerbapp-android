@@ -1,16 +1,26 @@
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.polsl.yerbapp.databinding.ProductItemBinding
 import com.polsl.yerbapp.domain.models.ProductModel
 
+
 class ProductsAdapter : ListAdapter <ProductModel, ProductsAdapter.ViewHolder>(ProductDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
+
+        holder.itemView.setOnClickListener { v ->
+            Toast.makeText(
+                v.context,
+                position.toString() + "",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
