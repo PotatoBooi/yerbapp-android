@@ -10,30 +10,33 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_margin="16dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/image_wrapper"
+           android:layout_height="200dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true">
-        <TextView
-                android:id="@+id/info_text"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:gravity="center"
-                android:background="@color/colorAccent"
-                android:height="100dp"
-                android:text="@{product.name}"
-              />
-        <ImageView
+            app:layout_constraintBottom_toTopOf="@id/product_name">
+
+            <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:productImage="@{product}"/>
+                app:productImage="@{product.photoUrl}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{product.name}"
+            app:layout_constraintTop_toBottomOf="@id/image_wrapper"
+            app:layout_constraintStart_toStartOf="@id/image_wrapper"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
