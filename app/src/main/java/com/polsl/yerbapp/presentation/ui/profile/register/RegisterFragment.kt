@@ -35,7 +35,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
     override fun setupLiveData() {
         super.setupLiveData()
         viewModel?.notifyRegisterSuccess?.observe(viewLifecycleOwner, Observer {
-            profileSharedViewModel?.handleRegisterSucces(it)
+            profileSharedViewModel?.handleRegisterSuccess(it)
             Navigation.findNavController(requireView()).popBackStack()
         })
     }

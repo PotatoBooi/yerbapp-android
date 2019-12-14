@@ -16,7 +16,6 @@ buildscript {
         // in the individual module build.gradle files
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         classpath 'com.apollographql.apollo:apollo-gradle-plugin:1.2.2'
-
     }
 }
 
@@ -35,8 +34,6 @@ allprojects {
             url 'https://jitpack.io'
         }
     }
-
-
 }
 
 task clean(type: Delete) {

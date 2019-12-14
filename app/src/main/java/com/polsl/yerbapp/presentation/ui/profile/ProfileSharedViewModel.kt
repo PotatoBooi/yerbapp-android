@@ -8,7 +8,7 @@ class ProfileSharedViewModel : BaseViewModel() {
     val registerSuccess: LiveData<String>
         get() = _registerSuccess
     private val _registerSuccess = LiveEvent<String>()
-    fun handleRegisterSucces(username: String) {
+    fun handleRegisterSuccess(username: String) {
         _registerSuccess.postValue(username)
     }
 }

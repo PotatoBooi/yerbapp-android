@@ -1,3 +1,5 @@
+package com.polsl.yerbapp.presentation.ui.explore.adapters
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -6,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.polsl.yerbapp.databinding.ProductItemBinding
 import com.polsl.yerbapp.domain.models.ProductModel
 
-class ProductsAdapter : ListAdapter <ProductModel, ProductsAdapter.ViewHolder>(ProductDiffCallback()) {
+
+class ProductsAdapter(private val productsListener: ProductsListener?) : ListAdapter <ProductModel, ProductsAdapter.ViewHolder>(ProductDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
@@ -14,10 +17,13 @@ class ProductsAdapter : ListAdapter <ProductModel, ProductsAdapter.ViewHolder>(P
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ProductItemBinding.inflate(layoutInflater, parent, false)
+        binding.listener = productsListener
+        return ViewHolder(binding)
     }
 
-    class ViewHolder private constructor(val binding: ProductItemBinding) :
+    class ViewHolder(val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ProductModel) {
@@ -25,13 +31,6 @@ class ProductsAdapter : ListAdapter <ProductModel, ProductsAdapter.ViewHolder>(P
             binding.executePendingBindings()
         }
 
-        companion object {
-            fun from(parent: ViewGroup): ViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ProductItemBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
-            }
-        }
     }
 
     class ProductDiffCallback : DiffUtil.ItemCallback<ProductModel>() {
@@ -48,4 +47,6 @@ class ProductsAdapter : ListAdapter <ProductModel, ProductsAdapter.ViewHolder>(P
 }
 
 
-
+interface ProductsListener{
+    fun onItemClick(item: ProductModel)
+}
