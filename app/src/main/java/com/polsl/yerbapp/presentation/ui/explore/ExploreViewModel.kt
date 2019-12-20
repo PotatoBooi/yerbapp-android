@@ -1,7 +1,6 @@
 package com.polsl.yerbapp.presentation.ui.explore
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
@@ -10,14 +9,10 @@ import com.polsl.yerbapp.data.ProductsRepository
 import com.polsl.yerbapp.domain.models.ProductModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsDataSource
-
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsListener
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 class ExploreViewModel(private val productsRepository: ProductsRepository) : BaseViewModel(), ProductsListener {
-    // TODO: Implement the ViewModel
 
     init {
         initPaging()
