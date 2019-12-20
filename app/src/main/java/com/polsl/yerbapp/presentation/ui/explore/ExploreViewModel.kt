@@ -21,9 +21,9 @@ class ExploreViewModel(private val productsRepository: ProductsRepository) : Bas
 
 
 
-    val pagedProducts : LiveData<PagedList<ProductModel>>
-        get() = _pagedProducts
-    private val _pagedProducts = MutableLiveData<PagedList<ProductModel>>()
+    lateinit var pagedProducts : LiveData<PagedList<ProductModel>>
+       // get() = _pagedProducts
+   // private val _pagedProducts = MutableLiveData<PagedList<ProductModel>>()
 
 
     val  products: LiveData<List<ProductModel>>
@@ -52,8 +52,7 @@ class ExploreViewModel(private val productsRepository: ProductsRepository) : Bas
             .setEnablePlaceholders(true)
             .setPageSize(15)
             .build()
-        _pagedProducts.postValue(initializedPagedListBuilder(pagedListConfig).build().value)
-
+        pagedProducts = initializedPagedListBuilder(pagedListConfig).build()
     }
 
     private fun initializedPagedListBuilder(config: PagedList.Config):
@@ -61,7 +60,7 @@ class ExploreViewModel(private val productsRepository: ProductsRepository) : Bas
 
         val dataSourceFactory = object : DataSource.Factory<Int, ProductModel>() {
             override fun create(): DataSource<Int, ProductModel> {
-                return ProductsDataSource(productsRepository)
+                return ProductsDataSource(viewModelScope, productsRepository)
             }
         }
         return LivePagedListBuilder<Int, ProductModel>(dataSourceFactory, config)

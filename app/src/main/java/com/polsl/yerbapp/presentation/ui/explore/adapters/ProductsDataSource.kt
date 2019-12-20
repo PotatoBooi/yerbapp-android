@@ -9,38 +9,37 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class ProductsDataSource (private val productsRepository: ProductsRepository):
+class ProductsDataSource (private val scope: CoroutineScope, private val productsRepository: ProductsRepository):
     PageKeyedDataSource<Int, ProductModel>() {
     override fun loadInitial(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, ProductModel>
     ) {
-        val items = initProducts()
-        callback.onResult(items, 0, 1) // need to check
+        scope.launch {
+            val items = productsRepository.getProducts()
+            callback.onResult(items, 0, 1)   // need to check
+        }
     }
 
     override fun loadAfter(
         params: LoadParams<Int>,
         callback: LoadCallback<Int, ProductModel>
     ) {
-        val items = initProducts()
-        callback.onResult(items, params.key + 1) // need to check
+        scope.launch {
+            val items = productsRepository.getProducts()
+            callback.onResult(items, params.key + 1)   // need to check
+        }
+
     }
 
     override fun loadBefore(
         params: LoadParams<Int>,
         callback: LoadCallback<Int, ProductModel>
     ) {
-        val items = initProducts()
-        callback.onResult(items, params.key + 1) // need to check
-    }
-
-    private fun initProducts() : ArrayList<ProductModel> {
-
-        val productsList: ArrayList<ProductModel> = ArrayList()
-        CoroutineScope(Dispatchers.Main).launch{
-            productsList.addAll(productsRepository.getProducts())
+        scope.launch {
+            val items = productsRepository.getProducts()
+            callback.onResult(items, params.key + 1)   // need to check
         }
-        return productsList
     }
+
 }

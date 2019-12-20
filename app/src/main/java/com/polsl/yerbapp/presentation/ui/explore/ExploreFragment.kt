@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.databinding.ExploreFragmentBinding
@@ -31,8 +32,7 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
         binding = DataBindingUtil.inflate(inflater, R.layout.explore_fragment, container, false)
         binding.viewmodel = viewModel
 
-       // adapter = ProductsAdapter()
-        adapter = ProductsAdapter(binding.viewmodel) //null
+        adapter = ProductsAdapter(binding.viewmodel)
         binding.productList.adapter = adapter
 
         val manager = GridLayoutManager(activity, 2)
