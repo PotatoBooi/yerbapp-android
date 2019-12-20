@@ -5,7 +5,7 @@ import androidx.paging.DataSource
 import com.polsl.yerbapp.data.ProductsRepository
 import com.polsl.yerbapp.domain.models.ProductModel
 
-class ProductsDataSourceFactory(private val productsRepository: ProductsRepository) : DataSource.Factory<Int?, ProductModel?>() {
+class ProductsDataSourceFactory(private val productsRepository: ProductsRepository) : DataSource.Factory<Int, ProductModel>() {
     private val liveData: MutableLiveData<ProductsDataSource> = MutableLiveData()
     //private val repository: Repository
     //private val compositeDisposable: CompositeDisposable
@@ -13,7 +13,7 @@ class ProductsDataSourceFactory(private val productsRepository: ProductsReposito
         get() = liveData
 
 
-    override fun create(): DataSource<Int?, ProductModel?>? {
+    override fun create(): DataSource<Int, ProductModel>{
         val dataSourceClass =
             ProductsDataSource(productsRepository)
         liveData.postValue(dataSourceClass)

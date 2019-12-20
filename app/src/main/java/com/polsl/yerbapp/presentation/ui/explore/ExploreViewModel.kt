@@ -11,6 +11,7 @@ import androidx.paging.PagedList
 import com.polsl.yerbapp.data.ProductsRepository
 import com.polsl.yerbapp.domain.models.ProductModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
+import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsDataSource
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsDataSourceFactory
 
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsListener
@@ -25,13 +26,13 @@ class ExploreViewModel(private val productsRepository: ProductsRepository,
 
 
 
-    val pagedProducts : LiveData<PagedList<ProductModel?>>
+    val pagedProducts : LiveData<PagedList<ProductModel>>
         get() = _pagedProducts
-    private val _pagedProducts = MutableLiveData<PagedList<ProductModel??>>()
+    private val _pagedProducts = MutableLiveData<PagedList<ProductModel>>()
 
-    val liveDataSource: LiveData<PageKeyedDataSource<Int, ProductModel>>
-        get() = _liveDataSource
-    val _liveDataSource = MutableLiveData<PageKeyedDataSource<Int, ProductModel>>()
+//    val liveDataSource: LiveData<PageKeyedDataSource<Int, ProductModel>>
+//        get() = _liveDataSource
+//    val _liveDataSource = MutableLiveData<PageKeyedDataSource<Int, ProductModel>>()
 
     val  products: LiveData<List<ProductModel>>
         get() = _products
@@ -54,15 +55,27 @@ class ExploreViewModel(private val productsRepository: ProductsRepository,
 
     private fun initPaging() {
 
-        _liveDataSource.postValue(productsDataSourceFactory.productsLiveData.value)
+       // _liveDataSource.postValue(productsDataSourceFactory.productsLiveData.value)
 
         val pagedListConfig = PagedList.Config.Builder()
-            .setEnablePlaceholders(true)
-            .setInitialLoadSizeHint(15)
-            .setPageSize(15).build()
+            .setEnablePlaceholders(false)
+            .setPageSize(15)
+            .build()
+        val sth = initializedPagedListBuilder(pagedListConfig).build()
+        _pagedProducts.postValue(sth.value)
+       // _pagedProducts.postValue(LivePagedListBuilder(productsDataSourceFactory, pagedListConfig).build().value)
 
-        _pagedProducts.postValue(LivePagedListBuilder(productsDataSourceFactory, pagedListConfig).build().value)
+    }
 
+    private fun initializedPagedListBuilder(config: PagedList.Config):
+            LivePagedListBuilder<Int, ProductModel> {
+
+        val dataSourceFactory = object : DataSource.Factory<Int, ProductModel>() {
+            override fun create(): DataSource<Int, ProductModel> {
+                return ProductsDataSource(productsRepository)
+            }
+        }
+        return LivePagedListBuilder<Int, ProductModel>(dataSourceFactory, config)
     }
 
 }

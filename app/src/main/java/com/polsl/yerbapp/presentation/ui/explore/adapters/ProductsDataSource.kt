@@ -16,7 +16,7 @@ class ProductsDataSource (private val productsRepository: ProductsRepository):
         callback: LoadInitialCallback<Int, ProductModel>
     ) {
         val items = initProducts()
-        callback.onResult(items, null, 1) // need to check
+        callback.onResult(items, 0, 1) // need to check
     }
 
     override fun loadAfter(

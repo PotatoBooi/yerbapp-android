@@ -31,7 +31,8 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
         binding = DataBindingUtil.inflate(inflater, R.layout.explore_fragment, container, false)
         binding.viewmodel = viewModel
 
-        adapter = ProductsAdapter(binding.viewmodel)
+       // adapter = ProductsAdapter()
+        adapter = ProductsAdapter(binding.viewmodel) //null
         binding.productList.adapter = adapter
 
         val manager = GridLayoutManager(activity, 2)

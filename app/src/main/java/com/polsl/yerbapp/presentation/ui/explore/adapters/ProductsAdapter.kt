@@ -10,11 +10,11 @@ import com.polsl.yerbapp.databinding.ProductItemBinding
 import com.polsl.yerbapp.domain.models.ProductModel
 
 
-class ProductsAdapter(private val productsListener: ProductsListener?) : PagedListAdapter<ProductModel, ProductsAdapter.ViewHolder> (ProductDiffCallback()) {
+class ProductsAdapter(private val productsListener: ProductsListener?) : ListAdapter<ProductModel, ProductsAdapter.ViewHolder> (ProductDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        item?.let(holder::bind)
+        item?.let { holder.bind(it) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,12 +37,12 @@ class ProductsAdapter(private val productsListener: ProductsListener?) : PagedLi
     class ProductDiffCallback : DiffUtil.ItemCallback<ProductModel>() {
 
         override fun areItemsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean {
-            return oldItem == newItem
+            return oldItem.id == newItem.id
             //return oldItem.nightId == newItem.nightId
         }
 
         override fun areContentsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean {
-            return oldItem == newItem
+            return oldItem.name == newItem.name
         }
     }
 }
