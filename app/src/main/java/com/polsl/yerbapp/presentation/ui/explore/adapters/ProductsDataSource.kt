@@ -38,7 +38,7 @@ class ProductsDataSource (private val productsRepository: ProductsRepository):
     private fun initProducts() : ArrayList<ProductModel> {
 
         val productsList: ArrayList<ProductModel> = ArrayList()
-        CoroutineScope(Dispatchers.IO).launch{
+        CoroutineScope(Dispatchers.Main).launch{
             productsList.addAll(productsRepository.getProducts())
         }
         return productsList

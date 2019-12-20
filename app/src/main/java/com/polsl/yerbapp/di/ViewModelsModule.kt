@@ -13,6 +13,6 @@ val viewModelsModule = module {
     viewModel { LoginViewModel(get()) }
     viewModel { RegisterViewModel(get()) }
     viewModel { ProfileSharedViewModel() }
-    viewModel { ExploreViewModel(get(), get()) }
+    viewModel { ExploreViewModel(get()) }
 
 }

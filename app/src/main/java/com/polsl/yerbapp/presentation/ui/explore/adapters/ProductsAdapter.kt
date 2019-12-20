@@ -8,16 +8,20 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.polsl.yerbapp.databinding.ProductItemBinding
 import com.polsl.yerbapp.domain.models.ProductModel
+import kotlinx.android.synthetic.main.product_item.view.*
 
 
-class ProductsAdapter(private val productsListener: ProductsListener?) : ListAdapter<ProductModel, ProductsAdapter.ViewHolder> (ProductDiffCallback()) {
+class ProductsAdapter(private val productsListener: ProductsListener?) : PagedListAdapter<ProductModel, ProductsAdapter.ViewHolder> (ProductDiffCallback()) {
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) { //
         val item = getItem(position)
         item?.let { holder.bind(it) }
+
+        //holder.binding.product = getItem(position)
+        //holder.itemView.product_name
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder { //
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ProductItemBinding.inflate(layoutInflater, parent, false)
         binding.listener = productsListener
@@ -29,7 +33,7 @@ class ProductsAdapter(private val productsListener: ProductsListener?) : ListAda
 
         fun bind(item: ProductModel) {
             binding.product = item
-            binding.executePendingBindings()
+            //binding.executePendingBindings()
         }
 
     }
