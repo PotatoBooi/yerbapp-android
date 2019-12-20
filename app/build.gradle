@@ -90,4 +90,7 @@ dependencies {
     // apollo coroutines
     implementation 'com.apollographql.apollo:apollo-coroutines-support:1.2.2'
 
+    /*Paging*/
+    implementation 'android.arch.paging:runtime:1.0.1'
+
 }
