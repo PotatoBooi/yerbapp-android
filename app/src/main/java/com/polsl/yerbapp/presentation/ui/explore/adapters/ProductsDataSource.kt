@@ -1,5 +1,6 @@
 package com.polsl.yerbapp.presentation.ui.explore.adapters
 
+import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import com.polsl.yerbapp.data.ProductsRepository
 import com.polsl.yerbapp.domain.models.ProductModel
@@ -14,8 +15,8 @@ class ProductsDataSource (private val scope: CoroutineScope, private val product
         callback: LoadInitialCallback<Int, ProductModel>
     ) {
         scope.launch {
-            val items = productsRepository.getProducts()
-            callback.onResult(items, 0, 1)   // need to check
+            val items = productsRepository.getProducts(params.requestedLoadSize, 0 )
+            callback.onResult(items, null, params.requestedLoadSize)
         }
     }
 
@@ -24,8 +25,8 @@ class ProductsDataSource (private val scope: CoroutineScope, private val product
         callback: LoadCallback<Int, ProductModel>
     ) {
         scope.launch {
-            val items = productsRepository.getProducts()
-            callback.onResult(items, params.key + 1)   // need to check
+            val items = productsRepository.getProducts(params.requestedLoadSize, params.key)
+            callback.onResult(items, params.key + params.requestedLoadSize)
         }
 
     }
@@ -34,10 +35,6 @@ class ProductsDataSource (private val scope: CoroutineScope, private val product
         params: LoadParams<Int>,
         callback: LoadCallback<Int, ProductModel>
     ) {
-        scope.launch {
-            val items = productsRepository.getProducts()
-            callback.onResult(items, params.key + 1)   // need to check
-        }
     }
 
 }

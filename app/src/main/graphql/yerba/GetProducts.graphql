@@ -1,10 +1,9 @@
-# TODO pagination
-query GetProducts {
-    products {
+
+query GetProducts ( $perPage: Int, $offset: Int){
+    products(perPage: $perPage, offset: $offset )  {
         id,
         name,
         photoUrl
-
     }
 }
 

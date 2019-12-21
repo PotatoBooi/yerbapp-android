@@ -18,6 +18,8 @@ class ExploreViewModel(private val productsRepository: ProductsRepository) : Bas
         initPaging()
     }
 
+    private val PAGE_SIZE: Int = 8
+
     val pagedProducts : LiveData<PagedList<ProductModel>>
         get() = _pagedProducts
     private lateinit var _pagedProducts: LiveData<PagedList<ProductModel>>
@@ -31,7 +33,8 @@ class ExploreViewModel(private val productsRepository: ProductsRepository) : Bas
 
         val pagedListConfig = PagedList.Config.Builder()
             .setEnablePlaceholders(true)
-            .setPageSize(15)
+            .setInitialLoadSizeHint(PAGE_SIZE)
+            .setPageSize(PAGE_SIZE)
             .build()
         _pagedProducts = initializedPagedListBuilder(pagedListConfig).build()
     }
