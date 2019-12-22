@@ -15,33 +15,91 @@
         android:layout_height="match_parent"
         tools:context=".presentation.ui.profile.ProfileFragment">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="35dp"
-            android:text="@{viewmodel.isAuthorized}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:visible="@{!viewmodel.loginVisible}">
 
-        <Button
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="35dp"
-            android:onClick="@{()->viewmodel.logoutClick()}"
-            android:padding="20dp"
-            android:text="Logout"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:visible="@{viewmodel.loginVisible}" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="35dp"
+                android:text="@{viewmodel.isAuthorized}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="35dp"
+                android:onClick="@{()->viewmodel.logoutClick()}"
+                android:padding="20dp"
+                android:text="Logout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <RadioGroup
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbAroma1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/ic_logo"
+                    android:buttonTint="none"
+                    android:layout_weight="1"/>
+<!--                    android:buttonTint="@color/shadow_color" />-->
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbAroma2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/ic_logo"
+                    android:buttonTint="none"
+                    android:layout_weight="1"/>
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbAroma3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/ic_logo"
+                    android:buttonTint="none"
+                    android:layout_weight="1"/>
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbAroma4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/ic_logo"
+                    android:buttonTint="none"
+                    android:layout_weight="1"/>
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbAroma5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/ic_logo"
+                    android:buttonTint="none"
+                    android:layout_weight="1"/>
+
+            </RadioGroup>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:visible="@{viewmodel.loginVisible}"
-            tools:visibility="invisible">
+            tools:visibility="invisible"
+            android:tint="@color/cardview_dark_background" >
 
             <fragment
                 android:id="@+id/fragmentLogin"
