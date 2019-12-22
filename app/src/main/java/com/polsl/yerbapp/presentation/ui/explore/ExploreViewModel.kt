@@ -1,13 +1,19 @@
 package com.polsl.yerbapp.presentation.ui.explore
 
+import android.util.Log
+import android.view.View
+import androidx.arch.core.util.Function
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.polsl.yerbapp.data.ProductsRepository
 import com.polsl.yerbapp.domain.models.ProductModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
+import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsDataFactory
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsDataSource
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsListener
 
@@ -18,12 +24,15 @@ class ExploreViewModel(private val productsRepository: ProductsRepository) : Bas
         initPaging()
     }
 
-    private val PAGE_SIZE: Int = 8
 
     val pagedProducts : LiveData<PagedList<ProductModel>>
         get() = _pagedProducts
     private lateinit var _pagedProducts: LiveData<PagedList<ProductModel>>
 
+    val loading: LiveData<Boolean>
+        get() = _loading
+
+    private lateinit var  _loading: LiveData<Boolean>
 
     override fun onItemClick(item: ProductModel) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -31,24 +40,18 @@ class ExploreViewModel(private val productsRepository: ProductsRepository) : Bas
 
     private fun initPaging() {
 
-        val pagedListConfig = PagedList.Config.Builder()
-            .setEnablePlaceholders(true)
-            .setInitialLoadSizeHint(PAGE_SIZE)
-            .setPageSize(PAGE_SIZE)
+       val productsDataFactory = ProductsDataFactory(viewModelScope, productsRepository)
+        _loading = Transformations.switchMap(productsDataFactory.liveData){it.loading}
+
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(12)
+            .setPageSize(6)
             .build()
-        _pagedProducts = initializedPagedListBuilder(pagedListConfig).build()
+        _pagedProducts = LivePagedListBuilder<Int, ProductModel>(productsDataFactory, config).build()
+
     }
 
-    private fun initializedPagedListBuilder(config: PagedList.Config):
-            LivePagedListBuilder<Int, ProductModel> {
-
-        val dataSourceFactory = object : DataSource.Factory<Int, ProductModel>() {
-            override fun create(): DataSource<Int, ProductModel> {
-                return ProductsDataSource(viewModelScope, productsRepository)
-            }
-        }
-        return LivePagedListBuilder<Int, ProductModel>(dataSourceFactory, config)
-    }
 
 }
 

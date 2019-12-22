@@ -9,6 +9,7 @@ import com.polsl.yerbapp.data.network.ApolloClientFactory
 import com.polsl.yerbapp.data.network.ConnectivityInterceptor
 import yerba.GetProductsQuery
 import com.polsl.yerbapp.domain.models.ProductModel
+import kotlinx.coroutines.delay
 import java.lang.IllegalStateException
 
 class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
@@ -21,6 +22,7 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
             .offset(offset)
             .build()
         val apolloClient = apolloClientFactory.create()
+        delay(2000)  // for testing loaders
         try {
             val productsData =
                 apolloClient

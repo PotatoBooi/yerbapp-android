@@ -3,7 +3,10 @@ package com.polsl.yerbapp.presentation.views
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
 import com.polsl.yerbapp.presentation.ui.helpers.GlideApp
 
 object BindingAdapters {
