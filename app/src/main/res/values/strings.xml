@@ -2,7 +2,6 @@
     <string name="USER_ID_KEY">USER_ID</string>
     <string name="USER_ROLE_KEY">USER_ROLE</string>
     <string name="ACCESS_TOKEN_KEY">ACCESS_TOKEN</string>
-
     <string name="app_name">YerbApp</string>
     <string name="TRAINING">Training</string>
     <string name="EXPLORE">Explore</string>
@@ -22,4 +21,10 @@
     <string name="USERNAME_TOO_SHORT">Login must be at least 7 characters</string>
     <string name="PASSWORD_TOO_SHORT">Password must be at least 8 characters</string>
     <string name="EMAIL_BAD_PATTER">Email must be an email</string>
+    <string name="AROMA">Aromat</string>
+    <string name="TASTE">Smak</string>
+    <string name="ENERGY">Pobudzenie</string>
+    <string name="BITTERNESS">Gorycz</string>
+    <string name="PRICE">Cena</string>
+    <string name="OVERALL">Ogólna ocena</string>
 </resources>
