@@ -14,7 +14,6 @@ import com.polsl.yerbapp.data.ProductsRepository
 import com.polsl.yerbapp.domain.models.ProductModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsDataFactory
-import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsDataSource
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsListener
 
 

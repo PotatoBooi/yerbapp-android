@@ -1,6 +1,5 @@
 package com.polsl.yerbapp.presentation.ui.explore.adapters
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource

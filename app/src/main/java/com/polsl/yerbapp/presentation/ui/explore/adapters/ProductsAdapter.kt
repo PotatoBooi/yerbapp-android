@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.polsl.yerbapp.databinding.ProductItemBinding
 import com.polsl.yerbapp.domain.models.ProductModel
-import kotlinx.android.synthetic.main.product_item.view.*
 
 
 class ProductsAdapter(private val productsListener: ProductsListener?) : PagedListAdapter<ProductModel, ProductsAdapter.ViewHolder> (ProductDiffCallback()) {

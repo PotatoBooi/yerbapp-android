@@ -22,7 +22,7 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
             .offset(offset)
             .build()
         val apolloClient = apolloClientFactory.create()
-        delay(2000)  // for testing loaders
+        //delay(2000)  // for testing loaders
         try {
             val productsData =
                 apolloClient
