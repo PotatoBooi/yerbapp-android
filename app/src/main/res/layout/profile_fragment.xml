@@ -20,14 +20,68 @@
             android:layout_height="match_parent"
             app:visible="@{!viewmodel.loginVisible}">
 
-            <TextView
+<!--            <TextView-->
+<!--                android:labelFor="@+id/etUsername"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                android:text="Username: "/>-->
+            <EditText
+                android:id="@+id/etUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="35dp"
-                android:text="@{viewmodel.isAuthorized}"
+                android:text="@{`Username: ` + viewmodel.username}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/etEmail"
+                android:focusable="false"
+                android:hint="@string/USERNAME"/>
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="35dp"
+                android:text="@{`Emai: ` + viewmodel.email}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/etRank"
+                android:focusable="false"
+                android:hint="@string/EMAIL"/>
 
+            <EditText
+                android:id="@+id/etRank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="35dp"
+                android:text="Ranking TODO"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btnLogout"
+                android:focusable="false"
+                android:hint="@string/RANK"/>
+            <Button
+                android:id="@+id/btnEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="35dp"
+                android:onClick="@{()->viewmodel.logoutClick()}"
+                android:padding="20dp"
+                android:text="Edit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="35dp"
+                android:onClick="@{()->viewmodel.logoutClick()}"
+                android:padding="20dp"
+                android:text="Save"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
             <Button
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:id="@+id/btnLogout"
@@ -38,7 +92,6 @@
                 android:padding="20dp"
                 android:text="Logout"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
 

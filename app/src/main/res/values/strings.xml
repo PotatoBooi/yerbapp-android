@@ -27,4 +27,8 @@
     <string name="BITTERNESS">Gorycz</string>
     <string name="PRICE">Cena</string>
     <string name="OVERALL">Ogólna ocena</string>
+    <string name="USERNAME">Nazwa użytkownika</string>
+    <string name="EMAIL">Email</string>
+    <string name="RANK">Miejsce w rankingu</string>
+
 </resources>
