@@ -17,7 +17,6 @@
     <string name="USER_NOT_FOUND">User des not exist</string>
     <string name="NO_INTERNET">No internet connection. Try again later.</string>
     <string name="LOADING">Loading</string>
-    <string name="EMAIL">Email</string>
     <string name="USERNAME_TOO_SHORT">Login must be at least 7 characters</string>
     <string name="PASSWORD_TOO_SHORT">Password must be at least 8 characters</string>
     <string name="EMAIL_BAD_PATTER">Email must be an email</string>
@@ -30,5 +29,10 @@
     <string name="USERNAME">Nazwa użytkownika</string>
     <string name="EMAIL">Email</string>
     <string name="RANK">Miejsce w rankingu</string>
+    <string name="EDIT">Edytuj</string>
+    <string name="SAVE">Zapisz</string>
+
+
+
 
 </resources>

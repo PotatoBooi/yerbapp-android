@@ -32,59 +32,59 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="35dp"
-                android:text="@{`Username: ` + viewmodel.username}"
+                android:text="fff@{viewmodel.username}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/etEmail"
-                android:focusable="false"
-                android:hint="@string/USERNAME"/>
+                app:editable="@{viewmodel.isEditable}"
+                android:hint="@string/USERNAME" />
+
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="35dp"
-                android:text="@{`Emai: ` + viewmodel.email}"
+                android:text="ss@{viewmodel.email}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/etRank"
-                android:focusable="false"
-                android:hint="@string/EMAIL"/>
+                app:layout_constraintBottom_toTopOf="@id/tvRank"
+                app:editable="@{viewmodel.isEditable}"
+                android:hint="@string/EMAIL" />
 
-            <EditText
-                android:id="@+id/etRank"
+            <TextView
+                android:id="@+id/tvRank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="35dp"
-                android:text="Ranking TODO"
+                android:text="@{`Ranking: `+ viewmodel.rank}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/btnLogout"
-                android:focusable="false"
-                android:hint="@string/RANK"/>
+                app:layout_constraintBottom_toTopOf="@id/btnLogout"/>
             <Button
                 android:id="@+id/btnEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="35dp"
-                android:onClick="@{()->viewmodel.logoutClick()}"
+                android:onClick="@{()->viewmodel.editClick()}"
                 android:padding="20dp"
-                android:text="Edit"
+                android:text="@string/EDIT"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
             <Button
                 android:id="@+id/btnSave"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="35dp"
-                android:onClick="@{()->viewmodel.logoutClick()}"
+                android:onClick="@{()->viewmodel.saveClick()}"
                 android:padding="20dp"
-                android:text="Save"
+                android:text="@string/SAVE"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
             <Button
-                style="@style/Widget.AppCompat.Button.Colored"
                 android:id="@+id/btnLogout"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="35dp"
@@ -116,7 +116,8 @@
                 android:layout_height="wrap_content"
                 android:numStars="5"
                 android:rating="3"
-                android:stepSize="1" />
+                android:stepSize="1"
+                android:isIndicator="true" />
 
             <TextView
                 android:id="@+id/tvTasteHeader"
