@@ -43,288 +43,113 @@
 
 
             <TextView
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/rgAroma"
                 android:id="@+id/tvAromaHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/AROMA"
+                android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
-                android:layout_marginStart="20dp"/>
-
-            <RadioGroup
-                android:id="@+id/rgAroma"
+                app:layout_constraintBottom_toBottomOf="@id/rbAroma"
                 app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/AROMA"
+                android:textSize="15sp" />
+
+            <RatingBar
+                android:id="@+id/rbAroma"
+                style="@style/PreferenceRating"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="35dp">
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbAroma1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:button="@drawable/ic_logo" />
-<!--                    android:buttonTint="@color/shadow_color" />-->
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbAroma2"
-                    style="@style/AlertDialog.AppCompat.Light"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:button="@drawable/ic_logo" />
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbAroma3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbAroma4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbAroma5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-
-            </RadioGroup>
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="1" />
 
             <TextView
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvAromaHeader"
-                app:layout_constraintTop_toTopOf="@id/rgTaste"
                 android:id="@+id/tvTasteHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/TASTE"
                 android:layout_marginEnd="5dp"
-                android:layout_marginStart="20dp"/>
-            <RadioGroup
-                android:id="@+id/rgTaste"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rgAroma"
+                app:layout_constraintBottom_toBottomOf="@id/rbTaste"
+                app:layout_constraintStart_toStartOf="@id/tvAromaHeader"
+                android:text="@string/TASTE"
+                android:textSize="15sp" />
+
+            <RatingBar
+                android:id="@+id/rbTaste"
+                style="@style/PreferenceRating"
+                app:layout_constraintEnd_toEndOf="@id/rbAroma"
+                app:layout_constraintTop_toBottomOf="@id/rbAroma"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="35dp">
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbTaste1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <!--                    android:buttonTint="@color/shadow_color" />-->
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbTaste2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbTaste3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbTaste4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbTaste5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-
-            </RadioGroup>
-
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="1" />
             <TextView
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTasteHeader"
-                app:layout_constraintTop_toTopOf="@id/rgEnergy"
                 android:id="@+id/tvEnergyHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintBottom_toBottomOf="@id/rbEnergy"
+                app:layout_constraintStart_toStartOf="@id/tvTasteHeader"
                 android:text="@string/ENERGY"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="20dp"/>
+                android:textSize="15sp" />
 
-            <RadioGroup
-                android:id="@+id/rgEnergy"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rgTaste"
+            <RatingBar
+                android:id="@+id/rbEnergy"
+                style="@style/PreferenceRating"
+                app:layout_constraintEnd_toEndOf="@id/rbTaste"
+                app:layout_constraintTop_toBottomOf="@id/rbTaste"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="35dp">
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbEnergy1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <!--                    android:buttonTint="@color/shadow_color" />-->
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbEnergy2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbEnergy3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbEnergy4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbEnergy5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-
-            </RadioGroup>
-
-
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="1" />
             <TextView
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvEnergyHeader"
-                app:layout_constraintTop_toTopOf="@id/rgBitterness"
-                android:id="@+id/tvBitternessHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/BITTERNESS"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="20dp"/>
-
-            <RadioGroup
-                android:id="@+id/rgBitterness"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rgEnergy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="35dp">
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbBitterness1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <!--                    android:buttonTint="@color/shadow_color" />-->
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbBitterness2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbBitterness3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbBitterness4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbBitterness5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-
-            </RadioGroup>
-
-
-
-            <TextView
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvBitternessHeader"
-                app:layout_constraintTop_toTopOf="@id/rgPrice"
                 android:id="@+id/tvPriceHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/PRICE"
                 android:layout_marginEnd="5dp"
-                android:layout_marginStart="20dp"/>
+                app:layout_constraintBottom_toBottomOf="@id/rbPrice"
+                app:layout_constraintStart_toStartOf="@id/tvEnergyHeader"
+                android:text="@string/PRICE"
+                android:textSize="15sp" />
 
-            <RadioGroup
-                android:id="@+id/rgPrice"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rgBitterness"
+            <RatingBar
+                android:id="@+id/rbPrice"
+                style="@style/PreferenceRating"
+                app:layout_constraintEnd_toEndOf="@id/rbEnergy"
+                app:layout_constraintTop_toBottomOf="@id/rbEnergy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="35dp">
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="1" />
+            <TextView
+                android:id="@+id/tvBitternessHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintBottom_toBottomOf="@id/rbBitterness"
+                app:layout_constraintStart_toStartOf="@id/tvPriceHeader"
+                android:text="@string/BITTERNESS"
+                android:textSize="15sp" />
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbPrice1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <!--                    android:buttonTint="@color/shadow_color" />-->
+            <RatingBar
+                android:id="@+id/rbBitterness"
+                style="@style/PreferenceRating"
+                app:layout_constraintEnd_toEndOf="@id/rbPrice"
+                app:layout_constraintTop_toBottomOf="@id/rbPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="1" />
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbPrice2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbPrice3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbPrice4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbPrice5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/ic_logo"
-                    android:layout_weight="1"/>
 
-            </RadioGroup>
-            
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -335,15 +160,13 @@
             tools:visibility="invisible"
             android:tint="@color/cardview_dark_background" >
 
-
             <fragment
                 android:id="@+id/fragmentLogin"
                 android:name="com.polsl.yerbapp.presentation.ui.profile.login.LoginFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:layout="@layout/login_fragment"
-                tools:layout_editor_absoluteX="3dp"
-                tools:layout_editor_absoluteY="0dp" />
+                tools:layout="@layout/login_fragment" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

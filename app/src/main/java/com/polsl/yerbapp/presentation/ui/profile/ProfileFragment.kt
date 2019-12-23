@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.databinding.ProfileFragmentBinding
 import com.polsl.yerbapp.presentation.base.BaseFragment
+import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -20,6 +21,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>(), AuthListener {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.profile_fragment, container, false)
         binding.viewmodel = viewModel
+
         return binding.root
     }
 
