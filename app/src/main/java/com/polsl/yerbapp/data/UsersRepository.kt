@@ -1,5 +1,8 @@
 package com.polsl.yerbapp.data
 
+import android.accounts.NetworkErrorException
+import com.apollographql.apollo.coroutines.toDeferred
+import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.device.SharedPreferencesManager
 import com.polsl.yerbapp.data.network.ApolloClientFactory
 import com.polsl.yerbapp.data.network.RetrofitService
@@ -7,9 +10,12 @@ import com.polsl.yerbapp.domain.exceptions.InvalidCredentialsException
 import com.polsl.yerbapp.domain.exceptions.UserNotFoundException
 import com.polsl.yerbapp.domain.models.dto.LoginDto
 import com.polsl.yerbapp.domain.models.dto.RegisterDto
+import com.polsl.yerbapp.domain.models.reponse.graphql.ProfileModel
+import com.polsl.yerbapp.domain.models.reponse.graphql.UserModel
 import com.polsl.yerbapp.domain.models.reponse.rest.RegisterResponse
 import com.polsl.yerbapp.domain.models.reponse.sharedPreferences.CurrentUserInfo
 import retrofit2.HttpException
+import yerba.GetUserQuery
 
 class UsersRepository(
     private val retrofitService: RetrofitService,
@@ -70,28 +76,29 @@ class UsersRepository(
         sharedPreferencesManager.saveUserData(-1, "", "")
     }
 
-//    suspend fun getCurrentUser(): UserModel{
-//        val productsQuery = GetProductsQuery
-//            .builder()
-//            .build()
-//        val apolloClient = apolloClientFactory.create()
-//        try {
-//            val productsData =
-//                apolloClient
-//                    .query(productsQuery)
-//                    .toDeferred()
-//                    .await()
-//            return productsData.data()?.products()?.let { items ->
-//                items.map{
-//                    ProductModel(it.id(), it.name(), it.photoUrl(),
-//                        null, null, null)
-//                }
-//            } ?: run {
-//                throw IllegalStateException()
-//            }
-//        }catch(apollo: ApolloException){
-//            throw NetworkErrorException() as Throwable
-//        }
-//    }
+    suspend fun getCurrentUser(): UserModel? {
+        val currUserId = getCurrentUserInfo().userId
+        val userQuery = GetUserQuery
+            .builder()
+            .userId(currUserId.toString()) // TODO check type
+            .build()
+        val apolloClient = apolloClientFactory.create()
+        try {
+            val userData =
+                apolloClient
+                    .query(userQuery)
+                    .toDeferred()
+                    .await()
+            return userData.data()?.user()?.let { u ->
+                    UserModel(u.id(), u.username(), u.email(), u.avatarUrl(), ProfileModel(u.profile().priceImportance(), u.profile().tasteImportance(), u.profile().energyImportance(),
+                        u.profile().aromaImportance(), u.profile().bitternessImportance()))
+                // TODO add extra function for mapping
+                } ?: run {
+                throw IllegalStateException()
+            }
+        }catch(apollo: ApolloException){
+            throw NetworkErrorException()
+        }
+    }
 
 }
