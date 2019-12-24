@@ -1,19 +1,22 @@
 package com.polsl.yerbapp.presentation.ui.profile
 
-import android.database.Observable
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
+import com.polsl.yerbapp.di.useCasesModule
+import com.polsl.yerbapp.domain.models.reponse.graphql.ProfileModel
+import com.polsl.yerbapp.domain.models.reponse.graphql.UserModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
-import com.polsl.yerbapp.presentation.usecases.GetCurrentUserCase
+import com.polsl.yerbapp.presentation.usecases.CurrentUserCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ProfileViewModel(private val getCurrentUserCase: GetCurrentUserCase) : BaseViewModel() {
+class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewModel() {
    // val loginVisible = ObservableBoolean(true)
-    val isAuthorized = ObservableBoolean(false)
+   // val isAuthorized = ObservableBoolean(false)
     val isEditable = ObservableBoolean(false)
 
     // preferences
@@ -27,26 +30,10 @@ class ProfileViewModel(private val getCurrentUserCase: GetCurrentUserCase) : Bas
     val email = ObservableField<String>("")
 
 
+    val isAuthorized: LiveData<Boolean>
+        get() = _isAuthorized
+    private val _isAuthorized = MutableLiveData<Boolean>(false)
 
-//    val bitterness: LiveData<Int>
-//        get() = _bitterness
-//    private val _bitterness = MutableLiveData<Int>()
-//
-//    val taste: LiveData<Int>
-//        get() = _taste
-//    private val _taste = MutableLiveData<Int>()
-//
-//    val energy: LiveData<Int>
-//        get() = _energy
-//    private val _energy = MutableLiveData<Int>()
-//
-//    val price: LiveData<Int>
-//        get() = _price
-//    private val _price = MutableLiveData<Int>()
-//
-//    val aroma: LiveData<Int>
-//        get() = _aroma
-//    private val _aroma = MutableLiveData<Int>()
 
     val rank: LiveData<Int>
         get() = _rank
@@ -54,16 +41,31 @@ class ProfileViewModel(private val getCurrentUserCase: GetCurrentUserCase) : Bas
 
     init {
         checkAuthStatus()
-        getUser()
     }
 
     fun logoutClick() {
-        getCurrentUserCase.logoutUser()
+        currentUserCase.logoutUser() // TODO live data in repo?
         checkAuthStatus()
     }
     fun saveClick() {
       //TODO
-        isEditable.set(false)
+        val editedProfile = ProfileModel(
+            priceImportance = price.get()!!.toInt(),
+            aromaImportance = aroma.get()!!.toInt(),
+            tasteImportance = taste.get()!!.toInt(),
+            bitternessImportance = bitterness.get()!!.toInt(),
+            energyImportance = energy.get()!!.toInt()
+            )
+        val editedUser =  UserModel(
+            id = "",  // TODO
+            username = username.get()!!,
+            email = email.get()!!,
+            profile = editedProfile)
+
+        viewModelScope.launch (Dispatchers.Main) {
+            currentUserCase.editCurrentUser(editedUser)
+            isEditable.set(false)
+        }
 
         // save user info preferences
     }
@@ -74,17 +76,22 @@ class ProfileViewModel(private val getCurrentUserCase: GetCurrentUserCase) : Bas
     fun discardClick(){
         isEditable.set(false)
     }
+//
+//    fun checkAuthStatus() = viewModelScope.launch(Dispatchers.Main) {
+//        val isAuth = currentUserCase.isUserAuthorized()
+//        //loginVisible.set(!isAuth)
+//        if (isAuth) isAuthorized.set(true) else isAuthorized.set(false)
+//    }
 
     fun checkAuthStatus() = viewModelScope.launch(Dispatchers.Main) {
-        val isAuth = getCurrentUserCase.isUserAuthorized()
-        //loginVisible.set(!isAuth)
-        if (isAuth) isAuthorized.set(true) else isAuthorized.set(false)
+        val isAuth = currentUserCase.isUserAuthorized()
+        _isAuthorized.postValue(isAuth)
     }
 
     fun getUser(){
         //TODO
         viewModelScope.launch(Dispatchers.Main) {
-            val user = getCurrentUserCase.getCurrentUser()
+            val user = currentUserCase.getCurrentUser()
             val profile = user?.profile
             username.set(user?.username)
             email.set(user?.username)

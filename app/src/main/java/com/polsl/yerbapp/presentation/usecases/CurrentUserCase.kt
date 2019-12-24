@@ -1,10 +1,12 @@
 package com.polsl.yerbapp.presentation.usecases
 
+import com.apollographql.apollo.api.toInput
 import com.polsl.yerbapp.data.UsersRepository
 import com.polsl.yerbapp.domain.models.reponse.graphql.UserModel
 import com.polsl.yerbapp.domain.models.reponse.sharedPreferences.CurrentUserInfo
+import yerba.type.EditUserInput
 
-class GetCurrentUserCase(private val usersRepository: UsersRepository) {
+class CurrentUserCase(private val usersRepository: UsersRepository) {
     fun getCurrentUserInfo(): CurrentUserInfo? {
         val userInfo = usersRepository.getCurrentUserInfo()
         return if (userInfo.accessToken.isEmpty()) {
@@ -18,6 +20,19 @@ class GetCurrentUserCase(private val usersRepository: UsersRepository) {
     fun logoutUser() = usersRepository.logoutUser()
 
     suspend fun getCurrentUser(): UserModel? = usersRepository.getCurrentUser()
+    suspend fun editCurrentUser(user: UserModel){
+        // TODO mapper
+        val profile = user.profile
+        val editUserInput = EditUserInput
+            .builder()
+            .bitternessImportance(profile.bitternessImportance)
+            .aromaImportance(profile.aromaImportance)
+            .tasteImportance(profile.tasteImportance)
+            .energyImportance(profile.energyImportance)
+            .priceImportance(profile.priceImportance)
+            .build()
 
+        usersRepository.editCurrentUser(editUserInput)
+    }
 
 }

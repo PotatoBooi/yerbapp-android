@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.databinding.ProfileFragmentBinding
 import com.polsl.yerbapp.presentation.base.BaseFragment
+import kotlinx.android.synthetic.main.profile_fragment.*
 import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -27,5 +30,22 @@ class ProfileFragment : BaseFragment<ProfileViewModel>(), AuthListener {
 
     override fun checkUserStatus() {
         viewModel?.checkAuthStatus()
+    }
+
+    override fun setupLiveData() {
+        super.setupLiveData()
+        viewModel?.isAuthorized?.observe(viewLifecycleOwner, Observer {
+            if(it) {
+                viewModel?.getUser()
+                clProfile.visibility = View.VISIBLE
+                clLogin.visibility = View.GONE
+
+            }
+            else {
+                clProfile.visibility = View.GONE
+                clLogin.visibility = View.VISIBLE
+
+            }
+        })
     }
 }

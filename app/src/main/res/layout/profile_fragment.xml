@@ -16,9 +16,10 @@
         tools:context=".presentation.ui.profile.ProfileFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clProfile"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:visible="@{viewmodel.isAuthorized()}">
+            android:layout_height="match_parent">
+<!--            app:visible="@{viewmodel.isAuthorized}">-->
 
 <!--            <TextView-->
 <!--                android:labelFor="@+id/etUsername"-->
@@ -209,10 +210,11 @@
             android:id="@+id/clLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:visible="@{!viewmodel.isAuthorized()}"
-            android:tint="@color/cardview_dark_background"
-            tools:visibility="invisible"
-            android:visibility="gone">
+            android:tint="@color/cardview_dark_background">
+
+<!--            app:visible="@{!viewmodel.isAuthorized}"-->
+<!--            tools:visibility="invisible"-->
+<!--            android:visibility="gone">-->
 
             <fragment
                 android:id="@+id/fragmentLogin"

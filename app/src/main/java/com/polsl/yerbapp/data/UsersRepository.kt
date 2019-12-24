@@ -15,7 +15,9 @@ import com.polsl.yerbapp.domain.models.reponse.graphql.UserModel
 import com.polsl.yerbapp.domain.models.reponse.rest.RegisterResponse
 import com.polsl.yerbapp.domain.models.reponse.sharedPreferences.CurrentUserInfo
 import retrofit2.HttpException
+import yerba.EditUserMutation
 import yerba.GetUserQuery
+import yerba.type.EditUserInput
 
 class UsersRepository(
     private val retrofitService: RetrofitService,
@@ -100,5 +102,28 @@ class UsersRepository(
             throw NetworkErrorException()
         }
     }
+
+    suspend fun editCurrentUser(editedUser: EditUserInput) {
+        val currUserId = getCurrentUserInfo().userId
+        val editUser = EditUserMutation
+            .builder()
+            .userId(currUserId.toString())
+            .user(editedUser)
+            .build()
+        val apolloClient = apolloClientFactory.create()
+        try {
+            val editUserResponse =
+                apolloClient
+                    .mutate(editUser)
+                    .toDeferred()
+                    .await()
+
+                // TODO catch errors
+
+        }catch(apollo: ApolloException){
+            throw NetworkErrorException()
+        }
+    }
+
 
 }
