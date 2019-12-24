@@ -6,7 +6,7 @@
     <data>
         <variable
                 name="product"
-                type="com.polsl.yerbapp.domain.models.ProductModel"/>
+                type="com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel"/>
         <variable
             name="listener"
             type="com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsListener" />

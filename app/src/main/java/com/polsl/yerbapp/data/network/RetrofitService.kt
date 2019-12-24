@@ -1,9 +1,9 @@
 package com.polsl.yerbapp.data.network
 
-import com.polsl.yerbapp.domain.models.LoginDto
-import com.polsl.yerbapp.domain.models.LoginResponse
-import com.polsl.yerbapp.domain.models.RegisterDto
-import com.polsl.yerbapp.domain.models.RegisterResponse
+import com.polsl.yerbapp.domain.models.dto.LoginDto
+import com.polsl.yerbapp.domain.models.reponse.rest.LoginResponse
+import com.polsl.yerbapp.domain.models.dto.RegisterDto
+import com.polsl.yerbapp.domain.models.reponse.rest.RegisterResponse
 import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

@@ -1,8 +1,7 @@
 package com.polsl.yerbapp.presentation.usecases
 
 import com.polsl.yerbapp.data.UsersRepository
-import com.polsl.yerbapp.domain.models.CurrentUserInfo
-import yerba.GetUserQuery
+import com.polsl.yerbapp.domain.models.reponse.sharedPreferences.CurrentUserInfo
 
 class GetCurrentUserCase(private val usersRepository: UsersRepository) {
     fun getCurrentUserInfo(): CurrentUserInfo? {

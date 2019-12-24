@@ -1,17 +1,15 @@
 package com.polsl.yerbapp.data
 
-import android.accounts.NetworkErrorException
-import com.apollographql.apollo.coroutines.toDeferred
-import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.device.SharedPreferencesManager
 import com.polsl.yerbapp.data.network.ApolloClientFactory
 import com.polsl.yerbapp.data.network.RetrofitService
 import com.polsl.yerbapp.domain.exceptions.InvalidCredentialsException
 import com.polsl.yerbapp.domain.exceptions.UserNotFoundException
-import com.polsl.yerbapp.domain.models.*
+import com.polsl.yerbapp.domain.models.dto.LoginDto
+import com.polsl.yerbapp.domain.models.dto.RegisterDto
+import com.polsl.yerbapp.domain.models.reponse.rest.RegisterResponse
+import com.polsl.yerbapp.domain.models.reponse.sharedPreferences.CurrentUserInfo
 import retrofit2.HttpException
-import yerba.GetProductsQuery
-import java.lang.IllegalStateException
 
 class UsersRepository(
     private val retrofitService: RetrofitService,
@@ -20,7 +18,12 @@ class UsersRepository(
 ) {
     suspend fun login(username: String, password: String) {
         try {
-            val result = retrofitService.login(LoginDto(username, password))
+            val result = retrofitService.login(
+                LoginDto(
+                    username,
+                    password
+                )
+            )
             sharedPreferencesManager.saveUserData(result.id, result.role, result.accessToken)
         } catch (ex: HttpException) {
             when (ex.code()) {
@@ -35,7 +38,13 @@ class UsersRepository(
 
     suspend fun register(username: String, password: String, email: String): RegisterResponse {
         try {
-            return retrofitService.register(RegisterDto(username, password, email))
+            return retrofitService.register(
+                RegisterDto(
+                    username,
+                    password,
+                    email
+                )
+            )
         } catch (ex: HttpException) {
             throw InvalidCredentialsException()
 
