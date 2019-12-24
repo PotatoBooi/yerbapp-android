@@ -90,7 +90,7 @@ class UsersRepository(
                     .toDeferred()
                     .await()
             return userData.data()?.user()?.let { u ->
-                    UserModel(u.id(), u.username(), u.email(), u.avatarUrl(), ProfileModel(u.profile().priceImportance(), u.profile().tasteImportance(), u.profile().energyImportance(),
+                    UserModel(u.id(), u.username(), u.email(), ProfileModel(u.profile().priceImportance(), u.profile().tasteImportance(), u.profile().energyImportance(),
                         u.profile().aromaImportance(), u.profile().bitternessImportance()))
                 // TODO add extra function for mapping
                 } ?: run {

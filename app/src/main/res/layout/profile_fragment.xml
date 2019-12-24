@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="35dp"
-                android:text="fff@{viewmodel.username}"
+                android:text="@={viewmodel.username}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/etEmail"
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="35dp"
-                android:text="ss@{viewmodel.email}"
+                android:text="@={viewmodel.email}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/tvRank"
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
-                android:rating="3"
+                android:rating="@={viewmodel.aroma}"
                 android:stepSize="1" />
 
             <TextView
@@ -136,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
-                android:rating="3"
+                android:rating="@={viewmodel.taste}"
                 android:stepSize="1" />
             <TextView
                 android:id="@+id/tvEnergyHeader"
@@ -156,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
-                android:rating="3"
+                android:rating="@={viewmodel.energy}"
                 android:stepSize="1" />
             <TextView
                 android:id="@+id/tvPriceHeader"
@@ -176,7 +176,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
-                android:rating="3"
+                android:rating="@={viewmodel.price}"
                 android:stepSize="1" />
             <TextView
                 android:id="@+id/tvBitternessHeader"
@@ -196,7 +196,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
-                android:rating="3"
+                android:rating="@={viewmodel.bitterness}"
                 android:stepSize="1" />
 
 

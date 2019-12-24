@@ -3,7 +3,6 @@ query GetUser( $userId:  ID!){
         id,
         username,
         email,
-        avatarUrl,
         profile{
             priceImportance,
             tasteImportance,

@@ -17,11 +17,11 @@ class ProfileViewModel(private val getCurrentUserCase: GetCurrentUserCase) : Bas
     val isEditable = ObservableBoolean(false)
 
     // preferences
-    val bitterness = ObservableField(3)
-    val taste = ObservableField(3)
-    val energy = ObservableField(3)
-    val price = ObservableField(3)
-    val aroma = ObservableField(3)
+    val bitterness = ObservableField(0.0f)
+    val taste = ObservableField(0.0f)
+    val energy = ObservableField(0.0f)
+    val price = ObservableField(0.0f)
+    val aroma = ObservableField(0.0f)
 
     val username = ObservableField<String>("")
     val email = ObservableField<String>("")
@@ -54,6 +54,7 @@ class ProfileViewModel(private val getCurrentUserCase: GetCurrentUserCase) : Bas
 
     init {
         checkAuthStatus()
+        getUser()
     }
 
     fun logoutClick() {
@@ -87,11 +88,11 @@ class ProfileViewModel(private val getCurrentUserCase: GetCurrentUserCase) : Bas
             val profile = user?.profile
             username.set(user?.username)
             email.set(user?.username)
-            bitterness.set(profile?.bitternessImportance)
-            taste.set(profile?.tasteImportance)
-            energy.set(profile?.energyImportance)
-            aroma.set(profile?.aromaImportance)
-            price.set(profile?.priceImportance)
+            bitterness.set(profile?.bitternessImportance?.toFloat())
+            taste.set(profile?.tasteImportance?.toFloat())
+            energy.set(profile?.energyImportance?.toFloat())
+            aroma.set(profile?.aromaImportance?.toFloat())
+            price.set(profile?.priceImportance?.toFloat())
         }
     }
 }
