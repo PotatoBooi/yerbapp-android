@@ -11,8 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(private val getCurrentUserCase: GetCurrentUserCase) : BaseViewModel() {
-    val loginVisible = ObservableBoolean(true)
-    val isAuthorized = ObservableField<String>("")
+   // val loginVisible = ObservableBoolean(true)
+    val isAuthorized = ObservableBoolean(false)
     val isEditable = ObservableBoolean(false)
 
     val username: LiveData<String>
@@ -49,7 +49,11 @@ class ProfileViewModel(private val getCurrentUserCase: GetCurrentUserCase) : Bas
 
     fun checkAuthStatus() = viewModelScope.launch(Dispatchers.Main) {
         val isAuth = getCurrentUserCase.isUserAuthorized()
-        loginVisible.set(!isAuth)
-        if (isAuth) isAuthorized.set("Authorized!") else isAuthorized.set("Not Authorized!")
+        //loginVisible.set(!isAuth)
+        if (isAuth) isAuthorized.set(true) else isAuthorized.set(false)
+    }
+
+    fun getUser(){
+        //val user = getCurrentUserCase.getCurrentUser()?.userId
     }
 }

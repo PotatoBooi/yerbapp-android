@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:visible="@{!viewmodel.loginVisible}">
+            app:visible="@{viewmodel.isAuthorized()}">
 
 <!--            <TextView-->
 <!--                android:labelFor="@+id/etUsername"-->
@@ -116,8 +116,7 @@
                 android:layout_height="wrap_content"
                 android:numStars="5"
                 android:rating="3"
-                android:stepSize="1"
-                android:isIndicator="true" />
+                android:stepSize="1" />
 
             <TextView
                 android:id="@+id/tvTasteHeader"
@@ -210,9 +209,9 @@
             android:id="@+id/clLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:visible="@{viewmodel.loginVisible}"
-            tools:visibility="invisible"
-            android:tint="@color/cardview_dark_background" >
+            app:visible="@{!viewmodel.isAuthorized()}"
+            android:tint="@color/cardview_dark_background"
+            android:visibility="gone">
 
             <fragment
                 android:id="@+id/fragmentLogin"
