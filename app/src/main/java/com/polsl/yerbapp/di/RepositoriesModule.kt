@@ -11,6 +11,6 @@ val repositoriesModule = module {
     single { ConnectivityInterceptor(get()) }
     single { RetrofitService(get()) }
     single { ApolloClientFactory(get(), get()) }
-    single { UsersRepository(get(), get()) }
+    single { UsersRepository(get(), get(), get()) }
     single { ProductsRepository(get())}
 }

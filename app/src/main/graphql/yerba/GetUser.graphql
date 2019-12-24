@@ -8,7 +8,7 @@ query GetUser( $userId:  ID!){
             priceImportance,
             tasteImportance,
             energyImportance,
-            tasteImportance,
+            bitternessImportance,
             aromaImportance,
             overallImportance
         }
