@@ -211,6 +211,7 @@
             android:layout_height="match_parent"
             app:visible="@{!viewmodel.isAuthorized()}"
             android:tint="@color/cardview_dark_background"
+            tools:visibility="invisible"
             android:visibility="gone">
 
             <fragment
