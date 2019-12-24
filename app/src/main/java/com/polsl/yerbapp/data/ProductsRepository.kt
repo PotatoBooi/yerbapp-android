@@ -1,6 +1,7 @@
 package com.polsl.yerbapp.data
 
 import android.accounts.NetworkErrorException
+import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.device.SharedPreferencesManager
@@ -8,16 +9,20 @@ import com.polsl.yerbapp.data.network.ApolloClientFactory
 import com.polsl.yerbapp.data.network.ConnectivityInterceptor
 import yerba.GetProductsQuery
 import com.polsl.yerbapp.domain.models.ProductModel
+import kotlinx.coroutines.delay
 import java.lang.IllegalStateException
 
 class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
 
 
-    suspend fun getProducts(): List<ProductModel>{
+    suspend fun getProducts(perPage: Int, offset: Int): List<ProductModel>{
         val productsQuery = GetProductsQuery
             .builder()
+            .perPage(perPage)
+            .offset(offset)
             .build()
         val apolloClient = apolloClientFactory.create()
+        //delay(2000)  // for testing loaders
         try {
             val productsData =
                 apolloClient

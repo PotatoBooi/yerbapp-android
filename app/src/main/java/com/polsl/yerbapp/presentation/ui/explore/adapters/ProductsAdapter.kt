@@ -2,6 +2,7 @@ package com.polsl.yerbapp.presentation.ui.explore.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,11 +10,11 @@ import com.polsl.yerbapp.databinding.ProductItemBinding
 import com.polsl.yerbapp.domain.models.ProductModel
 
 
-class ProductsAdapter(private val productsListener: ProductsListener?) : ListAdapter <ProductModel, ProductsAdapter.ViewHolder>(ProductDiffCallback()) {
+class ProductsAdapter(private val productsListener: ProductsListener?) : PagedListAdapter<ProductModel, ProductsAdapter.ViewHolder> (ProductDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        item?.let { holder.bind(it) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,12 +37,12 @@ class ProductsAdapter(private val productsListener: ProductsListener?) : ListAda
     class ProductDiffCallback : DiffUtil.ItemCallback<ProductModel>() {
 
         override fun areItemsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean {
-            return oldItem == newItem
+            return oldItem.id == newItem.id
             //return oldItem.nightId == newItem.nightId
         }
 
         override fun areContentsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean {
-            return oldItem == newItem
+            return oldItem.name == newItem.name
         }
     }
 }

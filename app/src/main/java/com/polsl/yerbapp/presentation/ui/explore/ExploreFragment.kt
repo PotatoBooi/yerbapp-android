@@ -29,7 +29,6 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.explore_fragment, container, false)
         binding.viewmodel = viewModel
-
         adapter = ProductsAdapter(binding.viewmodel)
         binding.productList.adapter = adapter
 
@@ -41,9 +40,19 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
 
     override fun setupLiveData() {
         super.setupLiveData()
-        viewModel?.products?.observe(viewLifecycleOwner, Observer {
-                adapter.submitList(it)
+        viewModel?.pagedProducts?.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
         })
-    }
+        viewModel?.loading?.observe(viewLifecycleOwner, Observer {
+            binding.loading = it })
+//                clLoading.visibility = View.VISIBLE
+//            }
+//            else
+//            {
+//                clLoading.visibility = View.INVISIBLE
+//            }
+//        })
+//    }
 
+    }
 }
