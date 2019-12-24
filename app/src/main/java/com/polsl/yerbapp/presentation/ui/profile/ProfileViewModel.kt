@@ -23,6 +23,11 @@ class ProfileViewModel(private val getCurrentUserCase: GetCurrentUserCase) : Bas
     val price = ObservableField(3)
     val aroma = ObservableField(3)
 
+    val username = ObservableField<String>("")
+    val email = ObservableField<String>("")
+
+
+
 //    val bitterness: LiveData<Int>
 //        get() = _bitterness
 //    private val _bitterness = MutableLiveData<Int>()
@@ -77,6 +82,16 @@ class ProfileViewModel(private val getCurrentUserCase: GetCurrentUserCase) : Bas
 
     fun getUser(){
         //TODO
-        //val user = getCurrentUserCase.getCurrentUser()?.userId
+        viewModelScope.launch(Dispatchers.Main) {
+            val user = getCurrentUserCase.getCurrentUser()
+            val profile = user?.profile
+            username.set(user?.username)
+            email.set(user?.username)
+            bitterness.set(profile?.bitternessImportance)
+            taste.set(profile?.tasteImportance)
+            energy.set(profile?.energyImportance)
+            aroma.set(profile?.aromaImportance)
+            price.set(profile?.priceImportance)
+        }
     }
 }
