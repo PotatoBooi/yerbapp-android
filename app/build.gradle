@@ -92,4 +92,7 @@ dependencies {
     /*Paging*/
     implementation 'android.arch.paging:runtime:1.0.1'
 
+    /*Card view*/
+    implementation "androidx.cardview:cardview:1.0.0"
+
 }
