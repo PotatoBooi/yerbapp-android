@@ -1,6 +1,5 @@
 package com.polsl.yerbapp.data
 
-import android.accounts.NetworkErrorException
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.device.SharedPreferencesManager
@@ -17,7 +16,6 @@ import com.polsl.yerbapp.domain.models.reponse.graphql.UserModel
 import com.polsl.yerbapp.domain.models.reponse.rest.RegisterResponse
 import com.polsl.yerbapp.domain.models.reponse.sharedPreferences.CurrentUserInfo
 import retrofit2.HttpException
-import retrofit2.Response
 import yerba.EditUserMutation
 import yerba.GetUserQuery
 import yerba.type.EditUserInput

@@ -1,13 +1,11 @@
 package com.polsl.yerbapp.data
 
-import android.accounts.NetworkErrorException
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.network.ApolloClientFactory
 import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import yerba.GetProductsQuery
-import com.polsl.yerbapp.domain.models.ProductModel
 import java.lang.IllegalStateException
 
 class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
