@@ -1,13 +1,16 @@
 package com.polsl.yerbapp.presentation.ui.explore.product_preview
 
 import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
 import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
+import com.polsl.yerbapp.domain.models.reponse.graphql.ManufacturerModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
+import com.polsl.yerbapp.domain.models.reponse.graphql.TypeModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
 import com.polsl.yerbapp.presentation.usecases.ProductsCase
 import kotlinx.coroutines.Dispatchers
@@ -17,21 +20,23 @@ class ProductPreviewViewModel(private val productsCase: ProductsCase) : BaseView
 
     val loading = ObservableBoolean(true)
 
-    val products: LiveData<ProductModel>
-        get() = _product
+    val product = ObservableField<ProductModel>()
+    val productType =  ObservableField<TypeModel>()
+    val productManufacturer =  ObservableField<ManufacturerModel>()
 
-    private val _product =  MutableLiveData<ProductModel>()
 
     init{
         initProduct()
     }
-    
+
     private fun initProduct(){
-        //TODO mapper
         viewModelScope.launch(Dispatchers.Main) {
             try{
                 loading.set(true)
-                _product.postValue(productsCase.getProduct())
+                val productData = productsCase.getProduct()
+                product.set(productData)
+                productManufacturer.set(productData.manufacturerModel)
+                productType.set(productData.typeModel)
                 loading.set(false)
             }catch (ex: Exception) {
                 loading.set(false)
