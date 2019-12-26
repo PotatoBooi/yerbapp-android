@@ -1,14 +1,10 @@
 package com.polsl.yerbapp.presentation.ui.profile
 
-import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
-import com.polsl.yerbapp.di.useCasesModule
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProfileModel
-import com.polsl.yerbapp.domain.models.reponse.graphql.UserModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
 import com.polsl.yerbapp.presentation.usecases.CurrentUserCase
 import kotlinx.coroutines.Dispatchers
@@ -45,7 +41,7 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
         checkAuthStatus()
     }
     fun saveClick() {
-      //TODO
+      //TODO mapper
         val editedProfile = ProfileModel(
             priceImportance = price.get()!!.toInt(),
             aromaImportance = aroma.get()!!.toInt(),
@@ -53,14 +49,8 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
             bitternessImportance = bitterness.get()!!.toInt(),
             energyImportance = energy.get()!!.toInt()
             )
-        val editedUser =  UserModel(
-            id = "",  // TODO
-            username = username.get()!!,
-            email = email.get()!!,
-            profile = editedProfile)
-
         viewModelScope.launch (Dispatchers.Main) {
-            currentUserCase.editCurrentUser(editedUser)
+            currentUserCase.editCurrentUser(editedProfile)
         }
     }
 
