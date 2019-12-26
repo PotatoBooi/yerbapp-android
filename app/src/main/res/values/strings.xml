@@ -9,13 +9,13 @@
     <string name="LOGIN">Login</string>
     <string name="PASSWORD">Hasło</string>
     <string name="REGISTER">Zarejestruj się</string>
-    <string name="ERROR">Błąd</string>
+    <string name="BAD_RESPONSE">Wystąpił błąd. Spróbuj ponownie później.</string>
     <string name="PASSWORD_EMPTY">Hasło nie może być puste</string>
     <string name="USERNAME_EMPTY">Login nie może być pusty</string>
     <string name="EMAIL_EMPTY">Email nie może być pusty</string>
-    <string name="INVALID_CREDENTIALS">Nieprawdidłowe dane logowania</string>
+    <string name="INVALID_CREDENTIALS">Nieprawidłowe dane logowania</string>
     <string name="USER_NOT_FOUND">Taki użytkownik nie istnieje</string>
-    <string name="NO_INTERNET">Nie masz połączenia z internetem. Spróbuj ponownie później.</string>
+    <string name="NO_INTERNET">Nie masz połączenia z internetem.\nSpróbuj ponownie później.</string>
     <string name="LOADING">Ładowanie</string>
     <string name="USERNAME_TOO_SHORT">Login musi się składać co najmniej z 7 znaków</string>
     <string name="PASSWORD_TOO_SHORT">Hasło musi się składać co najmniej z 8 znaków</string>
@@ -33,10 +33,6 @@
     <string name="SAVE">Zapisz</string>
     <string name="LOGOUT">Wyloguj</string>
     <string name="PREFERENCES">Moje preferencje</string>
-
-
-
-
-
+    <string name="UNAUTHORIZED">Przepraszamy, Twoja sesja wygasła.\nZaloguj się do aplikacji.</string>
 
 </resources>

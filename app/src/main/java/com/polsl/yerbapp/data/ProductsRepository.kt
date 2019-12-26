@@ -4,7 +4,9 @@ import android.accounts.NetworkErrorException
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.network.ApolloClientFactory
+import com.polsl.yerbapp.domain.exceptions.InvalidCredentialsException
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
+import retrofit2.HttpException
 import yerba.GetProductsQuery
 import java.lang.IllegalStateException
 
@@ -31,8 +33,13 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
             } ?: run {
                 throw IllegalStateException()
             }
-        }catch(apollo: ApolloException){
-            throw NetworkErrorException() as Throwable
         }
+        catch (ex: Exception) {
+            throw  ex
+        }
+        catch(apollo: ApolloException){
+            throw NetworkErrorException()
+        }
+
     }
 }
