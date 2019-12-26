@@ -15,18 +15,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 object AuthStatus{
-    val LOADING :String = "loading"
-    val AUTHORIZED: String = "authorized"
-    val UNAUTHORIZED: String = "unauthorized"
+    const val LOADING :String = "loading"
+    const val AUTHORIZED: String = "authorized"
+    const val UNAUTHORIZED: String = "unauthorized"
 }
 
 class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewModel() {
-   // val loginVisible = ObservableBoolean(true)
-   // val isAuthorized = ObservableBoolean(false)
-    //val isEditable = ObservableBoolean(false)
 
-    private val auth = arrayOf("LOADING", "AUTHORIZED")
-    // preferences
     val bitterness = ObservableField(0.0f)
     val taste = ObservableField(0.0f)
     val energy = ObservableField(0.0f)
@@ -41,20 +36,12 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
         get() = _authStatus
     private val _authStatus = MutableLiveData<String>(AuthStatus.LOADING)
 
-//    val isAuthorized: LiveData<Boolean>
-//        get() = _isAuthorized
-//    private val _isAuthorized = MutableLiveData<Boolean>(false)
-//
-//    val rank: LiveData<Int>
-//        get() = _rank
-//    private val _rank = MutableLiveData<Int>()
-
     init {
         checkAuthStatus()
     }
 
     fun logoutClick() {
-        currentUserCase.logoutUser() // TODO live data in repo?
+        currentUserCase.logoutUser()
         checkAuthStatus()
     }
     fun saveClick() {
@@ -74,29 +61,13 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
 
         viewModelScope.launch (Dispatchers.Main) {
             currentUserCase.editCurrentUser(editedUser)
-           // isEditable.set(false)
         }
-
-        // save user info preferences
     }
-//    fun editClick(){
-//        isEditable.set(true)
-//    }
-//
-//    fun discardClick(){
-//        isEditable.set(false)
-//    }
-//
-//    fun checkAuthStatus() = viewModelScope.launch(Dispatchers.Main) {
-//        val isAuth = currentUserCase.isUserAuthorized()
-//        //loginVisible.set(!isAuth)
-//        if (isAuth) isAuthorized.set(true) else isAuthorized.set(false)
-//    }
+
 
     fun checkAuthStatus() = viewModelScope.launch(Dispatchers.Main) {
         _authStatus.postValue(AuthStatus.LOADING)
         val isAuth = currentUserCase.isUserAuthorized()
-        //_isAuthorized.postValue(isAuth)
         if(isAuth) {
             getUser()
         } else {
@@ -105,7 +76,7 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
     }
 
     private fun getUser(){
-        //TODO
+        //TODO mapper
         viewModelScope.launch(Dispatchers.Main) {
             val user = currentUserCase.getCurrentUser()
             val profile = user?.profile

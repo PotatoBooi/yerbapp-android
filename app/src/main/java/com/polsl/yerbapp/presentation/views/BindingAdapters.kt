@@ -11,6 +11,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.request.RequestOptions
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.presentation.ui.helpers.GlideApp
+import com.polsl.yerbapp.presentation.ui.profile.AuthStatus
 
 
 object BindingAdapters {
@@ -33,14 +34,7 @@ object BindingAdapters {
         view.isClickable = editable
         view.isFocusableInTouchMode = editable
         view.isFocusable = editable
-//        if(editable){
-//
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-//                view.background.colorFilter = BlendModeColorFilter(Color.YELLOW, BlendMode.SRC_ATOP)
-//            } else {
-//                view.background.setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP)
-//            }
-//        }
+
         if(editable){
             view.setBackgroundResource(R.drawable.underline)
         }
