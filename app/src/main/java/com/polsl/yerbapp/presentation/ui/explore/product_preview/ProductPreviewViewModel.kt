@@ -1,8 +1,55 @@
 package com.polsl.yerbapp.presentation.ui.explore.product_preview
 
-import com.polsl.yerbapp.data.ProductsRepository
+import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.polsl.yerbapp.R
+import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
+import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
+import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
+import com.polsl.yerbapp.presentation.usecases.ProductsCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class ProductPreviewViewModel(private val productsRepository: ProductsRepository) : BaseViewModel(){
+class ProductPreviewViewModel(private val productsCase: ProductsCase) : BaseViewModel() {
 
+    val loading = ObservableBoolean(true)
+
+    val products: LiveData<ProductModel>
+        get() = _product
+
+    private val _product =  MutableLiveData<ProductModel>()
+
+    init{
+        initProduct()
+    }
+    
+    private fun initProduct(){
+        //TODO mapper
+        viewModelScope.launch(Dispatchers.Main) {
+            try{
+                loading.set(true)
+                _product.postValue(productsCase.getProduct())
+                loading.set(false)
+            }catch (ex: Exception) {
+                loading.set(false)
+                handleErrors(ex)
+            }
+        }
+    }
+
+    private fun handleErrors(ex: Exception) {
+        when (ex) {
+            is UnauthorizedException -> {
+                _message.postValue(R.string.UNAUTHORIZED)
+                // TODO navigate to login
+            }
+            is NoConnectivityException -> {
+                _message.postValue(R.string.NO_INTERNET)
+            }
+            else -> _message.postValue(R.string.BAD_RESPONSE)
+        }
+    }
 }

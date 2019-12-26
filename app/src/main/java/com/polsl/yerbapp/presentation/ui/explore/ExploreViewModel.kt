@@ -19,7 +19,6 @@ class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel()
         initPaging()
     }
 
-
     val pagedProducts : LiveData<PagedList<ProductModel>>
         get() = _pagedProducts
     private lateinit var _pagedProducts: LiveData<PagedList<ProductModel>>
@@ -30,6 +29,7 @@ class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel()
     private lateinit var  _loading: LiveData<Boolean>
 
     override fun onItemClick(item: ProductModel) {
+        productsCase.currentProductId = item.id // temporary solution
         _navigationId.value = R.id.action_exploreFragment_to_previewProductFragment
 
     }
