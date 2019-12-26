@@ -1,15 +1,12 @@
 package com.polsl.yerbapp.presentation.ui.profile
 
-import android.security.keystore.UserNotAuthenticatedException
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.polsl.yerbapp.R
-import com.polsl.yerbapp.domain.exceptions.InvalidCredentialsException
 import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
 import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
-import com.polsl.yerbapp.domain.exceptions.UserNotFoundException
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProfileModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
 import com.polsl.yerbapp.presentation.usecases.CurrentUserCase
@@ -55,35 +52,52 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
             bitternessImportance = bitterness.get()!!.toInt(),
             energyImportance = energy.get()!!.toInt()
             )
-        viewModelScope.launch (Dispatchers.Main) {
-            currentUserCase.editCurrentUser(editedProfile)
-        }
+            viewModelScope.launch (Dispatchers.Main) {
+                try{
+                    currentUserCase.editCurrentUser(editedProfile)
+                }catch (ex: Exception) {
+                    handleErrors(ex)
+                }
+            }
     }
 
 
-    fun checkAuthStatus() = viewModelScope.launch(Dispatchers.Main) {
-        _authStatus.postValue(AuthStatus.LOADING)
-        val isAuth = currentUserCase.isUserAuthorized()
-        if(isAuth) {
-            getUser()
-        } else {
-            _authStatus.postValue(AuthStatus.UNAUTHORIZED)
+    fun checkAuthStatus() {
+        viewModelScope.launch(Dispatchers.Main) {
+            try{
+                _authStatus.postValue(AuthStatus.LOADING)
+                val isAuth = currentUserCase.isUserAuthorized()
+                if (isAuth) {
+                    getUser()
+                } else {
+                    _authStatus.postValue(AuthStatus.UNAUTHORIZED)
+                }
+            }catch (ex: Exception) {
+                _authStatus.postValue(AuthStatus.UNAUTHORIZED)
+                handleErrors(ex)
+            }
+
         }
     }
 
     private fun getUser(){
         //TODO mapper
         viewModelScope.launch(Dispatchers.Main) {
-            val user = currentUserCase.getCurrentUser()
-            val profile = user?.profile
-            username.set(user?.username)
-            email.set(user?.username)
-            bitterness.set(profile?.bitternessImportance?.toFloat())
-            taste.set(profile?.tasteImportance?.toFloat())
-            energy.set(profile?.energyImportance?.toFloat())
-            aroma.set(profile?.aromaImportance?.toFloat())
-            price.set(profile?.priceImportance?.toFloat())
-            _authStatus.postValue(AuthStatus.AUTHORIZED)
+            try{
+                val user = currentUserCase.getCurrentUser()
+                val profile = user?.profile
+                username.set(user?.username)
+                email.set(user?.username)
+                bitterness.set(profile?.bitternessImportance?.toFloat())
+                taste.set(profile?.tasteImportance?.toFloat())
+                energy.set(profile?.energyImportance?.toFloat())
+                aroma.set(profile?.aromaImportance?.toFloat())
+                price.set(profile?.priceImportance?.toFloat())
+                _authStatus.postValue(AuthStatus.AUTHORIZED)
+            }catch (ex: Exception) {
+                handleErrors(ex)
+            }
+
         }
     }
 

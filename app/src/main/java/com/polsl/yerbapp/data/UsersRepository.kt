@@ -7,6 +7,8 @@ import com.polsl.yerbapp.data.device.SharedPreferencesManager
 import com.polsl.yerbapp.data.network.ApolloClientFactory
 import com.polsl.yerbapp.data.network.RetrofitService
 import com.polsl.yerbapp.domain.exceptions.InvalidCredentialsException
+import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
+import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
 import com.polsl.yerbapp.domain.exceptions.UserNotFoundException
 import com.polsl.yerbapp.domain.models.dto.LoginDto
 import com.polsl.yerbapp.domain.models.dto.RegisterDto
@@ -15,6 +17,7 @@ import com.polsl.yerbapp.domain.models.reponse.graphql.UserModel
 import com.polsl.yerbapp.domain.models.reponse.rest.RegisterResponse
 import com.polsl.yerbapp.domain.models.reponse.sharedPreferences.CurrentUserInfo
 import retrofit2.HttpException
+import retrofit2.Response
 import yerba.EditUserMutation
 import yerba.GetUserQuery
 import yerba.type.EditUserInput
@@ -67,11 +70,15 @@ class UsersRepository(
             val token = sharedPreferencesManager.getUserData().accessToken
             val response = retrofitService.checkAuthorization("Bearer $token")
             response.code() == 200
-        } catch (ex: HttpException) {
+        }catch(ex: NoConnectivityException){
+            throw ex
+        }
+        catch (ex: HttpException) {
             false
         } catch (ex: Exception) {
             false
         }
+
     }
 
     fun logoutUser() {
@@ -86,20 +93,29 @@ class UsersRepository(
             .build()
         val apolloClient = apolloClientFactory.create()
         try {
-            val userData =
+            val response =
                 apolloClient
                     .query(userQuery)
                     .toDeferred()
                     .await()
-            return userData.data()?.user()?.let { u ->
+
+            if(response.hasErrors()){
+                if(response.errors().first().message()?.first()?.toInt() == 401 ){
+                    throw UnauthorizedException()
+                }
+            }
+            return response.data()?.user()?.let { u ->
                     UserModel(u.id(), u.username(), u.email(), ProfileModel(u.profile().priceImportance(), u.profile().tasteImportance(), u.profile().energyImportance(),
                         u.profile().aromaImportance(), u.profile().bitternessImportance()))
                 // TODO add extra function for mapping
                 } ?: run {
                 throw IllegalStateException()
             }
-        }catch(apollo: ApolloException){
-            throw NetworkErrorException()
+        }catch(ex: ApolloException){
+            throw ex
+        }
+        catch(ex: Exception){
+            throw ex
         }
     }
 
@@ -112,16 +128,22 @@ class UsersRepository(
             .build()
         val apolloClient = apolloClientFactory.create()
         try {
-            val editUserResponse =
+            val response =
                 apolloClient
                     .mutate(editUser)
                     .toDeferred()
                     .await()
 
-                // TODO catch errors
-
-        }catch(apollo: ApolloException){
-            throw NetworkErrorException()
+            if(response.hasErrors()){
+                if(response.errors().first().message()?.first()?.toInt() == 401 ){
+                    throw UnauthorizedException()
+                }
+            }
+        }catch(ex: ApolloException){
+            throw ex
+        }
+        catch(ex: Exception){
+            throw ex
         }
     }
 

@@ -1,12 +1,7 @@
 package com.polsl.yerbapp.presentation.ui.explore
 
-import android.util.Log
-import android.view.View
-import androidx.arch.core.util.Function
-import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList

@@ -7,5 +7,4 @@ class NoConnectivityException : IOException()
 class UserNotFoundException : Exception()
 class InvalidCredentialsException : Exception()
 class UnauthorizedException : Exception()
-class BadResponseException : Exception()
 
