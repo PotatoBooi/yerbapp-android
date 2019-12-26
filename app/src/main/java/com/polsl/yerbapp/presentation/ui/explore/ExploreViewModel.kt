@@ -6,14 +6,14 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.polsl.yerbapp.R
-import com.polsl.yerbapp.data.ProductsRepository
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsDataFactory
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsListener
+import com.polsl.yerbapp.presentation.usecases.ProductsCase
 
 
-class ExploreViewModel(private val productsRepository: ProductsRepository) : BaseViewModel(), ProductsListener {
+class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel(), ProductsListener {
 
     init {
         initPaging()
@@ -36,7 +36,7 @@ class ExploreViewModel(private val productsRepository: ProductsRepository) : Bas
 
     private fun initPaging() {
 
-       val productsDataFactory = ProductsDataFactory(viewModelScope, productsRepository)
+       val productsDataFactory = ProductsDataFactory(viewModelScope, productsCase)
         _loading = Transformations.switchMap(productsDataFactory.liveData){it.loading}
 
         val config = PagedList.Config.Builder()

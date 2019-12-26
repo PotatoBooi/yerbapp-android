@@ -5,11 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.polsl.yerbapp.data.ProductsRepository
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
+import com.polsl.yerbapp.presentation.usecases.ProductsCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
-class ProductsDataSource (private val scope: CoroutineScope, private val productsRepository: ProductsRepository):
+class ProductsDataSource (private val scope: CoroutineScope, private val productsCase: ProductsCase):
     PageKeyedDataSource<Int, ProductModel>() {
 
     val loading: LiveData<Boolean>
@@ -22,7 +23,7 @@ class ProductsDataSource (private val scope: CoroutineScope, private val product
     ) {
         _loading.postValue(true)
         scope.launch {
-            val items = productsRepository.getProducts(params.requestedLoadSize, 0 )
+            val items = productsCase.getProducts(params.requestedLoadSize, 0 )
             _loading.postValue(false)
             callback.onResult(items, null, params.requestedLoadSize)
         }
@@ -36,7 +37,7 @@ class ProductsDataSource (private val scope: CoroutineScope, private val product
     ) {
         _loading.postValue(true)
         scope.launch {
-            val items = productsRepository.getProducts(params.requestedLoadSize, params.key)
+            val items = productsCase.getProducts(params.requestedLoadSize, params.key)
             _loading.postValue(false)
             callback.onResult(items, params.key + params.requestedLoadSize)
         }

@@ -5,7 +5,8 @@ import android.util.Log
 
 class ProductsCase(private val productsRepository: ProductsRepository) {
 
-    suspend fun getProducts(perPage: Int, offset: Int, orderBy: String) = productsRepository.getProducts(perPage, offset, orderBy)
+    val ORDER_BY = "name"
+    suspend fun getProducts(perPage: Int, offset: Int) = productsRepository.getProducts(perPage, offset, ORDER_BY)
     suspend fun getProduct(productId: String) = productsRepository.getProduct(productId)
 
 }
