@@ -87,7 +87,7 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
                 val user = currentUserCase.getCurrentUser()
                 val profile = user?.profile
                 username.set(user?.username)
-                email.set(user?.username)
+                email.set(user?.email)
                 bitterness.set(profile?.bitternessImportance?.toFloat())
                 taste.set(profile?.tasteImportance?.toFloat())
                 energy.set(profile?.energyImportance?.toFloat())
