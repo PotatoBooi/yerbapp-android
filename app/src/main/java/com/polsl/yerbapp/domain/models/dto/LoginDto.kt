@@ -1,4 +1,4 @@
-package com.polsl.yerbapp.domain.models
+package com.polsl.yerbapp.domain.models.dto
 
 import com.squareup.moshi.JsonClass
 

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.polsl.yerbapp.data.ProductsRepository
-import com.polsl.yerbapp.domain.models.ProductModel
+import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

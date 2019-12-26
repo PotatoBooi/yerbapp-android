@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.hadilq.liveevent.LiveEvent
 import com.polsl.yerbapp.R
+import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
 import com.polsl.yerbapp.presentation.base.BaseViewModel
 import com.polsl.yerbapp.presentation.usecases.RegisterUserCase
 import kotlinx.coroutines.Dispatchers
@@ -68,7 +69,14 @@ class RegisterViewModel(private val registerUserCase: RegisterUserCase) : BaseVi
     }
 
     private fun handleErrors(exception: Exception) {
-        _message.postValue(R.string.ERROR)
+        when(exception){
+            is NoConnectivityException -> {
+                _message.postValue(R.string.NO_INTERNET)
+            }
+            else ->  {
+                _message.postValue(R.string.BAD_RESPONSE)
+            }
+        }
     }
 
     fun loginClick(){

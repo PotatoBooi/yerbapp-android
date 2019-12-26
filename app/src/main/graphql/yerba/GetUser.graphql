@@ -1,0 +1,15 @@
+query GetUser( $userId:  ID!){
+    user(userId: $userId){
+        id,
+        username,
+        email,
+        profile{
+            priceImportance,
+            tasteImportance,
+            energyImportance,
+            bitternessImportance,
+            aromaImportance,
+            overallImportance
+        }
+    }
+}

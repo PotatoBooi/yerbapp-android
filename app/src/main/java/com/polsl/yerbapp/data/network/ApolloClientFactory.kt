@@ -30,7 +30,7 @@ class ApolloClientFactory( private val connectivityInterceptor: ConnectivityInte
                 val request = chain.request()
                     .newBuilder()
                     .url(url)
-                    .addHeader("Authorization", "Bearer $token")
+                    .addHeader("Authorization", "Bearer $token")  // TODO refresh token!
                     .build()
 
                 return@Interceptor chain.proceed(request)

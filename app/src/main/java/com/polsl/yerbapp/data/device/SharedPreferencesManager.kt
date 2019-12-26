@@ -2,7 +2,7 @@ package com.polsl.yerbapp.data.device
 
 import android.content.Context
 import com.polsl.yerbapp.R
-import com.polsl.yerbapp.domain.models.CurrentUserInfo
+import com.polsl.yerbapp.domain.models.reponse.sharedPreferences.CurrentUserInfo
 
 class SharedPreferencesManager(private val context: Context) {
     private val prefsFile = "yerbapp"

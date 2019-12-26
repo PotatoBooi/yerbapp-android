@@ -71,7 +71,7 @@ class LoginViewModel(private val loginUserCase: LoginUserCase) : BaseViewModel()
             is NoConnectivityException -> {
                 _message.postValue(R.string.NO_INTERNET)
             }
-            else -> _message.postValue(R.string.ERROR)
+            else -> _message.postValue(R.string.BAD_RESPONSE)
         }
     }
 

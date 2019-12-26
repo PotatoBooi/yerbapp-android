@@ -1,15 +1,11 @@
 package com.polsl.yerbapp.data
 
-import android.accounts.NetworkErrorException
-import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
-import com.polsl.yerbapp.data.device.SharedPreferencesManager
 import com.polsl.yerbapp.data.network.ApolloClientFactory
-import com.polsl.yerbapp.data.network.ConnectivityInterceptor
+import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
+import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import yerba.GetProductsQuery
-import com.polsl.yerbapp.domain.models.ProductModel
-import kotlinx.coroutines.delay
 import java.lang.IllegalStateException
 
 class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
@@ -24,19 +20,30 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
         val apolloClient = apolloClientFactory.create()
         //delay(2000)  // for testing loaders
         try {
-            val productsData =
+            val response =
                 apolloClient
                     .query(productsQuery)
                     .toDeferred()
                     .await()
-            return productsData.data()?.products()?.let { items ->
+
+            if(response.hasErrors()){
+                if(response.errors().first().message()?.first()?.toInt() == 401 ){
+                    throw UnauthorizedException()
+                }
+            }
+            return response.data()?.products()?.let { items ->
                 items.map{ProductModel(it.id(), it.name(), it.photoUrl(),
-                    null, null, null)}
-            } ?: run {
+                        null, null, null)}
+                } ?: run {
                 throw IllegalStateException()
             }
-        }catch(apollo: ApolloException){
-            throw NetworkErrorException() as Throwable
+
+        }
+        catch(apolloException: ApolloException){
+            throw apolloException
+        }
+        catch (ex: Exception) {
+            throw  ex
         }
     }
 }

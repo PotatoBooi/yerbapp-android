@@ -6,3 +6,5 @@ import java.io.IOException
 class NoConnectivityException : IOException()
 class UserNotFoundException : Exception()
 class InvalidCredentialsException : Exception()
+class UnauthorizedException : Exception()
+
