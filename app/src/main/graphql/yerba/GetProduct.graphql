@@ -1,5 +1,6 @@
 query GetProduct( $productId:  ID!){
     product(productId: $productId){
+        id,
         name,
         details,
         photoUrl,
