@@ -40,4 +40,9 @@
         android:name="com.polsl.yerbapp.presentation.ui.profile.login.LoginFragment"
         android:label="login_fragment"
         tools:layout="@layout/login_fragment" />
+    <fragment
+        android:id="@+id/productPreviewFragment"
+        android:name="com.polsl.yerbapp.presentation.ui.explore.product_preview.ProductPreviewFragment"
+        android:label="product_preview_fragment"
+        tools:layout="@layout/product_preview_fragment" />
 </navigation>
