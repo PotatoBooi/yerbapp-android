@@ -1,11 +1,13 @@
 package com.polsl.yerbapp.data
 
+import android.accounts.NetworkErrorException
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.network.ApolloClientFactory
 import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import yerba.GetProductsQuery
+import com.polsl.yerbapp.domain.models.ProductModel
 import java.lang.IllegalStateException
 
 class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
@@ -16,6 +18,7 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
             .builder()
             .perPage(perPage)
             .offset(offset)
+            .orderBy("name")
             .build()
         val apolloClient = apolloClientFactory.create()
         //delay(2000)  // for testing loaders
@@ -31,7 +34,7 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
                     throw UnauthorizedException()
                 }
             }
-            return response.data()?.products()?.let { items ->
+            return response.data()?.products()?.items()?.let { items ->
                 items.map{ProductModel(it.id(), it.name(), it.photoUrl(),
                         null, null, null)}
                 } ?: run {

@@ -1,15 +1,6 @@
 mutation EditUser ( $userId: ID!, $user: EditUserInput!){
     editUser(userId: $userId, user: $user){
         id
-#        username,
-#        email,
-#        profile{
-#            aromaImportance,
-#            bitternessImportance,
-#            energyImportance,
-#            priceImportance,
-#            tasteImportance,
-#        }
     }
 }
 

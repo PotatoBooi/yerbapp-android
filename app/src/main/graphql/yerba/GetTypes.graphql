@@ -1,6 +1,8 @@
 query GetTypes {
     types{
-        id,
-        name
+        items{
+            id,
+            name
+        }
     }
 }

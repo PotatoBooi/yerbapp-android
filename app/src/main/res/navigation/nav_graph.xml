@@ -9,7 +9,12 @@
         android:id="@+id/exploreFragment"
         android:name="com.polsl.yerbapp.presentation.ui.explore.ExploreFragment"
         android:label="explore_fragment"
-        tools:layout="@layout/explore_fragment" />
+        tools:layout="@layout/explore_fragment" >
+        <action
+            android:id="@+id/action_exploreFragment_to_previewProductFragment"
+            app:destination="@id/productPreviewFragment"
+            app:enterAnim="@anim/slide_in" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.polsl.yerbapp.presentation.ui.profile.ProfileFragment"

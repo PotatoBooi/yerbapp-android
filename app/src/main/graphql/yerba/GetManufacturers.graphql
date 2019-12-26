@@ -1,7 +1,9 @@
 query GetManufacturers {
     manufacturers{
-        id,
-        name,
-        country
+        items{
+            id,
+            name,
+            country
+        }
     }
 }

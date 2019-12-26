@@ -5,6 +5,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.polsl.yerbapp.R
 import com.polsl.yerbapp.data.ProductsRepository
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
@@ -29,7 +30,8 @@ class ExploreViewModel(private val productsRepository: ProductsRepository) : Bas
     private lateinit var  _loading: LiveData<Boolean>
 
     override fun onItemClick(item: ProductModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        _navigationId.value = R.id.action_exploreFragment_to_previewProductFragment
+
     }
 
     private fun initPaging() {

@@ -1,9 +1,11 @@
 
-query GetProducts ( $perPage: Int, $offset: Int){
-    products(perPage: $perPage, offset: $offset )  {
-        id,
-        name,
-        photoUrl
+query GetProducts ( $perPage: Int, $offset: Int, $orderBy: String){
+    products(perPage: $perPage, offset: $offset, orderBy: $orderBy )  {
+        items{
+            id,
+            name,
+            photoUrl
+        }
     }
 }
 
