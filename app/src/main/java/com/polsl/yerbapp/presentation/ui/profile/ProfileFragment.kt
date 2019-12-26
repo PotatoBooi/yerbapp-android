@@ -34,18 +34,26 @@ class ProfileFragment : BaseFragment<ProfileViewModel>(), AuthListener {
 
     override fun setupLiveData() {
         super.setupLiveData()
-        viewModel?.isAuthorized?.observe(viewLifecycleOwner, Observer {
-            if(it) {
-                viewModel?.getUser()
-                clProfile.visibility = View.VISIBLE
-                clLogin.visibility = View.GONE
 
-            }
-            else {
-                clProfile.visibility = View.GONE
-                clLogin.visibility = View.VISIBLE
-
+        viewModel?.authStatus?.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                AuthStatus.LOADING -> {
+                    clProfile.visibility = View.GONE
+                    clLogin.visibility = View.GONE
+                    clLoading.visibility =  View.VISIBLE
+                }
+                AuthStatus.AUTHORIZED -> {
+                    clProfile.visibility = View.VISIBLE
+                    clLogin.visibility = View.GONE
+                    clLoading.visibility =  View.GONE
+                }
+                AuthStatus.UNAUTHORIZED -> {
+                    clProfile.visibility = View.GONE
+                    clLogin.visibility = View.VISIBLE
+                    clLoading.visibility =  View.GONE
+                }
             }
         })
+
     }
 }

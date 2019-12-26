@@ -10,10 +10,14 @@
             type="com.polsl.yerbapp.presentation.ui.profile.ProfileViewModel" />
     </data>
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.ui.profile.ProfileFragment">
+
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clProfile"
@@ -229,15 +233,7 @@
 
             </androidx.cardview.widget.CardView>
 
-
-
-
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clLogin"
@@ -252,6 +248,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/login_fragment" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clLoading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tint="@color/cardview_dark_background">
+
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

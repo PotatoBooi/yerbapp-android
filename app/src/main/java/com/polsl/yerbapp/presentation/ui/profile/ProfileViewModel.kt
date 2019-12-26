@@ -14,11 +14,18 @@ import com.polsl.yerbapp.presentation.usecases.CurrentUserCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+object AuthStatus{
+    val LOADING :String = "loading"
+    val AUTHORIZED: String = "authorized"
+    val UNAUTHORIZED: String = "unauthorized"
+}
+
 class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewModel() {
    // val loginVisible = ObservableBoolean(true)
    // val isAuthorized = ObservableBoolean(false)
-    val isEditable = ObservableBoolean(false)
+    //val isEditable = ObservableBoolean(false)
 
+    private val auth = arrayOf("LOADING", "AUTHORIZED")
     // preferences
     val bitterness = ObservableField(0.0f)
     val taste = ObservableField(0.0f)
@@ -30,14 +37,17 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
     val email = ObservableField<String>("")
 
 
-    val isAuthorized: LiveData<Boolean>
-        get() = _isAuthorized
-    private val _isAuthorized = MutableLiveData<Boolean>(false)
+    val authStatus: LiveData<String>
+        get() = _authStatus
+    private val _authStatus = MutableLiveData<String>(AuthStatus.LOADING)
 
-
-    val rank: LiveData<Int>
-        get() = _rank
-    private val _rank = MutableLiveData<Int>()
+//    val isAuthorized: LiveData<Boolean>
+//        get() = _isAuthorized
+//    private val _isAuthorized = MutableLiveData<Boolean>(false)
+//
+//    val rank: LiveData<Int>
+//        get() = _rank
+//    private val _rank = MutableLiveData<Int>()
 
     init {
         checkAuthStatus()
@@ -64,18 +74,18 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
 
         viewModelScope.launch (Dispatchers.Main) {
             currentUserCase.editCurrentUser(editedUser)
-            isEditable.set(false)
+           // isEditable.set(false)
         }
 
         // save user info preferences
     }
-    fun editClick(){
-        isEditable.set(true)
-    }
-
-    fun discardClick(){
-        isEditable.set(false)
-    }
+//    fun editClick(){
+//        isEditable.set(true)
+//    }
+//
+//    fun discardClick(){
+//        isEditable.set(false)
+//    }
 //
 //    fun checkAuthStatus() = viewModelScope.launch(Dispatchers.Main) {
 //        val isAuth = currentUserCase.isUserAuthorized()
@@ -84,11 +94,17 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
 //    }
 
     fun checkAuthStatus() = viewModelScope.launch(Dispatchers.Main) {
+        _authStatus.postValue(AuthStatus.LOADING)
         val isAuth = currentUserCase.isUserAuthorized()
-        _isAuthorized.postValue(isAuth)
+        //_isAuthorized.postValue(isAuth)
+        if(isAuth) {
+            getUser()
+        } else {
+            _authStatus.postValue(AuthStatus.UNAUTHORIZED)
+        }
     }
 
-    fun getUser(){
+    private fun getUser(){
         //TODO
         viewModelScope.launch(Dispatchers.Main) {
             val user = currentUserCase.getCurrentUser()
@@ -100,6 +116,7 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
             energy.set(profile?.energyImportance?.toFloat())
             aroma.set(profile?.aromaImportance?.toFloat())
             price.set(profile?.priceImportance?.toFloat())
+            _authStatus.postValue(AuthStatus.AUTHORIZED)
         }
     }
 }
