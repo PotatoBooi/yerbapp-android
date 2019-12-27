@@ -34,9 +34,10 @@
     <string name="LOGOUT">Wyloguj</string>
     <string name="PREFERENCES">Moje preferencje</string>
     <string name="UNAUTHORIZED">Przepraszamy, Twoja sesja wygasła.\nZaloguj się do aplikacji.</string>
-    <string name="COUNTRY">Kraj pochodzenia:</string>
-    <string name="MANUFACTURER">Producent:</string>
-    <string name="TYPE">Typ:</string>
-
+    <string name="COUNTRY">Kraj pochodzenia</string>
+    <string name="MANUFACTURER">Producent</string>
+    <string name="TYPE">Typ</string>
+    <string name="PRODUCT_NAME">Nazwa produktu</string>
+    <string name="DETAILS">Szczegóły</string>
 
 </resources>
