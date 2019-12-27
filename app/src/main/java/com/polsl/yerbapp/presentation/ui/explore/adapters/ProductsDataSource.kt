@@ -23,9 +23,13 @@ class ProductsDataSource (private val scope: CoroutineScope, private val product
     ) {
         _loading.postValue(true)
         scope.launch {
-            val items = productsCase.getProducts(params.requestedLoadSize, 0 )
-            _loading.postValue(false)
-            callback.onResult(items, null, params.requestedLoadSize)
+            try{
+                val items = productsCase.getProducts(params.requestedLoadSize, 0 )
+                _loading.postValue(false)
+                callback.onResult(items, null, params.requestedLoadSize)
+            } catch(ex: Exception){
+                // TODO notification
+            }
         }
     }
 
@@ -35,9 +39,13 @@ class ProductsDataSource (private val scope: CoroutineScope, private val product
     ) {
         _loading.postValue(true)
         scope.launch {
-            val items = productsCase.getProducts(params.requestedLoadSize, params.key)
-            _loading.postValue(false)
-            callback.onResult(items, params.key + params.requestedLoadSize)
+            try{
+                val items = productsCase.getProducts(params.requestedLoadSize, params.key)
+                _loading.postValue(false)
+                callback.onResult(items, params.key + params.requestedLoadSize)
+            } catch(ex: Exception){
+                // TODO notification
+            }
         }
 
     }

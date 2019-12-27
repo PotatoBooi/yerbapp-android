@@ -31,7 +31,6 @@ class ProductsAdapter(private val productsListener: ProductsListener?) : PagedLi
             binding.product = item
             binding.executePendingBindings()
         }
-
     }
 
     class ProductDiffCallback : DiffUtil.ItemCallback<ProductModel>() {
