@@ -17,7 +17,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="20dp">
 
             <ImageView
                 android:id="@+id/ivPhoto"
@@ -35,36 +36,85 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@+id/ivPhoto"
                 app:layout_constraintTop_toBottomOf="@id/ivPhoto"
-                android:text="@{viewmodel.product.name}"/>
+                android:text="@{viewmodel.product.name}"
+                android:textColor="@color/slate_black"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"/>
 
             <TextView
-                android:id="@+id/tvType"
-                android:layout_width="match_parent"
+                android:id="@+id/tvTypeLabel"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@+id/tvName"
                 app:layout_constraintTop_toBottomOf="@id/tvName"
-                android:text="@{viewmodel.productType.name}"/>
+                android:text="@string/TYPE"
+                android:textColor="@color/colorAccent"
+                android:textSize="17sp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/tvManufacturerLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/tvTypeLabel"
+                app:layout_constraintTop_toBottomOf="@id/tvTypeLabel"
+                android:text="@string/MANUFACTURER"
+                android:textColor="@color/colorAccent"
+                android:textSize="17sp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/tvCountryLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/tvManufacturerLabel"
+                app:layout_constraintTop_toBottomOf="@id/tvManufacturerLabel"
+                android:text="@string/COUNTRY"
+                android:textColor="@color/colorAccent"
+                android:textSize="17sp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/tvType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/tvTypeLabel"
+                app:layout_constraintBottom_toBottomOf="@id/tvTypeLabel"
+                android:text="@{viewmodel.productType.name}"
+                android:textSize="17sp"
+                android:layout_marginStart="5dp"/>
+
             <TextView
                 android:id="@+id/tvManufacturer"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/tvType"
-                app:layout_constraintTop_toBottomOf="@id/tvType"
-                android:text="@{viewmodel.productManufacturer.name}"/>
+                app:layout_constraintStart_toEndOf="@+id/tvManufacturerLabel"
+                app:layout_constraintBottom_toBottomOf="@id/tvManufacturerLabel"
+                android:text="@{viewmodel.productManufacturer.name}"
+                android:textSize="17sp"
+                android:layout_marginStart="5dp"/>
+
             <TextView
                 android:id="@+id/tvCountry"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/tvManufacturer"
-                app:layout_constraintTop_toBottomOf="@id/tvManufacturer"
-                android:text="@{viewmodel.productManufacturer.country}"/>
+                app:layout_constraintStart_toEndOf="@+id/tvCountryLabel"
+                app:layout_constraintBottom_toBottomOf="@id/tvCountryLabel"
+                android:text="@{viewmodel.productManufacturer.country}"
+                android:textSize="17sp"
+                android:layout_marginStart="5dp"/>
+
             <TextView
                 android:id="@+id/tvDescription"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/tvCountry"
-                app:layout_constraintTop_toBottomOf="@id/tvCountry"
-                android:text="@{viewmodel.product.details}"/>
+                app:layout_constraintStart_toStartOf="@+id/tvCountryLabel"
+                app:layout_constraintTop_toBottomOf="@id/tvCountryLabel"
+                android:text="@{viewmodel.product.details}"
+                android:textSize="17sp" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

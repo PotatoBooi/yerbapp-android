@@ -21,9 +21,10 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
             .offset(offset)
             .orderBy(orderBy)
             .build()
-        val apolloClient = apolloClientFactory.create()
+
+        try{
+            val apolloClient = apolloClientFactory.create()
         //delay(2000)  // for testing loaders
-        try {
             val response =
                 apolloClient
                     .query(productsQuery)
