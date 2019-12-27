@@ -23,7 +23,7 @@ object BindingAdapters {
 
     @BindingAdapter("imageUrl")
     @JvmStatic
-    fun setImage(imageView: ImageView, url: String) {
+    fun setImage(imageView: ImageView, url: String?) {
         GlideApp.with(imageView).load(url).apply(RequestOptions().fitCenter()).into(imageView)
     }
     @BindingAdapter("editable")
