@@ -3,7 +3,6 @@ package com.polsl.yerbapp.data
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.network.ApolloClientFactory
-import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
 import com.polsl.yerbapp.domain.models.reponse.graphql.ManufacturerModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.TypeModel
@@ -31,11 +30,6 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
                     .toDeferred()
                     .await()
 
-            if(response.hasErrors()){
-                if(response.errors().first().message()?.first()?.toInt() == 401 ){
-                    throw UnauthorizedException()
-                }
-            }
             return response.data()?.products()?.items()?.let { items ->
                 items.map{ProductModel(it.id(), it.name(), it.photoUrl())}
                 } ?: run {
@@ -56,20 +50,15 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
             .builder()
             .productId(productId)
             .build()
-        val apolloClient = apolloClientFactory.create()
+        try{
+            val apolloClient = apolloClientFactory.create()
         //delay(2000)  // for testing loaders
-        try {
             val response =
                 apolloClient
                     .query(productQuery)
                     .toDeferred()
                     .await()
 
-            if(response.hasErrors()){
-                if(response.errors().first().message()?.first()?.toInt() == 401 ){
-                    throw UnauthorizedException()
-                }
-            }
             return response.data()?.product()?.let {
                 val manufacturer = ManufacturerModel(country = it.manufacturer().country(), name = it.manufacturer().name())
                 val type = TypeModel(name = it.type().name())

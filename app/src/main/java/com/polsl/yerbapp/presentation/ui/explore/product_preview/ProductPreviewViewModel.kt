@@ -49,7 +49,7 @@ class ProductPreviewViewModel(private val productsCase: ProductsCase) : BaseView
         when (ex) {
             is UnauthorizedException -> {
                 _message.postValue(R.string.UNAUTHORIZED)
-                // TODO navigate to login
+                // TODO navigate to login? is it possible?
             }
             is NoConnectivityException -> {
                 _message.postValue(R.string.NO_INTERNET)

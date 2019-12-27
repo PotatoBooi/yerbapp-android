@@ -42,7 +42,6 @@ class UsersRepository(
         } catch (ex: Exception) {
             throw  ex
         }
-        //save user info to shared preferences
     }
 
     suspend fun register(username: String, password: String, email: String): RegisterResponse {
@@ -63,6 +62,7 @@ class UsersRepository(
     }
 
     fun getCurrentUserInfo(): CurrentUserInfo = sharedPreferencesManager.getUserData()
+
     suspend fun checkUserAuthorized(): Boolean {
         return try {
             val token = sharedPreferencesManager.getUserData().accessToken
@@ -76,7 +76,6 @@ class UsersRepository(
         } catch (ex: Exception) {
             false
         }
-
     }
 
     fun logoutUser() {
@@ -89,8 +88,8 @@ class UsersRepository(
             .builder()
             .userId(currUserId.toString()) // TODO check type
             .build()
-        val apolloClient = apolloClientFactory.create()
         try {
+            val apolloClient = apolloClientFactory.create()
             val response =
                 apolloClient
                     .query(userQuery)
@@ -124,8 +123,8 @@ class UsersRepository(
             .userId(currUserId.toString())
             .user(editedUser)
             .build()
-        val apolloClient = apolloClientFactory.create()
         try {
+            val apolloClient = apolloClientFactory.create()
             val response =
                 apolloClient
                     .mutate(editUser)

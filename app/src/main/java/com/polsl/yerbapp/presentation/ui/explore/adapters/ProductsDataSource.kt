@@ -27,8 +27,6 @@ class ProductsDataSource (private val scope: CoroutineScope, private val product
             _loading.postValue(false)
             callback.onResult(items, null, params.requestedLoadSize)
         }
-
-
     }
 
     override fun loadAfter(

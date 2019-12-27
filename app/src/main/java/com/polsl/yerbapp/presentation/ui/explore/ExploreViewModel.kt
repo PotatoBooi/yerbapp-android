@@ -6,11 +6,16 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.polsl.yerbapp.R
+import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
+import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsDataFactory
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsListener
+import com.polsl.yerbapp.presentation.ui.profile.AuthStatus
 import com.polsl.yerbapp.presentation.usecases.ProductsCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel(), ProductsListener {
@@ -48,7 +53,8 @@ class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel()
 
     }
 
-
 }
+
+
 
 
