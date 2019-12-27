@@ -36,7 +36,10 @@ class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel()
     override fun onItemClick(item: ProductModel) {
         productsCase.currentProductId = item.id // temporary solution
         _navigationId.value = R.id.action_exploreFragment_to_previewProductFragment
+    }
 
+    fun onAddProductClick() {
+        _navigationId.value = R.id.action_exploreFragment_to_addProductFragment
     }
 
     private fun initPaging() {
