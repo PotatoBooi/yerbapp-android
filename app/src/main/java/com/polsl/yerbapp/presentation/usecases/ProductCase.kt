@@ -12,8 +12,8 @@ class ProductCase(private val productsRepository: ProductsRepository,
 {
 
     suspend fun getProduct(productId: String) = productsRepository.getProduct(productId)
-    suspend fun addProduct(product: ProductModel) = productsRepository.addProduct(product)
     suspend fun getProductTypes() = typesRepository.getTypes()
     suspend fun getProductManfacturers() = manufacturersRepository.getManufacturers()
-    
+    suspend fun addProduct(product: ProductModel) = productsRepository.addProduct(product)
+
 }
