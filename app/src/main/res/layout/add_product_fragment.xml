@@ -26,14 +26,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:hint="@string/PRODUCT_NAME"/>
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:layout_constraintStart_toBottomOf="et"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                android:hint="@string/PRODUCT_NAME"/>-->
+                android:hint="@string/PRODUCT_NAME"
+                android:text="@={viewmodel.name}"/>
 
             <TextView
                 android:id="@+id/tvTypeLabel"
@@ -49,8 +43,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@id/tvTypeLabel"
                 app:layout_constraintBottom_toBottomOf="@id/tvTypeLabel"
-                android:entries="@{viewmodel.test}"
-                android:selectedItemPosition= "@={viewmodel.testIdx}"/>
+                android:entries="@{viewmodel.types}"
+                android:selectedItemPosition= "@={viewmodel.selectedTypeIndex}"/>
 
             <TextView
                 android:id="@+id/tvManufacturerLabel"
@@ -65,7 +59,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@id/tvManufacturerLabel"
-                app:layout_constraintBottom_toBottomOf="@id/tvManufacturerLabel" />
+                app:layout_constraintBottom_toBottomOf="@id/tvManufacturerLabel"
+                android:entries="@{viewmodel.manufacturers}"
+                android:selectedItemPosition= "@={viewmodel.selectedManufacturerIndex}"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etDetails"
@@ -73,7 +69,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/tvManufacturerLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvManufacturerLabel"
-                android:hint="@string/DETAILS" />
+                android:hint="@string/DETAILS"
+                android:text="@={viewmodel.details}"/>
 
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
