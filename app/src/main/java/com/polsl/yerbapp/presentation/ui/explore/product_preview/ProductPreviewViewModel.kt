@@ -2,8 +2,6 @@ package com.polsl.yerbapp.presentation.ui.explore.product_preview
 
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
@@ -17,17 +15,24 @@ import com.polsl.yerbapp.presentation.usecases.ProductsCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ProductPreviewViewModel(private val productsCase: ProductsCase, private val productCase: ProductCase) : BaseViewModel() {
+class ProductPreviewViewModel(
+    private var productId: String?,
+    private val productsCase: ProductsCase,
+    private val productCase: ProductCase
+) : BaseViewModel() {
 
     val loading = ObservableBoolean(true)
 
     val product = ObservableField<ProductModel>()
     val productType =  ObservableField<TypeModel>()
     val productManufacturer =  ObservableField<ManufacturerModel>()
-    val productId = ObservableField<String>()
 
-    fun initProduct(){
-        productId.get()?.let{
+    init {
+        initProduct()
+    }
+
+    private fun initProduct() {
+        productId?.let {
             viewModelScope.launch(Dispatchers.Main) {
                 try{
                     loading.set(true)
