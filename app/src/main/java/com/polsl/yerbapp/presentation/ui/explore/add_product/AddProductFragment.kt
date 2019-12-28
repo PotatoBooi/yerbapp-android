@@ -19,7 +19,6 @@ import org.koin.core.parameter.parametersOf
 class AddProductFragment : BaseFragment<AddProductViewModel>() {
     override val viewModel: AddProductViewModel? by viewModel { parametersOf(this) }
     private lateinit var binding: AddProductFragmentBinding
-    private lateinit var ctxt: Context
 
     companion object {
         fun newInstance() = AddProductFragment()
@@ -37,13 +36,12 @@ class AddProductFragment : BaseFragment<AddProductViewModel>() {
     override fun setupLiveData() {
         super.setupLiveData()
 
-        viewModel?.types?.observe( this, Observer {array ->
-            activity?.baseContext?.let{ ctx ->
-                val typeSpinnerAdapter =
-                    ArrayAdapter(ctx, R.layout.dropdown_item, array)
-                sManufacturer.adapter = typeSpinnerAdapter
-            }
-
-        })
+//        viewModel?.types?.observe( this, Observer {array ->
+//            activity?.baseContext?.let{ ctx ->
+//                val typeSpinnerAdapter =
+//                    ArrayAdapter(ctx, R.layout.dropdown_item, array)
+//                sType.adapter = typeSpinnerAdapter
+//            }
+//        })
     }
 }

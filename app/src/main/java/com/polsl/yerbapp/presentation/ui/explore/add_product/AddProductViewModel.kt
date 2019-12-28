@@ -1,8 +1,9 @@
 package com.polsl.yerbapp.presentation.ui.explore.add_product
 
+import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
-import androidx.databinding.ObservableList
+import androidx.databinding.ObservableInt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.polsl.yerbapp.domain.models.reponse.graphql.TypeModel
@@ -13,12 +14,21 @@ import com.polsl.yerbapp.presentation.usecases.ProductsCase
 class AddProductViewModel(private val productsCase: ProductsCase) : BaseViewModel() {
     val loading = ObservableBoolean(true)
 
-    val types : LiveData<List<String>>
+    val types : LiveData<List<TypeModel>>
         get() = _types
+    private val _types = MutableLiveData<List<TypeModel>>()
 
-    private val _types = MutableLiveData<List<String>>()
+    var test = ObservableArrayList<TypeModel>()
+    val testIdx = ObservableInt()
     init{
-        val list = listOf("1", "2", "3")
+        val list = listOf(TypeModel(name = "0"),TypeModel(name = "1"), TypeModel(name = "3") )
         _types.postValue(list)
+
+        test.addAll(list)
+        testIdx.set(0)
+    }
+
+    fun onSaveClick() {
+        Log.d("TYPE INDEX", testIdx.get().toString())
     }
 }

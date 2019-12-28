@@ -48,7 +48,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@id/tvTypeLabel"
-                app:layout_constraintBottom_toBottomOf="@id/tvTypeLabel" />
+                app:layout_constraintBottom_toBottomOf="@id/tvTypeLabel"
+                android:entries="@{viewmodel.test}"
+                android:selectedItemPosition= "@={viewmodel.testIdx}"/>
 
             <TextView
                 android:id="@+id/tvManufacturerLabel"
@@ -56,7 +58,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/tvTypeLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvTypeLabel"
-                android:text="@string/MANUFACTURER"/>
+                android:text="@string/MANUFACTURER" />
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/sManufacturer"
@@ -81,7 +83,8 @@
                 app:layout_constraintTop_toBottomOf="@id/etDetails"
                 android:padding="20dp"
                 android:text="@string/SAVE"
-                style="@style/Widget.AppCompat.Button.Colored"/>
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:onClick="@{() -> viewmodel.onSaveClick()}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
