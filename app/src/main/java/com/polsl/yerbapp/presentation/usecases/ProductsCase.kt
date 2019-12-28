@@ -1,8 +1,6 @@
 package com.polsl.yerbapp.presentation.usecases
 
-import com.polsl.yerbapp.data.ProductsRepository
-import android.util.Log
-import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
+import com.polsl.yerbapp.data.repos.ProductsRepository
 
 class ProductsCase(private val productsRepository: ProductsRepository) {
 

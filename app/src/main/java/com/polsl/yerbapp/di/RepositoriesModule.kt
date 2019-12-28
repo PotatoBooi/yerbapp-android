@@ -1,10 +1,12 @@
 package com.polsl.yerbapp.di
 
-import com.polsl.yerbapp.data.UsersRepository
-import com.polsl.yerbapp.data.ProductsRepository
+import com.polsl.yerbapp.data.repos.UsersRepository
+import com.polsl.yerbapp.data.repos.ProductsRepository
 import com.polsl.yerbapp.data.network.ApolloClientFactory
 import com.polsl.yerbapp.data.network.ConnectivityInterceptor
 import com.polsl.yerbapp.data.network.RetrofitService
+import com.polsl.yerbapp.data.repos.ManufacturersRepository
+import com.polsl.yerbapp.data.repos.TypesRepository
 import org.koin.dsl.module
 
 val repositoriesModule = module {
@@ -12,5 +14,7 @@ val repositoriesModule = module {
     single { RetrofitService(get()) }
     single { ApolloClientFactory(get(), get()) }
     single { UsersRepository(get(), get(), get()) }
-    single { ProductsRepository(get())}
+    single { ProductsRepository(get()) }
+    single { ManufacturersRepository (get())}
+    single { TypesRepository (get())}
 }

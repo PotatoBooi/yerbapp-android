@@ -1,4 +1,4 @@
-package com.polsl.yerbapp.data
+package com.polsl.yerbapp.data.repos
 
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
@@ -72,5 +72,9 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
         catch (ex: Exception) {
             throw  ex
         }
+    }
+
+    fun addProduct(product: ProductModel) {
+        //TODO
     }
 }

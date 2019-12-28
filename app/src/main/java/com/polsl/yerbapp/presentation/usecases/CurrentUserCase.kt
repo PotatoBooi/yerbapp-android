@@ -1,7 +1,6 @@
 package com.polsl.yerbapp.presentation.usecases
 
-import com.apollographql.apollo.api.toInput
-import com.polsl.yerbapp.data.UsersRepository
+import com.polsl.yerbapp.data.repos.UsersRepository
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProfileModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.UserModel
 import com.polsl.yerbapp.domain.models.reponse.sharedPreferences.CurrentUserInfo

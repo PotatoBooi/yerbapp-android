@@ -9,5 +9,5 @@ val useCasesModule = module {
     single { RegisterUserCase(get()) }
     single { CurrentUserCase(get()) }
     single { ProductsCase (get())}
-    single { ProductCase (get()) }
+    single { ProductCase (get(), get(), get()) }
 }

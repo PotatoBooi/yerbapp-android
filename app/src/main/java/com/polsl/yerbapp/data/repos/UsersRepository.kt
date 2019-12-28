@@ -1,4 +1,4 @@
-package com.polsl.yerbapp.data
+package com.polsl.yerbapp.data.repos
 
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
