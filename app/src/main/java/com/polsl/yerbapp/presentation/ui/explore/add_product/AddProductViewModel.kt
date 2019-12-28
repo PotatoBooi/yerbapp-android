@@ -10,6 +10,7 @@ import com.polsl.yerbapp.R
 import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
 import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
 import com.polsl.yerbapp.domain.models.reponse.graphql.ManufacturerModel
+import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.TypeModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
 import com.polsl.yerbapp.presentation.usecases.ProductCase
@@ -20,14 +21,19 @@ import kotlinx.coroutines.launch
 class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel() {
     val loading = ObservableBoolean(true)
 
-    val name = ObservableField<String>("")
-    val details = ObservableField<String>("")
+    val nameInput = ObservableField<String>("")
+    val detailsInput = ObservableField<String>("")
 
     val types = ObservableArrayList<TypeModel>()
-    val selectedTypeIndex = ObservableInt(0)
+    val typeInputIndex = ObservableInt(0)
 
     val manufacturers = ObservableArrayList<ManufacturerModel>()
-    val selectedManufacturerIndex = ObservableInt(0)
+    val manufacturerInputIndex = ObservableInt(0)
+
+    private val manufacturerId: String?
+        get() = manufacturers[manufacturerInputIndex.get()].id
+    private val typeId: String?
+        get() = types[typeInputIndex.get()].id
 
     init{
         initTypes()
@@ -36,7 +42,28 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
 
 
     fun onSaveClick() {
-
+        when {
+            nameInput.get()?.isEmpty() ?: true -> {
+                _message.value = R.string.EMAIL_EMPTY
+                return
+            }
+        }
+        viewModelScope.launch(Dispatchers.Main) {
+            try {
+                loading.set(true)
+                val result = productCase.addProduct(
+                    nameInput.get() ?: "",
+                    detailsInput.get() ?: "",
+                    typeId ?: "",
+                    manufacturerId ?: ""
+                )
+               // notify if saved -> navigate to explore
+            } catch (ex: Exception) {
+                handleErrors(ex)
+            } finally {
+                loading.set(false)
+            }
+        }
         // TODO validation
         // TODO Post photo or default photo
         // TODO add product with url photo adress
@@ -61,7 +88,7 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
         viewModelScope.launch(Dispatchers.Main) {
             try{
                 loading.set(true)
-                val manufacturersData = productCase.getProductManfacturers()
+                val manufacturersData = productCase.getProductManufacturers()
                 manufacturers.clear()
                 manufacturers.addAll(manufacturersData)
                 loading.set(false)

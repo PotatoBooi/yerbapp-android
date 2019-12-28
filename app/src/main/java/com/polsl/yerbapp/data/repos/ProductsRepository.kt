@@ -6,8 +6,10 @@ import com.polsl.yerbapp.data.network.ApolloClientFactory
 import com.polsl.yerbapp.domain.models.reponse.graphql.ManufacturerModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.TypeModel
+import yerba.AddProductMutation
 import yerba.GetProductQuery
 import yerba.GetProductsQuery
+import yerba.type.AddProductInput
 import java.lang.IllegalStateException
 
 class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
@@ -74,7 +76,40 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
         }
     }
 
-    fun addProduct(product: ProductModel) {
-        //TODO
+   suspend fun addProduct(name: String, details: String, typeId: String, manufacturerId: String) : String {
+        val tempUrl = "https://ekogram.pl/2322-thickbox_default/bio-yerba-mate-despalada-ekologiczna-250g.jpg"
+        val productInput = AddProductInput
+            .builder()
+            .name(name)
+            .details(details)
+            .typeId(typeId)
+            .manufacturerId(manufacturerId)
+            .photoUrl(tempUrl)
+            .build()
+
+        val productMutation = AddProductMutation
+            .builder()
+            .product(productInput)
+            .build()
+        try{
+            val apolloClient = apolloClientFactory.create()
+            //delay(2000)  // for testing loaders
+            val response =
+                apolloClient
+                    .mutate(productMutation)
+                    .toDeferred()
+                    .await()
+
+            return response.data()?.addProduct()?.let {
+                return it.id()
+            }?: run {
+                throw IllegalStateException()}
+        }
+        catch(ex: ApolloException){
+            throw ex
+        }
+        catch (ex: Exception) {
+            throw  ex
+        }
     }
 }
