@@ -17,6 +17,6 @@ val viewModelsModule = module {
     viewModel { RegisterViewModel(get()) }
     viewModel { ProfileSharedViewModel() }
     viewModel { ExploreViewModel(get()) }
-    viewModel { ProductPreviewViewModel(get()) }
+    viewModel { ProductPreviewViewModel(get(), get()) }
     viewModel { AddProductViewModel( get()) }
 }

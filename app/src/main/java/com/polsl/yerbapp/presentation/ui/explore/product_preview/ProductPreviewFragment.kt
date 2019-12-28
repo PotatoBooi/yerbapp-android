@@ -32,4 +32,18 @@ class ProductPreviewFragment : BaseFragment<ProductPreviewViewModel>() {
     override fun setupLiveData() {
         super.setupLiveData()
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel?.productId?.set(arguments?.getString("productId"))
+        viewModel?.initProduct()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+//        viewModel?.productId?.set(arguments?.getString("productId"))
+//        viewModel?.initProduct()
+
+    }
+
 }

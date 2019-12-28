@@ -1,5 +1,6 @@
 package com.polsl.yerbapp.presentation.ui.explore
 
+import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
@@ -10,6 +11,7 @@ import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
 import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
+import com.polsl.yerbapp.presentation.base.NavigationProps
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsDataFactory
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsListener
 import com.polsl.yerbapp.presentation.ui.profile.AuthStatus
@@ -34,12 +36,17 @@ class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel()
     private lateinit var  _loading: LiveData<Boolean>
 
     override fun onItemClick(item: ProductModel) {
-        productsCase.currentProductId = item.id // temporary solution
-        _navigationId.value = R.id.action_exploreFragment_to_previewProductFragment
+        //productsCase.currentProductId = item.id // temporary solution
+        val navigationId = R.id.action_exploreFragment_to_previewProductFragment
+        val bundle = bundleOf("productId" to item.id)
+        _navigationProps.value = NavigationProps(navigationId, bundle)
+        //_navigationId.value = R.id.action_exploreFragment_to_previewProductFragment
     }
 
     fun onAddProductClick() {
-        _navigationId.value = R.id.action_exploreFragment_to_addProductFragment
+        val navigationId = R.id.action_exploreFragment_to_addProductFragment
+        _navigationProps.value = NavigationProps(navigationId, null)
+        //_navigationId.value = R.id.action_exploreFragment_to_addProductFragment
     }
 
     private fun initPaging() {
@@ -55,7 +62,6 @@ class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel()
         _pagedProducts = LivePagedListBuilder<Int, ProductModel>(productsDataFactory, config).build()
 
     }
-
 }
 
 

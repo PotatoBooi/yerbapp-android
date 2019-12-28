@@ -53,7 +53,12 @@
         android:id="@+id/productPreviewFragment"
         android:name="com.polsl.yerbapp.presentation.ui.explore.product_preview.ProductPreviewFragment"
         android:label="product_preview_fragment"
-        tools:layout="@layout/product_preview_fragment" />
+        tools:layout="@layout/product_preview_fragment">
+        <argument
+            android:name="productId"
+            android:defaultValue="Android" />
+    </fragment>
+
     <fragment
         android:id="@+id/addProductFragment"
         android:name="com.polsl.yerbapp.presentation.ui.explore.add_product.AddProductFragment"

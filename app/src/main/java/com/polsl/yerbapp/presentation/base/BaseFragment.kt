@@ -18,16 +18,16 @@ open class BaseFragment<T : BaseViewModel> : Fragment() {
     }
 
     open fun setupLiveData() {
-        viewModel?.navigationId?.observe(viewLifecycleOwner, Observer {
-            navigate(it)
+        viewModel?.navigationProps?.observe(viewLifecycleOwner, Observer {
+            navigate(it.navigationId, it.bundle)
         })
         viewModel?.message?.observe(viewLifecycleOwner, Observer {
             showMessage(it)
         })
     }
 
-    fun navigate(@IdRes actionId: Int) {
-        view?.let { Navigation.findNavController(it).navigate(actionId) }
+    fun navigate(@IdRes actionId: Int, bundle: Bundle?) {
+        view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }
     }
 
     fun navigate(navDirection: NavDirections) {

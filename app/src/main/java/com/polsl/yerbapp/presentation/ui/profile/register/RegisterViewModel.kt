@@ -9,6 +9,7 @@ import com.hadilq.liveevent.LiveEvent
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
 import com.polsl.yerbapp.presentation.base.BaseViewModel
+import com.polsl.yerbapp.presentation.base.NavigationProps
 import com.polsl.yerbapp.presentation.usecases.RegisterUserCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -80,6 +81,7 @@ class RegisterViewModel(private val registerUserCase: RegisterUserCase) : BaseVi
     }
 
     fun loginClick(){
-        _navigationId.value = R.id.action_registerFragment_to_profileFragment
+        val navigationId = R.id.action_registerFragment_to_profileFragment
+        _navigationProps.value = NavigationProps(navigationId, null)
     }
 }

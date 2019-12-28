@@ -12,37 +12,37 @@ import com.polsl.yerbapp.domain.models.reponse.graphql.ManufacturerModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.TypeModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
+import com.polsl.yerbapp.presentation.usecases.ProductCase
 import com.polsl.yerbapp.presentation.usecases.ProductsCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ProductPreviewViewModel(private val productsCase: ProductsCase) : BaseViewModel() {
+class ProductPreviewViewModel(private val productsCase: ProductsCase, private val productCase: ProductCase) : BaseViewModel() {
 
     val loading = ObservableBoolean(true)
 
     val product = ObservableField<ProductModel>()
     val productType =  ObservableField<TypeModel>()
     val productManufacturer =  ObservableField<ManufacturerModel>()
+    val productId = ObservableField<String>()
 
-
-    init{
-        initProduct()
-    }
-
-    private fun initProduct(){
-        viewModelScope.launch(Dispatchers.Main) {
-            try{
-                loading.set(true)
-                val productData = productsCase.getProduct()
-                product.set(productData)
-                productManufacturer.set(productData.manufacturerModel)
-                productType.set(productData.typeModel)
-                loading.set(false)
-            }catch (ex: Exception) {
-                loading.set(false)
-                handleErrors(ex)
+    fun initProduct(){
+        productId.get()?.let{
+            viewModelScope.launch(Dispatchers.Main) {
+                try{
+                    loading.set(true)
+                    val productData = productCase.getProduct(it)
+                    product.set(productData)
+                    productManufacturer.set(productData.manufacturerModel)
+                    productType.set(productData.typeModel)
+                    loading.set(false)
+                }catch (ex: Exception) {
+                    loading.set(false)
+                    handleErrors(ex)
+                }
             }
         }
+
     }
 
     private fun handleErrors(ex: Exception) {

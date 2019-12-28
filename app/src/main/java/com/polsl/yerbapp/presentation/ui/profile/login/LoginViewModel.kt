@@ -10,6 +10,7 @@ import com.polsl.yerbapp.domain.exceptions.InvalidCredentialsException
 import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
 import com.polsl.yerbapp.domain.exceptions.UserNotFoundException
 import com.polsl.yerbapp.presentation.base.BaseViewModel
+import com.polsl.yerbapp.presentation.base.NavigationProps
 import com.polsl.yerbapp.presentation.usecases.LoginUserCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,7 +58,8 @@ class LoginViewModel(private val loginUserCase: LoginUserCase) : BaseViewModel()
     }
 
     fun registerClick() {
-        _navigationId.value = R.id.action_profileFragment_to_registerFragment
+       val navigationId = R.id.action_profileFragment_to_registerFragment
+        _navigationProps.value = NavigationProps(navigationId, null)
     }
 
     private fun handleErrors(ex: Exception) {
