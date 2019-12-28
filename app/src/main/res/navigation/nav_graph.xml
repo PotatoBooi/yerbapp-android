@@ -56,7 +56,8 @@
         tools:layout="@layout/product_preview_fragment">
         <argument
             android:name="productId"
-            android:defaultValue="Android" />
+            app:argType="string"
+            app:nullable="true"/>
     </fragment>
 
     <fragment

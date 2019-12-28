@@ -89,10 +89,9 @@ dependencies {
     // apollo coroutines
     implementation 'com.apollographql.apollo:apollo-coroutines-support:1.2.2'
 
-    /*Paging*/
+    // paging
     implementation 'android.arch.paging:runtime:1.0.1'
 
-    /*Card view*/
+    // Card view
     implementation "androidx.cardview:cardview:1.0.0"
-
 }

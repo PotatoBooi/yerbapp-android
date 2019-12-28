@@ -39,11 +39,4 @@ class ProductPreviewFragment : BaseFragment<ProductPreviewViewModel>() {
         viewModel?.initProduct()
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-//        viewModel?.productId?.set(arguments?.getString("productId"))
-//        viewModel?.initProduct()
-
-    }
-
 }

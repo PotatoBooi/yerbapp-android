@@ -36,17 +36,14 @@ class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel()
     private lateinit var  _loading: LiveData<Boolean>
 
     override fun onItemClick(item: ProductModel) {
-        //productsCase.currentProductId = item.id // temporary solution
         val navigationId = R.id.action_exploreFragment_to_previewProductFragment
         val bundle = bundleOf("productId" to item.id)
         _navigationProps.value = NavigationProps(navigationId, bundle)
-        //_navigationId.value = R.id.action_exploreFragment_to_previewProductFragment
     }
 
     fun onAddProductClick() {
         val navigationId = R.id.action_exploreFragment_to_addProductFragment
         _navigationProps.value = NavigationProps(navigationId, null)
-        //_navigationId.value = R.id.action_exploreFragment_to_addProductFragment
     }
 
     private fun initPaging() {
