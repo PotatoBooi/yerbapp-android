@@ -59,20 +59,9 @@ class AddProductFragment : BaseFragment<AddProductViewModel>() {
             if(!images.isNullOrEmpty()){
                 imageView.setImageBitmap(BitmapFactory.decodeFile(images[0].path))
             }
+        // TODO bind image here to bytearray?
 
     }
 
-
-//    override fun setupLiveData() {
-//        super.setupLiveData()
-//
-
-//        viewModel?.types?.observe( this, Observer {array ->
-//            activity?.baseContext?.let{ ctx ->
-//                val typeSpinnerAdapter =
-//                    ArrayAdapter(ctx, R.layout.dropdown_item, array)
-//                sType.adapter = typeSpinnerAdapter
-//            }
-//        }) //   }
 
 }

@@ -73,11 +73,13 @@
                 android:text="@={viewmodel.detailsInput}"/>
             <ImageView
                 android:id="@+id/ivPhoto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/etDetails"
-                android:contentDescription="@string/ADD"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintDimensionRatio="4:3" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAddPhoto"
@@ -88,7 +90,6 @@
                 android:padding="20dp"
                 android:text="@string/ADD"
                 style="@style/Widget.AppCompat.Button.Colored" />
-
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSave"
