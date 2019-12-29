@@ -94,4 +94,14 @@ dependencies {
 
     // Card view
     implementation "androidx.cardview:cardview:1.0.0"
+
+    // permissions
+    implementation 'com.karumi:dexter:6.0.1'
+
+    // material design
+    implementation 'com.google.android.material:material:1.0.0'
+
+    // photo picker
+    implementation 'com.github.esafirm.android-image-picker:imagepicker:2.2.0'
+
 }

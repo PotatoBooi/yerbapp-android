@@ -39,5 +39,6 @@
     <string name="TYPE">Typ</string>
     <string name="PRODUCT_NAME">Nazwa produktu</string>
     <string name="DETAILS">Szczegóły</string>
+    <string name="ADD">Dodaj</string>
 
 </resources>
