@@ -1,5 +1,6 @@
 package com.polsl.yerbapp.presentation.ui.explore.add_product
 
+import android.media.Image
 import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
@@ -29,6 +30,7 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
 
     val manufacturers = ObservableArrayList<ManufacturerModel>()
     val manufacturerInputIndex = ObservableInt(0)
+    var productImagePath: String = ""
 
     private val manufacturerId: String?
         get() = manufacturers[manufacturerInputIndex.get()].id
@@ -55,7 +57,8 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
                     nameInput.get() ?: "",
                     detailsInput.get() ?: "",
                     typeId ?: "",
-                    manufacturerId ?: ""
+                    manufacturerId ?: "",
+                    productImagePath ?: ""
                 )
                // notify if saved -> navigate to explore
             } catch (ex: Exception) {

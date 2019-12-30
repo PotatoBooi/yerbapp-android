@@ -97,10 +97,12 @@ class UsersRepository(
                     .await()
 
             if(response.hasErrors()){
-                if(response.errors().first().message()?.first()?.toInt() == 401 ){
+                val errorMessage = response.errors().first().message()
+                if(errorMessage == "{statusCode=401, error=Unauthorized}"){
                     throw UnauthorizedException()
                 }
             }
+            
             return response.data()?.user()?.let { u ->
                     UserModel(u.id(), u.username(), u.email(), ProfileModel(u.profile().priceImportance(), u.profile().tasteImportance(), u.profile().energyImportance(),
                         u.profile().aromaImportance(), u.profile().bitternessImportance()))

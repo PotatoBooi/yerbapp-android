@@ -57,9 +57,8 @@ class AddProductFragment : BaseFragment<AddProductViewModel>() {
 
             val images = ImagePicker.getImages(data)
             if(!images.isNullOrEmpty()){
-                imageView.layoutParams.height = 400
-                imageView.requestLayout()
                 imageView.setImageBitmap(BitmapFactory.decodeFile(images[0].path))
+                viewModel?.productImagePath = images[0].path
             }
         // TODO bind image here to bytearray?
 

@@ -3,6 +3,7 @@ package com.polsl.yerbapp.data.repos
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.network.ApolloClientFactory
+import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
 import com.polsl.yerbapp.domain.models.reponse.graphql.ManufacturerModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.TypeModel
@@ -76,8 +77,12 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
         }
     }
 
-   suspend fun addProduct(name: String, details: String, typeId: String, manufacturerId: String) : String {
-        val tempUrl = "https://ekogram.pl/2322-thickbox_default/bio-yerba-mate-despalada-ekologiczna-250g.jpg"
+   suspend fun addProduct(name: String, details: String, typeId: String, manufacturerId: String, imagePath: String) : String {
+       val tempUrl = null
+       if(imagePath.isNotEmpty()){
+           // TODO post multipart form data
+           // tempUrl = response
+       }
         val productInput = AddProductInput
             .builder()
             .name(name)
@@ -99,6 +104,13 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
                     .mutate(productMutation)
                     .toDeferred()
                     .await()
+
+            if(response.hasErrors()){
+                val errorMessage = response.errors().first().message()
+                if(errorMessage == "{statusCode=401, error=Unauthorized}"){
+                    throw UnauthorizedException()
+                }
+            }
 
             return response.data()?.addProduct()?.let {
                 return it.id()
