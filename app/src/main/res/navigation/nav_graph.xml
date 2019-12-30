@@ -54,6 +54,10 @@
         android:name="com.polsl.yerbapp.presentation.ui.explore.product_preview.ProductPreviewFragment"
         android:label="product_preview_fragment"
         tools:layout="@layout/product_preview_fragment">
+        <action
+            android:id="@+id/action_PreviewFragment_to_exploreFragment"
+            app:destination="@id/exploreFragment"
+            app:enterAnim="@anim/slide_in" />
         <argument
             android:name="productId"
             app:argType="string"
@@ -64,5 +68,14 @@
         android:id="@+id/addProductFragment"
         android:name="com.polsl.yerbapp.presentation.ui.explore.add_product.AddProductFragment"
         android:label="add_product_fragment"
-        tools:layout="@layout/add_product_fragment" />
+        tools:layout="@layout/add_product_fragment">
+        <action
+            android:id="@+id/action_addProductFragment_to_exploreFragment"
+            app:destination="@id/exploreFragment"
+            app:enterAnim="@anim/slide_in" />
+        <action
+            android:id="@+id/action_addProductFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/slide_in" />
+    </fragment>
 </navigation>

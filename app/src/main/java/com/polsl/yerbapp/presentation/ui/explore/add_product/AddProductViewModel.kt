@@ -14,6 +14,7 @@ import com.polsl.yerbapp.domain.models.reponse.graphql.ManufacturerModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.TypeModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
+import com.polsl.yerbapp.presentation.base.NavigationProps
 import com.polsl.yerbapp.presentation.usecases.ProductCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,7 +64,8 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
                // notify if saved -> navigate to explore
                 if(!result.isNullOrEmpty()) {
                     _message.postValue(R.string.PRODUCT_ADDED)
-                    // TODO navigation to explore
+                    val navigationId = R.id.action_addProductFragment_to_exploreFragment
+                    _navigationProps.value = NavigationProps(navigationId, null)
                 }
             } catch (ex: Exception) {
                 handleErrors(ex)
@@ -107,7 +109,8 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
         when (ex) {
             is UnauthorizedException -> {
                 _message.postValue(R.string.UNAUTHORIZED)
-                // TODO navigate to login? is it possible?
+                val navigationId = R.id.action_addProductFragment_to_profileFragment
+                _navigationProps.value = NavigationProps(navigationId, null)
             }
             is NoConnectivityException -> {
                 _message.postValue(R.string.NO_INTERNET)
