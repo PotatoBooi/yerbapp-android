@@ -7,17 +7,12 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.polsl.yerbapp.R
-import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
-import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import com.polsl.yerbapp.presentation.base.BaseViewModel
 import com.polsl.yerbapp.presentation.base.NavigationProps
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsDataFactory
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsListener
-import com.polsl.yerbapp.presentation.ui.profile.AuthStatus
 import com.polsl.yerbapp.presentation.usecases.ProductsCase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel(), ProductsListener {
@@ -35,11 +30,7 @@ class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel()
 
     private lateinit var  _loading: LiveData<Boolean>
 
-    override fun onItemClick(item: ProductModel) {
-        val navigationId = R.id.action_exploreFragment_to_previewProductFragment
-        val bundle = bundleOf("productId" to item.id)
-        _navigationProps.value = NavigationProps(navigationId, bundle)
-    }
+
 
     fun onAddProductClick() {
         val navigationId = R.id.action_exploreFragment_to_addProductFragment
@@ -57,6 +48,13 @@ class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel()
             .setPageSize(6)
             .build()
         _pagedProducts = LivePagedListBuilder<Int, ProductModel>(productsDataFactory, config).build()
+
+    }
+
+    override fun onItemClick(item: ProductModel) {
+        val navigationId = R.id.action_exploreFragment_to_previewProductFragment
+        val bundle = bundleOf("productId" to item.id)
+        _navigationProps.value = NavigationProps(navigationId, bundle)
 
     }
 }

@@ -40,5 +40,6 @@
     <string name="PRODUCT_NAME">Nazwa produktu</string>
     <string name="DETAILS">Szczegóły</string>
     <string name="ADD">Dodaj</string>
+    <string name="GALLERY">Galeria</string>
 
 </resources>

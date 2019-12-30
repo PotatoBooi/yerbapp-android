@@ -2,9 +2,11 @@ package com.polsl.yerbapp.presentation.ui.explore
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,6 +14,7 @@ import com.polsl.yerbapp.R
 import com.polsl.yerbapp.databinding.ExploreFragmentBinding
 import com.polsl.yerbapp.presentation.base.BaseFragment
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsAdapter
+import kotlinx.android.synthetic.main.product_item.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -34,7 +37,6 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
 
         val manager = GridLayoutManager(activity, 2)
         binding.productList.layoutManager = manager
-
         return binding.root
     }
 
@@ -55,4 +57,5 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
 //    }
 
     }
+
 }
