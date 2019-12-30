@@ -33,7 +33,12 @@
         android:id="@+id/trainingFragment"
         android:name="com.polsl.yerbapp.presentation.ui.training.TrainingFragment"
         android:label="training_fragment"
-        tools:layout="@layout/training_fragment" />
+        tools:layout="@layout/training_fragment">
+        <action
+            android:id="@+id/action_trainingFragment_to_tutorialFragment"
+            app:destination="@id/tutorialFragment"
+            app:enterAnim="@anim/slide_in" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.polsl.yerbapp.presentation.ui.profile.register.RegisterFragment"
@@ -76,6 +81,19 @@
         <action
             android:id="@+id/action_addProductFragment_to_profileFragment"
             app:destination="@id/profileFragment"
+            app:enterAnim="@anim/slide_in" />
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/tutorialFragment"
+        android:name="com.polsl.yerbapp.presentation.ui.training.tutorial.TutorialFragment"
+        android:label="tutorial_fragment"
+        tools:layout="@layout/tutorial_fragment">
+        <action
+            android:id="@+id/action_tutorialFragment_to_trainingFragment"
+            app:destination="@id/trainingFragment"
             app:enterAnim="@anim/slide_in" />
     </fragment>
 </navigation>

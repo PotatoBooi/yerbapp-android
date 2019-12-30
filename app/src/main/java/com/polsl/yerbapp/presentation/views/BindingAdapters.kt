@@ -18,12 +18,18 @@ object BindingAdapters {
 
     @BindingAdapter("imageUrl")
     @JvmStatic
-    fun setImage(imageView: ImageView, url: String?) {
+    fun setImageFromUrl(imageView: ImageView, url: String?) {
         if(!url.isNullOrEmpty()){
             GlideApp.with(imageView).load(url).apply(RequestOptions().fitCenter()).into(imageView)
         } else{
             GlideApp.with(imageView).load(R.drawable.product_default).apply(RequestOptions().fitCenter()).into(imageView)
         }
+    }
+
+    @BindingAdapter("imageRes")
+    @JvmStatic
+    fun setImageFromSrc(imageView: ImageView, res: Int?) {
+        GlideApp.with(imageView).load(res).apply(RequestOptions().fitCenter()).into(imageView)
     }
 //    @BindingAdapter("editable")
 //    @JvmStatic

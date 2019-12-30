@@ -7,6 +7,8 @@ import com.polsl.yerbapp.presentation.ui.profile.ProfileSharedViewModel
 import com.polsl.yerbapp.presentation.ui.profile.ProfileViewModel
 import com.polsl.yerbapp.presentation.ui.profile.login.LoginViewModel
 import com.polsl.yerbapp.presentation.ui.profile.register.RegisterViewModel
+import com.polsl.yerbapp.presentation.ui.training.TrainingViewModel
+import com.polsl.yerbapp.presentation.ui.training.tutorial.TutorialViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -18,4 +20,7 @@ val viewModelsModule = module {
     viewModel { ExploreViewModel(get()) }
     viewModel { (productId: String) -> ProductPreviewViewModel(productId, get(), get()) }
     viewModel { AddProductViewModel( get()) }
+    viewModel { TutorialViewModel() }
+    viewModel { TrainingViewModel() }
+
 }
