@@ -15,6 +15,8 @@ import com.polsl.yerbapp.R
 import com.polsl.yerbapp.databinding.AddProductFragmentBinding
 import com.polsl.yerbapp.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.add_product_fragment.*
+import kotlinx.android.synthetic.main.product_item.*
+import kotlinx.android.synthetic.main.product_item.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -42,7 +44,7 @@ class AddProductFragment : BaseFragment<AddProductViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         imageView = ivPhoto
-        imageView.setOnClickListener {
+        btnAddPhoto.setOnClickListener {
             ImagePicker.create(this)
                 .returnMode(ReturnMode.ALL)
                 .folderMode(true)
@@ -50,6 +52,7 @@ class AddProductFragment : BaseFragment<AddProductViewModel>() {
                 .toolbarFolderTitle("Galeria")
                 .start()
         }
+        btnRemovePhoto.setOnClickListener{ onRemovePhotoClick() }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -62,6 +65,10 @@ class AddProductFragment : BaseFragment<AddProductViewModel>() {
             }
         // TODO bind image here to bytearray?
 
+    }
+
+    fun onRemovePhotoClick(){
+        imageView.setImageDrawable(null)
     }
 
 

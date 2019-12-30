@@ -72,20 +72,36 @@
                 android:hint="@string/DETAILS"
                 android:text="@={viewmodel.detailsInput}"/>
 
+
+            <ImageButton
+                android:id="@+id/btnAddPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/etDetails"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_add_photo"
+                android:background="@null" />
+
+            <Button
+                android:id="@+id/btnRemovePhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/etDetails"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/REMOVE" />
+
             <ImageView
                 android:id="@+id/ivPhoto"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etDetails"
+                app:layout_constraintTop_toBottomOf="@id/btnRemovePhoto"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintDimensionRatio="4:3"
-                android:src="@drawable/ic_add_photo"
                 android:orientation="horizontal" />
 
-
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btnSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
