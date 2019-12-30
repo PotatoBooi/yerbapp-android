@@ -20,7 +20,7 @@ class TutorialViewModel() : BaseViewModel() {
 
     val currentSlide = ObservableField<TutorialSlide>(slides[0])
     private val isLastSlide: Boolean
-        get() = currentSlideId == slides.size
+        get() = currentSlideId == (slides.size - 1)
 
     fun onNextClick(){
         // handle next slide or navigate to the training
