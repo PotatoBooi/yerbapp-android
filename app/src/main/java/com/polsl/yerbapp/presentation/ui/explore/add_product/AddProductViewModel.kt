@@ -46,7 +46,7 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
     fun onSaveClick() {
         when {
             nameInput.get()?.isEmpty() ?: true -> {
-                _message.value = R.string.EMAIL_EMPTY
+                _message.value = R.string.PRODUCT_NAME_EMPTY
                 return
             }
         }
@@ -61,15 +61,16 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
                     productImagePath ?: ""
                 )
                // notify if saved -> navigate to explore
+                if(!result.isNullOrEmpty()) {
+                    _message.postValue(R.string.PRODUCT_ADDED)
+                    // TODO navigation to explore
+                }
             } catch (ex: Exception) {
                 handleErrors(ex)
             } finally {
                 loading.set(false)
             }
         }
-        // TODO validation
-        // TODO Post photo or default photo
-        // TODO add product with url photo adress
     }
 
     private fun initTypes(){

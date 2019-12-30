@@ -102,7 +102,7 @@ class UsersRepository(
                     throw UnauthorizedException()
                 }
             }
-            
+
             return response.data()?.user()?.let { u ->
                     UserModel(u.id(), u.username(), u.email(), ProfileModel(u.profile().priceImportance(), u.profile().tasteImportance(), u.profile().energyImportance(),
                         u.profile().aromaImportance(), u.profile().bitternessImportance()))

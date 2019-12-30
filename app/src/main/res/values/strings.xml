@@ -41,5 +41,7 @@
     <string name="DETAILS">Szczegóły</string>
     <string name="ADD">Dodaj</string>
     <string name="GALLERY">Galeria</string>
+    <string name="PRODUCT_NAME_EMPTY">Nazwa produktu nie może być pusta</string>
+    <string name="PRODUCT_ADDED">produkt został dodany!</string>
 
 </resources>
