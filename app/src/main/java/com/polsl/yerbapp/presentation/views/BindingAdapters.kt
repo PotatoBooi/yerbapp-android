@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.request.RequestOptions
+import com.polsl.yerbapp.R
 import com.polsl.yerbapp.presentation.ui.helpers.GlideApp
 
 
@@ -18,7 +19,11 @@ object BindingAdapters {
     @BindingAdapter("imageUrl")
     @JvmStatic
     fun setImage(imageView: ImageView, url: String?) {
-        GlideApp.with(imageView).load(url).apply(RequestOptions().fitCenter()).into(imageView)
+        if(!url.isNullOrEmpty()){
+            GlideApp.with(imageView).load(url).apply(RequestOptions().fitCenter()).into(imageView)
+        } else{
+            GlideApp.with(imageView).load(R.drawable.product_default).apply(RequestOptions().fitCenter()).into(imageView)
+        }
     }
 //    @BindingAdapter("editable")
 //    @JvmStatic
