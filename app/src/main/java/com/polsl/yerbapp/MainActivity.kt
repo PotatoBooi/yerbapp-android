@@ -22,6 +22,10 @@ class MainActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this, R.id.navHostMain)
         bottomNav.setupWithNavController(navController)
         navController.addOnDestinationChangedListener(navigationChangedListener)
+
+//        supportActionBar?.setDisplayShowHomeEnabled(true)
+//        supportActionBar?.setLogo(R.mipmap.ic_logo)
+//        supportActionBar?.setDisplayUseLogoEnabled(true)
     }
 
     private val navigationChangedListener =
