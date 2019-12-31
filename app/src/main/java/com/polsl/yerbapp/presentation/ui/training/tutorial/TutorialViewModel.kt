@@ -1,5 +1,6 @@
 package com.polsl.yerbapp.presentation.ui.training.tutorial
 
+
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import com.polsl.yerbapp.R
@@ -15,21 +16,32 @@ class TutorialViewModel() : BaseViewModel() {
         TutorialSlide(R.drawable.ic_tutorial_5, R.string.TUTORIAL_5),
         TutorialSlide(R.drawable.ic_tutorial_6, R.string.TUTORIAL_6))
 
-   // private val currentSlideId = ObservableField(0)
    private var currentSlideId = 0
 
     val currentSlide = ObservableField<TutorialSlide>(slides[0])
     private val isLastSlide: Boolean
         get() = currentSlideId == (slides.size - 1)
 
+    private val isFirstSlide: Boolean
+        get() = currentSlideId == 0
+    val isPreviousButtonVisible = ObservableBoolean(false)
+
     fun onNextClick(){
-        // handle next slide or navigate to the training
+        isPreviousButtonVisible.set(true)
         if(isLastSlide){
             val navigationId = R.id.action_tutorialFragment_to_trainingFragment
             _navigationProps.value = NavigationProps(navigationId, null)
         }else{
             currentSlideId++
             currentSlide.set(slides[currentSlideId])
+        }
+    }
+
+    fun onPreviousClick(){
+        currentSlideId--
+        currentSlide.set(slides[currentSlideId])
+        if(isFirstSlide){
+            isPreviousButtonVisible.set(false)
         }
     }
 }
