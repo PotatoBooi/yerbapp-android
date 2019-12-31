@@ -3,9 +3,7 @@ package com.polsl.yerbapp.presentation.ui.explore
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -57,5 +55,35 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
 //    }
 
     }
+
+
+//
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        menuInflater.inflate(R.menu.options_menu, menu)
+//
+//        val searchItem = menu.findItem(R.id.search)
+//        val searchView = searchItem.actionView as SearchView
+//
+//        searchView.queryHint = "type location"
+//
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//
+//            override fun onQueryTextChange(newText: String): Boolean {
+//                return false
+//            }
+//
+//            override fun onQueryTextSubmit(query: String): Boolean {
+//
+//                launch {
+//                    content.visibility = View.GONE
+//                    loader.visibility = View.VISIBLE
+//                    mainViewModel.setCustomLocation(query)}
+//                return false
+//            }
+//
+//        })
+//
+//        return true
+//    }
 
 }

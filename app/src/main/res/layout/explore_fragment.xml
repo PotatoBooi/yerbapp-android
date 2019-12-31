@@ -23,10 +23,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/product_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+
+             <com.mancj.materialsearchbar.MaterialSearchBar
+                 android:id="@+id/searchBar"
+                 style="@style/MaterialSearchBarLight"
+                 app:mt_hint="@string/SEARCH"
+                 app:mt_maxSuggestionsCount="5"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 app:layout_constraintTop_toTopOf="parent"
+                 android:layout_margin="10dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/product_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/searchBar"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -51,6 +63,7 @@
             android:layout_margin = "30dp"
             app:srcCompat="@drawable/ic_add"
             android:onClick="@{() -> viewmodel.onAddProductClick()}"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

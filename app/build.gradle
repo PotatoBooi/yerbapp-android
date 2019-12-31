@@ -104,4 +104,7 @@ dependencies {
     // photo picker
     implementation 'com.github.esafirm.android-image-picker:imagepicker:2.2.0'
 
+    // search component
+    implementation 'com.github.mancj:MaterialSearchBar:0.8.2'
+
 }
