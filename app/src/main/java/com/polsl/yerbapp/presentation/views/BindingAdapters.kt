@@ -31,6 +31,17 @@ object BindingAdapters {
     fun setImageFromSrc(imageView: ImageView, res: Int?) {
         GlideApp.with(imageView).load(res).apply(RequestOptions().fitCenter()).into(imageView)
     }
+
+    @BindingAdapter("imagePath")
+    @JvmStatic
+    fun setImageFromPath(imageView: ImageView, path: String?){
+        if(path.isNullOrEmpty()) {
+            GlideApp.with(imageView).load(R.drawable.ic_add_photo).apply(RequestOptions().fitCenter()).into(imageView)
+        }else{
+            GlideApp.with(imageView).load(path).apply(RequestOptions().fitCenter()).into(imageView)
+        }
+
+    }
 //    @BindingAdapter("editable")
 //    @JvmStatic
 //    fun editable(view: View, editable: Boolean){

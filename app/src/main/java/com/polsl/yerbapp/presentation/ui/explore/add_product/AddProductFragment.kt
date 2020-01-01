@@ -61,7 +61,6 @@ class AddProductFragment : BaseFragment<AddProductViewModel>() {
                 .toolbarFolderTitle(context?.resources?.getString(R.string.GALLERY))
                 .start()
         }
-        btnRemovePhoto.setOnClickListener{ onRemovePhotoClick() }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -69,17 +68,11 @@ class AddProductFragment : BaseFragment<AddProductViewModel>() {
 
             val images = ImagePicker.getImages(data)
             if(!images.isNullOrEmpty()){
-                imageView.setImageBitmap(BitmapFactory.decodeFile(images[0].path))
-                viewModel?.productImagePath = images[0].path
+                //imageView.setImageBitmap(BitmapFactory.decodeFile(images[0].path))
+                viewModel?.productImagePath?.set(images[0].path)
+                viewModel?.isImageSet?.set(true)
             }
         // TODO bind image here to bytearray?
 
     }
-
-    private fun onRemovePhotoClick(){
-        imageView.setImageDrawable(context?.resources?.getDrawable(R.drawable.ic_add_photo))
-        viewModel?.productImagePath = ""
-    }
-
-
 }

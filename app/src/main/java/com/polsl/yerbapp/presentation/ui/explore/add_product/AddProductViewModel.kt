@@ -3,6 +3,8 @@ package com.polsl.yerbapp.presentation.ui.explore.add_product
 import android.media.Image
 import android.util.Log
 import androidx.databinding.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
@@ -28,11 +30,8 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
 
     val manufacturers = ObservableArrayList<ManufacturerModel>()
     val manufacturerInputIndex = ObservableInt()
-    var productImagePath = ""
-        set(value){
-            isImageSet.set(value.isNotEmpty())
-            field = value
-        }
+
+    val productImagePath = ObservableField<String>()
     val isImageSet = ObservableBoolean(false)
 
     private val manufacturerId: String?
@@ -45,6 +44,11 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
         initManufacturers()
     }
 
+
+    fun onRemovePhotoClick(){
+        productImagePath?.set("")
+        isImageSet?.set(false)
+    }
 
     fun onSaveClick() {
         when {
@@ -73,7 +77,7 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
                     detailsInput.get() ?: "",
                     typeId ?: "",
                     manufacturerId ?: "",
-                    productImagePath ?: ""
+                    productImagePath.get() ?: ""
                 )
                 if(!result.isNullOrEmpty()) {
                     _message.postValue(R.string.PRODUCT_ADDED)

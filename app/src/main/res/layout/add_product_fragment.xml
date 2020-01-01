@@ -30,7 +30,8 @@
                 android:scaleType="fitCenter"
                 app:layout_constraintDimensionRatio="4:3"
                 android:orientation="horizontal"
-                android:src="@drawable/ic_add_photo"/>
+                android:src="@drawable/ic_add_photo"
+                app:imagePath="@{viewmodel.productImagePath}"/>
 
             <ImageButton
                 android:id="@+id/btnRemovePhoto"
@@ -40,7 +41,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:src="@drawable/ic_delete"
                 android:background="@android:color/transparent"
-                app:visible="@{viewmodel.isImageSet}"/>
+                app:visible="@{viewmodel.isImageSet}"
+                android:onClick="@{() -> viewmodel.onRemovePhotoClick()}"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etName"
