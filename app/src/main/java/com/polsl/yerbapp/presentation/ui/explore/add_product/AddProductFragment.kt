@@ -53,7 +53,7 @@ class AddProductFragment : BaseFragment<AddProductViewModel>() {
         sType.setAdapter(HintSpinnerAdapter<TypeModel>(context, viewModel!!.types, context?.resources?.getString(R.string.TYPE)))
 
         imageView = ivPhoto
-        btnAddPhoto.setOnClickListener {
+        ivPhoto.setOnClickListener {
             ImagePicker.create(this)
                 .returnMode(ReturnMode.ALL)
                 .folderMode(true)

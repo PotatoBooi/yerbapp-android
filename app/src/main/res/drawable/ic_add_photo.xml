@@ -1,9 +1,17 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
+    android:width="76dp"
+    android:height="86dp"
+    android:viewportWidth="76"
+    android:viewportHeight="86">
   <path
-      android:fillColor="@color/cardview_dark_background"
-      android:pathData="M18,20L4,20L4,6h9L13,4L4,4c-1.1,0 -2,0.9 -2,2v14c0,1.1 0.9,2 2,2h14c1.1,0 2,-0.9 2,-2v-9h-2v9zM10.21,16.83l-1.96,-2.36L5.5,18h11l-3.54,-4.71zM20,4L20,1h-2v3h-3c0.01,0.01 0,2 0,2h3v2.99c0.01,0.01 2,0 2,0L20,6h3L23,4h-3z"/>
+      android:pathData="M-1,-1h78v88h-78z"
+      android:fillColor="@android:color/transparent"/>
+  <path
+      android:strokeWidth="1"
+      android:pathData="m22.5,18.5l35,0l0,35l-35,0l0,-35z"
+      android:fillColor="@android:color/transparent" />
+  <path
+      android:fillColor="#FF000000"
+      android:strokeWidth="1"
+      android:pathData="m48.75,47.6667l-20.4167,0l0,-20.4167l13.125,0l0,-2.9167l-13.125,0c-1.6042,0 -2.9167,1.3125 -2.9167,2.9167l0,20.4167c0,1.6042 1.3125,2.9167 2.9167,2.9167l20.4167,0c1.6042,0 2.9167,-1.3125 2.9167,-2.9167l0,-13.125l-2.9167,0l0,13.125zM37.3896,43.0437l-2.8583,-3.4417l-4.0104,5.1479l16.0417,0l-5.1625,-6.8688l-4.0104,5.1625zM47.6563,29.4958l0,-9.5375l-2.9167,0l0,4.375l-4.375,0c0.0146,0.0146 0,2.9167 0,2.9167l4.375,0l0,4.3604c0.0146,0.0146 2.9167,0 2.9167,0l0,-4.3604l4.375,0l0,-2.9167l-4.375,0l0,5.1625z" />
 </vector>
