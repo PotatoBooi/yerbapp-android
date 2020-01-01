@@ -2,10 +2,7 @@ package com.polsl.yerbapp.presentation.ui.explore.add_product
 
 import android.media.Image
 import android.util.Log
-import androidx.databinding.ObservableArrayList
-import androidx.databinding.ObservableBoolean
-import androidx.databinding.ObservableField
-import androidx.databinding.ObservableInt
+import androidx.databinding.*
 import androidx.lifecycle.viewModelScope
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
@@ -31,7 +28,12 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
 
     val manufacturers = ObservableArrayList<ManufacturerModel>()
     val manufacturerInputIndex = ObservableInt()
-    var productImagePath: String = ""
+    var productImagePath = ""
+        set(value){
+            isImageSet.set(value.isNotEmpty())
+            field = value
+        }
+    val isImageSet = ObservableBoolean(false)
 
     private val manufacturerId: String?
         get() = manufacturers[manufacturerInputIndex.get()-1].id

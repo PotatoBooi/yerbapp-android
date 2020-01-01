@@ -39,7 +39,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/ivPhoto"
                 app:layout_constraintStart_toStartOf="parent"
                 android:src="@drawable/ic_delete"
-                android:background="@android:color/transparent"/>
+                android:background="@android:color/transparent"
+                app:visible="@{viewmodel.isImageSet}"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etName"

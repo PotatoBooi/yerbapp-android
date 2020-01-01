@@ -58,7 +58,7 @@ class AddProductFragment : BaseFragment<AddProductViewModel>() {
                 .returnMode(ReturnMode.ALL)
                 .folderMode(true)
                 .single()
-                .toolbarFolderTitle("Galeria")
+                .toolbarFolderTitle(context?.resources?.getString(R.string.GALLERY))
                 .start()
         }
         btnRemovePhoto.setOnClickListener{ onRemovePhotoClick() }
@@ -77,7 +77,8 @@ class AddProductFragment : BaseFragment<AddProductViewModel>() {
     }
 
     private fun onRemovePhotoClick(){
-        imageView.setImageDrawable(null)
+        imageView.setImageDrawable(context?.resources?.getDrawable(R.drawable.ic_add_photo))
+        viewModel?.productImagePath = ""
     }
 
 
