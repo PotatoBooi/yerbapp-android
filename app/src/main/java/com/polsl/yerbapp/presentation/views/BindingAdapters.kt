@@ -16,9 +16,9 @@ object BindingAdapters {
         view.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
-    @BindingAdapter("imageUrl")
+    @BindingAdapter("productImage")
     @JvmStatic
-    fun setImageFromUrl(imageView: ImageView, url: String?) {
+    fun setProductImage(imageView: ImageView, url: String?) {
         if(!url.isNullOrEmpty()){
             GlideApp.with(imageView).load(url).apply(RequestOptions().fitCenter()).into(imageView)
         } else{
@@ -28,13 +28,13 @@ object BindingAdapters {
 
     @BindingAdapter("imageRes")
     @JvmStatic
-    fun setImageFromSrc(imageView: ImageView, res: Int?) {
+    fun setImageFromRes(imageView: ImageView, res: Int?) {
         GlideApp.with(imageView).load(res).apply(RequestOptions().fitCenter()).into(imageView)
     }
 
-    @BindingAdapter("imagePath")
+    @BindingAdapter("addProductImage")
     @JvmStatic
-    fun setImageFromPath(imageView: ImageView, path: String?){
+    fun setAddProductImage(imageView: ImageView, path: String?){
         if(path.isNullOrEmpty()) {
             GlideApp.with(imageView).load(R.drawable.ic_add_photo).apply(RequestOptions().fitCenter()).into(imageView)
         }else{

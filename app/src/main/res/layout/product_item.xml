@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:scaleType="fitCenter"
-            app:imageUrl="@{product.photoUrl}"
+            app:productImage="@{product.photoUrl}"
             app:layout_constraintDimensionRatio="4:3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
