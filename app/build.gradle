@@ -107,4 +107,6 @@ dependencies {
     // search component
     implementation 'com.github.mancj:MaterialSearchBar:0.8.2'
 
+    // spinner component
+    implementation 'com.github.jaiselrahman:HintSpinner:1.0.0'
 }

@@ -54,6 +54,8 @@
     <string name="TUTORIAL_6">Tak przygotowaną yerba mate pozostaw na około 2-3 minuty, zaraz potem śmiało możesz zacząć delektować się swoim napojem!</string>
     <string name="PREVIOUS">Cofnij</string>
     <string name="SEARCH">Wyszukaj..</string>
+    <string name="TYPE_EMPTY">Wybierz typ produktu</string>
+    <string name="MANUFACTURER_EMPTY">Wybierz producenta</string>
 
 
 </resources>

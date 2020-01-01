@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp">
+            android:layout_margin="@dimen/layout_main_margin">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etName"
@@ -27,48 +27,84 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:hint="@string/PRODUCT_NAME"
-                android:text="@={viewmodel.nameInput}"/>
+                android:text="@={viewmodel.nameInput}"
+                android:textSize="@dimen/large_text_size"/>
 
-            <TextView
-                android:id="@+id/tvTypeLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/etName"
-                app:layout_constraintTop_toBottomOf="@id/etName"
-                android:text="@string/TYPE"/>
-
-            <androidx.appcompat.widget.AppCompatSpinner
+            <com.jaiselrahman.hintspinner.HintSpinner
                 android:id="@+id/sType"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/tvTypeLabel"
-                app:layout_constraintBottom_toBottomOf="@id/tvTypeLabel"
-                android:entries="@{viewmodel.types}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etName"
+                android:textSize="@dimen/text_size"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:selectedItemPosition= "@={viewmodel.typeInputIndex}"/>
 
-            <TextView
-                android:id="@+id/tvManufacturerLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/tvTypeLabel"
-                app:layout_constraintTop_toBottomOf="@id/tvTypeLabel"
-                android:text="@string/MANUFACTURER" />
+            <!--            <TextView-->
+<!--                android:id="@+id/tvTypeLabel"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintStart_toStartOf="@id/etName"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/etName"-->
+<!--                android:text="@string/TYPE"-->
+<!--                style="@style/Widget.AppCompat.TextView"-->
+<!--                android:textSize="@dimen/text_size"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginBottom="5dp"/>-->
 
-            <androidx.appcompat.widget.AppCompatSpinner
+<!--            <androidx.appcompat.widget.AppCompatSpinner-->
+<!--                android:id="@+id/sType"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintStart_toEndOf="@id/tvTypeLabel"-->
+<!--                app:layout_constraintTop_toTopOf="@id/tvTypeLabel"-->
+<!--                android:entries="@{viewmodel.types}"-->
+<!--                android:selectedItemPosition= "@={viewmodel.typeInputIndex}"-->
+<!--                android:textSize="@dimen/text_size"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                android:layout_marginEnd="5dp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvManufacturerLabel"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tvTypeLabel"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/sType"-->
+<!--                android:text="@string/MANUFACTURER"-->
+<!--                android:textSize="@dimen/text_size"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginBottom="5dp" />-->
+
+<!--            <androidx.appcompat.widget.AppCompatSpinner-->
+<!--                android:id="@+id/sManufacturer"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintStart_toEndOf="@id/tvManufacturerLabel"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/tvManufacturerLabel"-->
+<!--                android:selectedItemPosition= "@={viewmodel.manufacturerInputIndex}"-->
+<!--                android:textSize="@dimen/text_size"-->
+<!--                android:layout_marginEnd="5dp"-->
+<!--                android:entries="@{viewmodel.manufacturers}"-->
+<!--                android:autofillHints="@string/MANUFACTURER"/>-->
+            <com.jaiselrahman.hintspinner.HintSpinner
                 android:id="@+id/sManufacturer"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/tvManufacturerLabel"
-                app:layout_constraintBottom_toBottomOf="@id/tvManufacturerLabel"
-                android:entries="@{viewmodel.manufacturers}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sType"
+                android:textSize="@dimen/text_size"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:selectedItemPosition= "@={viewmodel.manufacturerInputIndex}"/>
+
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/tvManufacturerLabel"
-                app:layout_constraintTop_toBottomOf="@id/tvManufacturerLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sManufacturer"
                 android:hint="@string/DETAILS"
                 android:text="@={viewmodel.detailsInput}"/>
 

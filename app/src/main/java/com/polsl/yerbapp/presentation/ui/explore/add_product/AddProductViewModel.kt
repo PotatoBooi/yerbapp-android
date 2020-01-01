@@ -30,13 +30,13 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
     val typeInputIndex = ObservableInt(0)
 
     val manufacturers = ObservableArrayList<ManufacturerModel>()
-    val manufacturerInputIndex = ObservableInt(0)
+    val manufacturerInputIndex = ObservableInt()
     var productImagePath: String = ""
 
     private val manufacturerId: String?
-        get() = manufacturers[manufacturerInputIndex.get()].id
+        get() = manufacturers[manufacturerInputIndex.get()-1].id
     private val typeId: String?
-        get() = types[typeInputIndex.get()].id
+        get() = types[typeInputIndex.get()-1].id
 
     init{
         initTypes()
@@ -51,6 +51,18 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
                 return
             }
         }
+        when{
+            typeInputIndex.get() == 0 -> {
+                _message.value = R.string.TYPE_EMPTY
+                return
+            }
+        }
+        when{
+            manufacturerInputIndex.get() == 0 -> {
+                _message.value = R.string.MANUFACTURER_EMPTY
+                return
+            }
+        }
         viewModelScope.launch(Dispatchers.Main) {
             try {
                 loading.set(true)
@@ -61,7 +73,6 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
                     manufacturerId ?: "",
                     productImagePath ?: ""
                 )
-               // notify if saved -> navigate to explore
                 if(!result.isNullOrEmpty()) {
                     _message.postValue(R.string.PRODUCT_ADDED)
                     val navigationId = R.id.action_addProductFragment_to_exploreFragment
