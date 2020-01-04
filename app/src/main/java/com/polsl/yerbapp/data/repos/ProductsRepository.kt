@@ -103,17 +103,17 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
         manufacturerId: String,
         image: File?
     ): String {
-        val tempUrl = null
-        image?.let{
-            val tempUrl = uploadFile(image)
-        }
+
+        val url = image?.let{
+            uploadFile(image)
+        } ?: run {null}
         val productInput = AddProductInput
             .builder()
             .name(name)
             .details(details)
             .typeId(typeId)
             .manufacturerId(manufacturerId)
-            .photoUrl(tempUrl)
+            .photoUrl(url)
             .build()
 
         val productMutation = AddProductMutation
