@@ -3,7 +3,6 @@ package com.polsl.yerbapp.presentation.usecases
 import com.polsl.yerbapp.data.repos.ManufacturersRepository
 import com.polsl.yerbapp.data.repos.ProductsRepository
 import com.polsl.yerbapp.data.repos.TypesRepository
-import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import java.io.File
 
 

@@ -1,6 +1,5 @@
 package com.polsl.yerbapp.presentation.ui.profile.register
 
-import android.text.TextUtils
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData

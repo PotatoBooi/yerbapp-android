@@ -1,6 +1,5 @@
 package com.polsl.yerbapp
 
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
@@ -9,7 +8,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import com.andrognito.flashbar.Flashbar
-import com.esafirm.imagepicker.features.ImagePicker
 import kotlinx.android.synthetic.main.activity_main.*
 
 

@@ -1,14 +1,11 @@
 package com.polsl.yerbapp.data.repos
 
-import android.content.ContentResolver
 import android.net.Uri
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.network.ApolloClientFactory
 import com.polsl.yerbapp.data.network.RetrofitService
-import com.polsl.yerbapp.domain.exceptions.InvalidCredentialsException
 import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
-import com.polsl.yerbapp.domain.exceptions.UserNotFoundException
 import com.polsl.yerbapp.domain.models.reponse.graphql.ManufacturerModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.TypeModel
