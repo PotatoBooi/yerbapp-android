@@ -1,5 +1,6 @@
 package com.polsl.yerbapp.data.network
 
+import com.polsl.yerbapp.data.device.SharedPreferencesManager
 import com.polsl.yerbapp.domain.models.dto.LoginDto
 import com.polsl.yerbapp.domain.models.reponse.rest.LoginResponse
 import com.polsl.yerbapp.domain.models.dto.RegisterDto
@@ -33,18 +34,27 @@ interface RetrofitService {
     suspend fun upload(@Part file: MultipartBody.Part): UploadResponse
 
     companion object {
-        operator fun invoke(connectivityInterceptor: ConnectivityInterceptor): RetrofitService {
+        operator fun invoke(connectivityInterceptor: ConnectivityInterceptor, sharedPreferencesManager: SharedPreferencesManager): RetrofitService {
+            val token = sharedPreferencesManager.getUserData().accessToken
             val requestInterceptor = Interceptor { chain ->
 
                 val url = chain.request()
                     .url()
                     .newBuilder()
                     .build()
-                val request = chain.request()
-                    .newBuilder()
-                    .url(url)
-                    .build()
 
+                val request = token.isNotEmpty().let{
+                    chain.request()
+                        .newBuilder()
+                        .url(url)
+                        .addHeader("Authorization", "Bearer $token")
+                        .build()
+                } ?: run {
+                    chain.request()
+                        .newBuilder()
+                        .url(url)
+                        .build()
+                 }
                 return@Interceptor chain.proceed(request)
             }
 

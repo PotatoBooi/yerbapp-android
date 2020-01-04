@@ -11,10 +11,10 @@ import org.koin.dsl.module
 
 val repositoriesModule = module {
     single { ConnectivityInterceptor(get()) }
-    single { RetrofitService(get()) }
+    single { RetrofitService(get(), get()) }
     single { ApolloClientFactory(get(), get()) }
     single { UsersRepository(get(), get(), get()) }
-    single { ProductsRepository(get()) }
+    single { ProductsRepository(get(), get()) }
     single { ManufacturersRepository (get())}
     single { TypesRepository (get())}
 }

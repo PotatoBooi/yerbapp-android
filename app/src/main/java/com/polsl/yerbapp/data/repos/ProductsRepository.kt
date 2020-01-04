@@ -102,8 +102,9 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
     ): String {
         val tempUrl = null
         if (imagePath.isNotEmpty()) {
+
             // TODO post multipart form data
-            // tempUrl = response
+            val tempUrl = uploadFile(imagePath)
         }
         val productInput = AddProductInput
             .builder()
@@ -148,7 +149,7 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
 
     suspend fun uploadFile(file: String): String? {
         val filePart = MultipartBody.Part.createFormData(
-            "url",
+            "file",
             file,
             RequestBody.create(MediaType.parse("image/*"), file)
         )
