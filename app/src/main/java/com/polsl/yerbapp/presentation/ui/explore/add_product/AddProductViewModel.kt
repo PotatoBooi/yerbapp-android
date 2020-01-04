@@ -74,7 +74,11 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
             try {
                 loading.set(true)
                 val file = productImagePath.get()?.let{
-                    File(it)
+                    if(it.isNotEmpty()){
+                        File(it)
+                    }else{
+                        null
+                    }
                 } ?: run {null}
                 val result = productCase.addProduct(
                     nameInput.get() ?: "",
