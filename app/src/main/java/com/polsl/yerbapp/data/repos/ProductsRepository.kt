@@ -3,20 +3,29 @@ package com.polsl.yerbapp.data.repos
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.network.ApolloClientFactory
+import com.polsl.yerbapp.data.network.RetrofitService
+import com.polsl.yerbapp.domain.exceptions.InvalidCredentialsException
 import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
+import com.polsl.yerbapp.domain.exceptions.UserNotFoundException
 import com.polsl.yerbapp.domain.models.reponse.graphql.ManufacturerModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 import com.polsl.yerbapp.domain.models.reponse.graphql.TypeModel
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.HttpException
 import yerba.AddProductMutation
 import yerba.GetProductQuery
 import yerba.GetProductsQuery
 import yerba.type.AddProductInput
 import java.lang.IllegalStateException
 
-class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
+class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
+                         private val retrofitService: RetrofitService
+) {
 
 
-    suspend fun getProducts(perPage: Int, offset: Int, orderBy: String): List<ProductModel>{
+    suspend fun getProducts(perPage: Int, offset: Int, orderBy: String): List<ProductModel> {
         val productsQuery = GetProductsQuery
             .builder()
             .perPage(perPage)
@@ -24,9 +33,9 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
             .orderBy(orderBy)
             .build()
 
-        try{
+        try {
             val apolloClient = apolloClientFactory.create()
-        //delay(2000)  // for testing loaders
+            //delay(2000)  // for testing loaders
             val response =
                 apolloClient
                     .query(productsQuery)
@@ -34,28 +43,26 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
                     .await()
 
             return response.data()?.products()?.items()?.let { items ->
-                items.map{ProductModel(it.id(), it.name(), it.photoUrl())}
-                } ?: run {
+                items.map { ProductModel(it.id(), it.name(), it.photoUrl()) }
+            } ?: run {
                 throw IllegalStateException()
             }
 
-        }
-        catch(ex: ApolloException){
+        } catch (ex: ApolloException) {
             throw ex
-        }
-        catch (ex: Exception) {
+        } catch (ex: Exception) {
             throw  ex
         }
     }
 
-    suspend fun getProduct(productId: String): ProductModel{
+    suspend fun getProduct(productId: String): ProductModel {
         val productQuery = GetProductQuery
             .builder()
             .productId(productId)
             .build()
-        try{
+        try {
             val apolloClient = apolloClientFactory.create()
-        //delay(2000)  // for testing loaders
+            //delay(2000)  // for testing loaders
             val response =
                 apolloClient
                     .query(productQuery)
@@ -63,26 +70,41 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
                     .await()
 
             return response.data()?.product()?.let {
-                val manufacturer = ManufacturerModel(country = it.manufacturer().country(), name = it.manufacturer().name())
+                val manufacturer = ManufacturerModel(
+                    country = it.manufacturer().country(),
+                    name = it.manufacturer().name()
+                )
                 val type = TypeModel(name = it.type().name())
-                ProductModel(id = it.id(), name = it.name(), details = it.details(), photoUrl = it.photoUrl(), manufacturerModel = manufacturer, typeModel = type )
-            }?: run {
-                throw IllegalStateException()}
-        }
-        catch(ex: ApolloException){
+                ProductModel(
+                    id = it.id(),
+                    name = it.name(),
+                    details = it.details(),
+                    photoUrl = it.photoUrl(),
+                    manufacturerModel = manufacturer,
+                    typeModel = type
+                )
+            } ?: run {
+                throw IllegalStateException()
+            }
+        } catch (ex: ApolloException) {
             throw ex
-        }
-        catch (ex: Exception) {
+        } catch (ex: Exception) {
             throw  ex
         }
     }
 
-   suspend fun addProduct(name: String, details: String, typeId: String, manufacturerId: String, imagePath: String) : String {
-       val tempUrl = null
-       if(imagePath.isNotEmpty()){
-           // TODO post multipart form data
-           // tempUrl = response
-       }
+    suspend fun addProduct(
+        name: String,
+        details: String,
+        typeId: String,
+        manufacturerId: String,
+        imagePath: String
+    ): String {
+        val tempUrl = null
+        if (imagePath.isNotEmpty()) {
+            // TODO post multipart form data
+            // tempUrl = response
+        }
         val productInput = AddProductInput
             .builder()
             .name(name)
@@ -96,7 +118,7 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
             .builder()
             .product(productInput)
             .build()
-        try{
+        try {
             val apolloClient = apolloClientFactory.create()
             //delay(2000)  // for testing loaders
             val response =
@@ -105,23 +127,45 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory){
                     .toDeferred()
                     .await()
 
-            if(response.hasErrors()){
+            if (response.hasErrors()) {
                 val errorMessage = response.errors().first().message()
-                if(errorMessage == "{statusCode=401, error=Unauthorized}"){
+                if (errorMessage == "{statusCode=401, error=Unauthorized}") {
                     throw UnauthorizedException()
                 }
             }
 
             return response.data()?.addProduct()?.let {
                 return it.id()
-            }?: run {
-                throw IllegalStateException()}
-        }
-        catch(ex: ApolloException){
+            } ?: run {
+                throw IllegalStateException()
+            }
+        } catch (ex: ApolloException) {
             throw ex
-        }
-        catch (ex: Exception) {
+        } catch (ex: Exception) {
             throw  ex
         }
     }
+
+    suspend fun uploadFile(file: String): String? {
+        val filePart = MultipartBody.Part.createFormData(
+            "url",
+            file,
+            RequestBody.create(MediaType.parse("image/*"), file)
+        )
+        try {
+            val result = retrofitService.upload(
+                filePart
+            )
+            return result.url
+        } catch (ex: HttpException) {
+            when (ex.code()) {
+                400 -> throw InvalidCredentialsException()
+                404 -> throw UserNotFoundException()
+            }
+        } catch (ex: Exception) {
+            throw  ex
+        }
+        return null
+    }
 }
+

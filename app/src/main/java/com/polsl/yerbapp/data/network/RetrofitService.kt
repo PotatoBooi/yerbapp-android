@@ -4,16 +4,16 @@ import com.polsl.yerbapp.domain.models.dto.LoginDto
 import com.polsl.yerbapp.domain.models.reponse.rest.LoginResponse
 import com.polsl.yerbapp.domain.models.dto.RegisterDto
 import com.polsl.yerbapp.domain.models.reponse.rest.RegisterResponse
+import com.polsl.yerbapp.domain.models.reponse.rest.UploadResponse
 import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 private const val API_URL = "http://157.230.108.68:4000/"
 
@@ -27,6 +27,10 @@ interface RetrofitService {
 
     @POST("auth/login")
     suspend fun login(@Body login: LoginDto): LoginResponse
+
+    @Multipart
+    @POST("upload")
+    suspend fun upload(@Part file: MultipartBody.Part): UploadResponse
 
     companion object {
         operator fun invoke(connectivityInterceptor: ConnectivityInterceptor): RetrofitService {
