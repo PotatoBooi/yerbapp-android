@@ -1,5 +1,7 @@
 package com.polsl.yerbapp.data.repos
 
+import android.content.ContentResolver
+import android.net.Uri
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.network.ApolloClientFactory
@@ -18,6 +20,7 @@ import yerba.AddProductMutation
 import yerba.GetProductQuery
 import yerba.GetProductsQuery
 import yerba.type.AddProductInput
+import java.io.File
 import java.lang.IllegalStateException
 
 class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
@@ -98,13 +101,11 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
         details: String,
         typeId: String,
         manufacturerId: String,
-        imagePath: String
+        image: File?
     ): String {
         val tempUrl = null
-        if (imagePath.isNotEmpty()) {
-
-            // TODO post multipart form data
-            val tempUrl = uploadFile(imagePath)
+        image?.let{
+            val tempUrl = uploadFile(image)
         }
         val productInput = AddProductInput
             .builder()
@@ -140,6 +141,8 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
             } ?: run {
                 throw IllegalStateException()
             }
+        } catch(ex: UnauthorizedException){
+            throw UnauthorizedException()
         } catch (ex: ApolloException) {
             throw ex
         } catch (ex: Exception) {
@@ -147,12 +150,12 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
         }
     }
 
-    suspend fun uploadFile(file: String): String? {
-        val filePart = MultipartBody.Part.createFormData(
-            "file",
-            file,
-            RequestBody.create(MediaType.parse("image/*"), file)
-        )
+        suspend fun uploadFile(file: File): String? {
+            val uri = Uri.fromFile(file)
+            val filePart = MultipartBody.Part.createFormData(
+                "file",
+                file.name,
+                RequestBody.create(MediaType.parse("image/jpeg"), file))
         try {
             val result = retrofitService.upload(
                 filePart
@@ -160,8 +163,7 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
             return result.url
         } catch (ex: HttpException) {
             when (ex.code()) {
-                400 -> throw InvalidCredentialsException()
-                404 -> throw UserNotFoundException()
+                401 -> throw UnauthorizedException()
             }
         } catch (ex: Exception) {
             throw  ex

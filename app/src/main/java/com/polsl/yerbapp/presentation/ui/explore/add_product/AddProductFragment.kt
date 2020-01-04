@@ -1,7 +1,9 @@
 package com.polsl.yerbapp.presentation.ui.explore.add_product
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.FileUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +20,7 @@ import com.polsl.yerbapp.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.add_product_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import java.io.File
 
 
 class AddProductFragment : BaseFragment<AddProductViewModel>() {
@@ -58,6 +61,7 @@ class AddProductFragment : BaseFragment<AddProductViewModel>() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
             val images = ImagePicker.getImages(data)
+
             if(!images.isNullOrEmpty()){
                 viewModel?.productImagePath?.set(images[0].path)
                 viewModel?.isImageSet?.set(true) // can one observable depend on another automatically?

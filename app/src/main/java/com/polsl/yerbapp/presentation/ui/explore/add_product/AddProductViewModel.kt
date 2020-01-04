@@ -17,6 +17,7 @@ import com.polsl.yerbapp.presentation.base.NavigationProps
 import com.polsl.yerbapp.presentation.usecases.ProductCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.File
 
 
 class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel() {
@@ -72,12 +73,15 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
         viewModelScope.launch(Dispatchers.Main) {
             try {
                 loading.set(true)
+                val file = productImagePath.get()?.let{
+                    File(it)
+                } ?: run {null}
                 val result = productCase.addProduct(
                     nameInput.get() ?: "",
                     detailsInput.get() ?: "",
                     typeId ?: "",
                     manufacturerId ?: "",
-                    productImagePath.get() ?: ""
+                    file
                 )
                 if(!result.isNullOrEmpty()) {
                     _message.postValue(R.string.PRODUCT_ADDED)
