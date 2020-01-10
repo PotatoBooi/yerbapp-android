@@ -7,8 +7,8 @@
     <data>
 
         <variable
-                name="viewmodel"
-                type="com.polsl.yerbapp.presentation.ui.explore.ExploreViewModel" />
+            name="viewmodel"
+            type="com.polsl.yerbapp.presentation.ui.explore.ExploreViewModel" />
 
         <variable
             name="loading"

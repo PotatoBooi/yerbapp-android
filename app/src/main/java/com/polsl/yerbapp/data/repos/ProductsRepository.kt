@@ -21,8 +21,7 @@ import java.io.File
 import java.lang.IllegalStateException
 
 class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
-                         private val retrofitService: RetrofitService
-) {
+                         private val retrofitService: RetrofitService) {
 
 
     suspend fun getProducts(perPage: Int, offset: Int, orderBy: String): List<ProductModel> {
@@ -35,7 +34,6 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
 
         try {
             val apolloClient = apolloClientFactory.create()
-            //delay(2000)  // for testing loaders
             val response =
                 apolloClient
                     .query(productsQuery)

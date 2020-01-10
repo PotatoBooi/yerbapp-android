@@ -9,8 +9,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
-class ProductsDataSource (private val scope: CoroutineScope, private val productsCase: ProductsCase):
-    PageKeyedDataSource<Int, ProductModel>() {
+class ProductsDataSource (private val scope: CoroutineScope, 
+private val productsCase: ProductsCase): PageKeyedDataSource<Int, ProductModel>() {
 
     val loading: LiveData<Boolean>
         get() = _loading

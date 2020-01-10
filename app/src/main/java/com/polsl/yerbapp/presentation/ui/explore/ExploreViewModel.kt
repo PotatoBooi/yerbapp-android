@@ -38,7 +38,6 @@ class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel()
     }
 
     private fun initPaging() {
-
        val productsDataFactory = ProductsDataFactory(viewModelScope, productsCase)
         _loading = Transformations.switchMap(productsDataFactory.liveData){it.loading}
 
@@ -48,7 +47,6 @@ class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel()
             .setPageSize(6)
             .build()
         _pagedProducts = LivePagedListBuilder<Int, ProductModel>(productsDataFactory, config).build()
-
     }
 
     override fun onItemClick(item: ProductModel) {

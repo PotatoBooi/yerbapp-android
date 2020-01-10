@@ -8,11 +8,12 @@ import com.polsl.yerbapp.presentation.usecases.ProductsCase
 import kotlinx.coroutines.CoroutineScope
 
 
-class ProductsDataFactory(private val scope: CoroutineScope, private val productsCase: ProductsCase) : DataSource.Factory<Int, ProductModel>(){
+class ProductsDataFactory(private val scope: CoroutineScope, 
+private val productsCase: ProductsCase) : DataSource.Factory<Int, ProductModel>(){
 
     val liveData: LiveData<ProductsDataSource>
         get() = _mutableLiveData
-   private val _mutableLiveData = MutableLiveData<ProductsDataSource>()
+    private val _mutableLiveData = MutableLiveData<ProductsDataSource>()
 
     override fun create(): DataSource<Int, ProductModel> {
       val productDataSource =  ProductsDataSource(scope, productsCase)

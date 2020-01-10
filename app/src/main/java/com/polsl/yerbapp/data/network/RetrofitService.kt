@@ -34,7 +34,8 @@ interface RetrofitService {
     suspend fun upload(@Part file: MultipartBody.Part): UploadResponse
 
     companion object {
-        operator fun invoke(connectivityInterceptor: ConnectivityInterceptor, sharedPreferencesManager: SharedPreferencesManager): RetrofitService {
+        operator fun invoke(connectivityInterceptor: ConnectivityInterceptor, 
+        sharedPreferencesManager: SharedPreferencesManager): RetrofitService {
             val token = sharedPreferencesManager.getUserData().accessToken
             val requestInterceptor = Interceptor { chain ->
 

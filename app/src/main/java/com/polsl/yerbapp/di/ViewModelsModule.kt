@@ -22,5 +22,4 @@ val viewModelsModule = module {
     viewModel { AddProductViewModel( get()) }
     viewModel { TutorialViewModel() }
     viewModel { TrainingViewModel() }
-
 }

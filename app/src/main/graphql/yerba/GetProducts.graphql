@@ -4,7 +4,8 @@ query GetProducts ( $perPage: Int, $offset: Int, $orderBy: String){
         items{
             id,
             name,
-            photoUrl
+            photoUrl,
+            overallAverage
         }
     }
 }

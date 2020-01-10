@@ -44,6 +44,9 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
         })
         viewModel?.loading?.observe(viewLifecycleOwner, Observer {
             binding.loading = it })
+    }
+
+}
 //                clLoading.visibility = View.VISIBLE
 //            }
 //            else
@@ -53,9 +56,6 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
 //        })
 //    }
 
-    }
 
 
 
-
-}

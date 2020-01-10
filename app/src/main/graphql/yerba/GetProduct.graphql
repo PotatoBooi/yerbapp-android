@@ -4,9 +4,15 @@ query GetProduct( $productId:  ID!){
         name,
         details,
         photoUrl,
+        aromaAverage,
+        bitternessAverage,
+        energyAverage,
+        priceAverage,
+        tasteAverage
+        overallAverage,
         manufacturer{
             name,
-            country
+            country,
         },
         type{
             name
