@@ -1,6 +1,6 @@
 
-query GetProducts ( $perPage: Int, $offset: Int, $orderBy: String){
-    products(perPage: $perPage, offset: $offset, orderBy: $orderBy )  {
+query GetProducts ($searchByName: String, $perPage: Int, $offset: Int, $orderBy: String){
+    products(searchByName: $searchByName, perPage: $perPage, offset: $offset, orderBy: $orderBy )  {
         items{
             id,
             name,

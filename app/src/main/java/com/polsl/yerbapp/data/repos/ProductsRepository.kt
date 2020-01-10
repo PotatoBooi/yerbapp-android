@@ -41,7 +41,7 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
                     .await()
 
             return response.data()?.products()?.items()?.let { items ->
-                items.map { ProductModel(it.id(), it.name(), it.photoUrl()) }
+                items.map { ProductModel(it.id(), it.name(), it.overallAverage(),it.photoUrl() ) }
             } ?: run {
                 throw IllegalStateException()
             }
@@ -78,6 +78,12 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
                     name = it.name(),
                     details = it.details(),
                     photoUrl = it.photoUrl(),
+                    overallAverage = it.overallAverage(),
+                    aromaAverage = it.aromaAverage(),
+                    bitternessAverage = it.bitternessAverage(),
+                    energyAverage = it.energyAverage(),
+                    priceAverage = it.priceAverage(),
+                    tasteAverage = it.tasteAverage(),
                     manufacturerModel = manufacturer,
                     typeModel = type
                 )
