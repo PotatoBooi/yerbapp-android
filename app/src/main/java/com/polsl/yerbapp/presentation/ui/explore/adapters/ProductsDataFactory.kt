@@ -15,10 +15,15 @@ private val productsCase: ProductsCase) : DataSource.Factory<Int, ProductModel>(
         get() = _mutableLiveData
     private val _mutableLiveData = MutableLiveData<ProductsDataSource>()
 
+    var filter = ""
+
     override fun create(): DataSource<Int, ProductModel> {
-      val productDataSource =  ProductsDataSource(scope, productsCase)
+      val productDataSource =  ProductsDataSource(scope, productsCase, filter)
         _mutableLiveData.postValue(productDataSource)
         return productDataSource
+    }
+    fun searchByName(query: String) {
+       filter = query
     }
 
 }

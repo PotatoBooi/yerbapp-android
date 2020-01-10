@@ -24,9 +24,10 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
                          private val retrofitService: RetrofitService) {
 
 
-    suspend fun getProducts(perPage: Int, offset: Int, orderBy: String): List<ProductModel> {
+    suspend fun getProducts(filter: String?, perPage: Int, offset: Int, orderBy: String): List<ProductModel> {
         val productsQuery = GetProductsQuery
             .builder()
+            .searchByName(filter)
             .perPage(perPage)
             .offset(offset)
             .orderBy(orderBy)

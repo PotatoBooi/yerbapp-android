@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 
 class ProductsDataSource (private val scope: CoroutineScope, 
-private val productsCase: ProductsCase): PageKeyedDataSource<Int, ProductModel>() {
+private val productsCase: ProductsCase, private val filter: String?): PageKeyedDataSource<Int, ProductModel>() {
 
     val loading: LiveData<Boolean>
         get() = _loading
@@ -23,7 +23,7 @@ private val productsCase: ProductsCase): PageKeyedDataSource<Int, ProductModel>(
         _loading.postValue(true)
         scope.launch {
             try{
-                val items = productsCase.getProducts(params.requestedLoadSize, 0 )
+                val items = productsCase.getProducts(filter, params.requestedLoadSize, 0 )
                 _loading.postValue(false)
                 callback.onResult(items, null, params.requestedLoadSize)
             } catch(ex: Exception){
@@ -39,7 +39,7 @@ private val productsCase: ProductsCase): PageKeyedDataSource<Int, ProductModel>(
         _loading.postValue(true)
         scope.launch {
             try{
-                val items = productsCase.getProducts(params.requestedLoadSize, params.key)
+                val items = productsCase.getProducts(filter, params.requestedLoadSize, params.key)
                 _loading.postValue(false)
                 callback.onResult(items, params.key + params.requestedLoadSize)
             } catch(ex: Exception){

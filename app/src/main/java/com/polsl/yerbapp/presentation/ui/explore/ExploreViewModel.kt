@@ -1,9 +1,8 @@
 package com.polsl.yerbapp.presentation.ui.explore
 
 import androidx.core.os.bundleOf
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
+import androidx.databinding.ObservableField
+import androidx.lifecycle.*
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.polsl.yerbapp.R
@@ -24,21 +23,19 @@ class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel()
     val pagedProducts : LiveData<PagedList<ProductModel>>
         get() = _pagedProducts
     private lateinit var _pagedProducts: LiveData<PagedList<ProductModel>>
-
     val loading: LiveData<Boolean>
         get() = _loading
 
     private lateinit var  _loading: LiveData<Boolean>
 
-
-
     fun onAddProductClick() {
         val navigationId = R.id.action_exploreFragment_to_addProductFragment
         _navigationProps.value = NavigationProps(navigationId, null)
     }
+    private lateinit var productsDataFactory: ProductsDataFactory
 
     private fun initPaging() {
-       val productsDataFactory = ProductsDataFactory(viewModelScope, productsCase)
+      productsDataFactory = ProductsDataFactory(viewModelScope, productsCase)
         _loading = Transformations.switchMap(productsDataFactory.liveData){it.loading}
 
         val config = PagedList.Config.Builder()
@@ -53,7 +50,11 @@ class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel()
         val navigationId = R.id.action_exploreFragment_to_previewProductFragment
         val bundle = bundleOf("productId" to item.id)
         _navigationProps.value = NavigationProps(navigationId, bundle)
+    }
 
+    fun search(query: String){
+        productsDataFactory.searchByName(query)
+        _pagedProducts.value?.dataSource?.invalidate()
     }
 }
 
