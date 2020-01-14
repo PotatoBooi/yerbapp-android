@@ -21,32 +21,38 @@ import java.io.File
 import java.lang.IllegalStateException
 
 class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
-                         private val retrofitService: RetrofitService) {
+                         private val retrofitService: RetrofitService,
+                         private val usersRepository: UsersRepository) {
 
 
-    suspend fun getProducts(filter: String?, perPage: Int, offset: Int, orderBy: String): List<ProductModel> {
+    suspend fun getProducts(
+        filter: String?,
+        perPage: Int,
+        offset: Int,
+        orderBy: String
+    ): List<ProductModel> {
         val productsQuery = GetProductsQuery
             .builder()
             .searchByName(filter)
             .perPage(perPage)
             .offset(offset)
             .orderBy(orderBy)
-            .build()
-
+        if (usersRepository.checkUserAuthorized()) {
+            productsQuery.personalizeForUer(usersRepository.getCurrentUserInfo().userId.toString())
+        }
         try {
             val apolloClient = apolloClientFactory.create()
             val response =
                 apolloClient
-                    .query(productsQuery)
+                    .query(productsQuery.build())
                     .toDeferred()
                     .await()
 
             return response.data()?.products()?.items()?.let { items ->
-                items.map { ProductModel(it.id(), it.name(), it.overallAverage(),it.photoUrl() ) }
+                items.map { ProductModel(it.id(), it.name(), it.overallAverage(), it.photoUrl()) }
             } ?: run {
                 throw IllegalStateException()
             }
-
         } catch (ex: ApolloException) {
             throw ex
         } catch (ex: Exception) {
