@@ -43,6 +43,18 @@
             android:text="@{product.name}"
             app:layout_constraintTop_toBottomOf="@id/image"
             app:layout_constraintStart_toStartOf="@id/image"/>
+        <RatingBar
+            android:id="@+id/rbAroma"
+            style="@style/PreferenceRating"
+            app:layout_constraintTop_toBottomOf="@id/product_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="@{product.overallAverage}"
+            android:stepSize="0.01"
+            android:layout_marginBottom="15dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
