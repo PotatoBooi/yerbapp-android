@@ -115,6 +115,23 @@
                 android:text="@{viewmodel.product.details}"
                 android:textSize="17sp" />
 
+            <com.willy.ratingbar.BaseRatingBar
+                android:id="@+id/rbOverall"
+                app:layout_constraintTop_toBottomOf="@id/tvDetails"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                app:srb_drawableEmpty="@drawable/ic_logo_empty"
+                app:srb_drawableFilled="@drawable/ic_logo"
+                app:rate="@{viewmodel.product.overallAverage}"
+                app:srb_starPadding="0dp"
+                app:srb_isIndicator="true"
+                app:srb_starHeight="20dp"
+                app:srb_starWidth="20dp"/>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
