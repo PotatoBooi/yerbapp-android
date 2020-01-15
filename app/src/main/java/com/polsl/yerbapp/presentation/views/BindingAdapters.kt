@@ -4,9 +4,11 @@ package com.polsl.yerbapp.presentation.views
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.databinding.InverseBindingAdapter
 import com.bumptech.glide.request.RequestOptions
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.presentation.ui.helpers.GlideApp
+import com.willy.ratingbar.BaseRatingBar
 
 
 object BindingAdapters {
@@ -41,6 +43,20 @@ object BindingAdapters {
     @JvmStatic
     fun setImageFromRes(imageView: ImageView, res: Int?) {
         GlideApp.with(imageView).load(res).apply(RequestOptions().fitCenter()).into(imageView)
+    }
+
+    @BindingAdapter("rate")
+    @JvmStatic
+    fun setRate(bar: BaseRatingBar, rate: Float){
+        if(bar.rating != rate){
+            bar.rating = rate
+        }
+    }
+
+    @InverseBindingAdapter(attribute = "rate")
+    @JvmStatic
+    fun getRate(bar: BaseRatingBar): Float{
+        return bar.rating
     }
 
 

@@ -42,19 +42,23 @@
             android:layout_marginTop="15dp"
             android:text="@{product.name}"
             app:layout_constraintTop_toBottomOf="@id/image"
-            app:layout_constraintStart_toStartOf="@id/image"/>
-        <RatingBar
-            android:id="@+id/rbAroma"
-            style="@style/PreferenceRating"
+            app:layout_constraintStart_toStartOf="@id/image" />
+
+        <com.willy.ratingbar.BaseRatingBar
+            android:id="@+id/rbOverall"
             app:layout_constraintTop_toBottomOf="@id/product_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:numStars="5"
-            android:rating="@{product.overallAverage}"
-            android:stepSize="0.01"
-            android:layout_marginBottom="15dp"/>
+            app:srb_drawableEmpty="@drawable/ic_logo"
+            app:srb_drawableFilled="@drawable/ic_logo"
+            app:rate="@{product.overallAverage}"
+            app:srb_starPadding="0dp"
+            app:srb_isIndicator="true"
+            app:srb_starHeight="15dp"
+            app:srb_starWidth="15dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

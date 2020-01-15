@@ -108,7 +108,6 @@
                         android:text="@string/AROMA"
                         android:textSize="15sp" />
 
-
                     <RatingBar
                         android:id="@+id/rbAroma"
                         style="@style/PreferenceRating"
