@@ -3,6 +3,7 @@ package com.polsl.yerbapp.presentation.views
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
@@ -52,6 +53,12 @@ object BindingAdapters {
         if(bar.rating != rate){
             bar.rating = rate
         }
+    }
+
+    @BindingAdapter("textFloat")
+    @JvmStatic
+    fun setText(textView: TextView, value: Float){
+        textView.text = value.toString()
     }
 
 //    @InverseBindingAdapter(attribute = "rate")
