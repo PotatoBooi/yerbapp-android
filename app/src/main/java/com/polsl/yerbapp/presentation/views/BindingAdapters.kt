@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
+import androidx.databinding.InverseBindingListener
 import com.bumptech.glide.request.RequestOptions
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.presentation.ui.helpers.GlideApp
@@ -53,12 +54,20 @@ object BindingAdapters {
         }
     }
 
-    @InverseBindingAdapter(attribute = "rate")
-    @JvmStatic
-    fun getRate(bar: BaseRatingBar): Float{
-        return bar.rating
-    }
-
+//    @InverseBindingAdapter(attribute = "rate")
+//    @JvmStatic
+//    fun getRate(ratingBar: BaseRatingBar): Float{
+//        return ratingBar.rating
+//    }
+//
+//    @BindingAdapter("app:rateAttrChanged")
+//    @JvmStatic fun setListeners(
+//        rateingBar: BaseRatingBar,
+//        attrChange: InverseBindingListener
+//    ) {
+//
+//        // Set a listener for click, focus, touch, etc.
+//    }
 
 //    @BindingAdapter("editable")
 //    @JvmStatic

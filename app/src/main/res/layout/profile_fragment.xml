@@ -108,6 +108,17 @@
                         android:text="@string/AROMA"
                         android:textSize="15sp" />
 
+                    <com.willy.ratingbar.BaseRatingBar
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.495"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvAromaHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        app:srb_drawableEmpty="@drawable/logo_empty"
+                        app:srb_drawableFilled="@drawable/logo_full"
+                        app:rate="@{viewmodel.aroma}" />
                     <RatingBar
                         android:id="@+id/rbAroma"
                         style="@style/PreferenceRating"
@@ -117,7 +128,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:numStars="5"
-                        android:rating="@={viewmodel.aroma}"
+                        android:rating="@{viewmodel.aroma}"
                         android:stepSize="1"
                         android:layout_marginBottom="15dp"/>
 

@@ -43,12 +43,49 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"/>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clOverall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvName">
+
+                <TextView
+                    android:id="@+id/tvOverall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="center"
+                    android:text="2.4"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="20sp" />
+
+                <com.willy.ratingbar.BaseRatingBar
+                    android:id="@+id/rbOverall"
+                    app:layout_constraintStart_toEndOf="@id/tvOverall"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    app:srb_drawableEmpty="@drawable/ic_logo_empty"
+                    app:srb_drawableFilled="@drawable/ic_logo"
+                    app:rate="@{viewmodel.product.overallAverage}"
+                    app:srb_starPadding="2dp"
+                    app:srb_isIndicator="true"
+                    app:srb_starHeight="20dp"
+                    app:srb_starWidth="20dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <TextView
                 android:id="@+id/tvTypeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@+id/tvName"
-                app:layout_constraintTop_toBottomOf="@id/tvName"
+                app:layout_constraintTop_toBottomOf="@id/clOverall"
                 android:text="@string/TYPE"
                 android:textColor="@color/colorAccent"
                 android:textSize="17sp"
@@ -115,21 +152,6 @@
                 android:text="@{viewmodel.product.details}"
                 android:textSize="17sp" />
 
-            <com.willy.ratingbar.BaseRatingBar
-                android:id="@+id/rbOverall"
-                app:layout_constraintTop_toBottomOf="@id/tvDetails"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                app:srb_drawableEmpty="@drawable/ic_logo_empty"
-                app:srb_drawableFilled="@drawable/ic_logo"
-                app:rate="@{viewmodel.product.overallAverage}"
-                app:srb_starPadding="0dp"
-                app:srb_isIndicator="true"
-                app:srb_starHeight="20dp"
-                app:srb_starWidth="20dp"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
