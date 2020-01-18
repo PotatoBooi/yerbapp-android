@@ -21,86 +21,15 @@
             android:layout_height="match_parent"
             android:layout_margin="20dp">
 
-            <androidx.cardview.widget.CardView
+            <include
                 android:id="@+id/cvHeader"
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                card_view:cardCornerRadius="8dp"
-                card_view:cardElevation="8dp"
+                layout="@layout/product_preview_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                card_view:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_margin="5dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/ivPhoto"
-                        android:layout_width="0dp"
-                        android:layout_height="300dp"
-                        android:scaleType="fitCenter"
-                        app:productImage="@{viewmodel.product.photoUrl}"
-                        app:layout_constraintDimensionRatio="4:3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tvName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@+id/ivPhoto"
-                        app:layout_constraintTop_toBottomOf="@id/ivPhoto"
-                        android:text="@{viewmodel.product.name}"
-                        android:textColor="@color/slate_black"
-                        android:textSize="20sp"
-                        android:gravity="center"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"/>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/clOverall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvName">
-
-                        <TextView
-                            android:id="@+id/tvOverall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            android:gravity="center"
-                            app:textFloat="@{viewmodel.product.overallAverage}"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="20sp" />
-
-                        <com.willy.ratingbar.BaseRatingBar
-                            android:id="@+id/rbOverall"
-                            app:layout_constraintStart_toEndOf="@id/tvOverall"
-                            android:layout_marginStart="8dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:numStars="5"
-                            app:srb_drawableEmpty="@drawable/ic_logo_empty"
-                            app:srb_drawableFilled="@drawable/ic_logo"
-                            app:rate="@{viewmodel.product.overallAverage}"
-                            app:srb_starPadding="2dp"
-                            app:srb_isIndicator="true"
-                            app:srb_starHeight="20dp"
-                            app:srb_starWidth="20dp"/>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
+                app:layout_constraintTop_toTopOf="parent"
+                bind:product = "@{viewmodel.product}" />
+            
             <TextView
                 android:id="@+id/tvTypeLabel"
                 android:layout_width="wrap_content"
