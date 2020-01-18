@@ -62,7 +62,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_margin = "30dp"
             app:srcCompat="@drawable/ic_add"
-            android:onClick="@{() -> viewmodel.onAddProductClick()}"/>
+            android:onClick="@{() -> viewmodel.onAddProductClick()}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

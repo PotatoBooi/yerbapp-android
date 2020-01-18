@@ -63,7 +63,7 @@
                 android:textSize="@dimen/text_size"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:selectedItemPosition= "@={viewmodel.typeInputIndex}" />
+                android:selectedItemPosition="@={viewmodel.typeInputIndex}" />
 
             <com.jaiselrahman.hintspinner.HintSpinner
                 android:id="@+id/sManufacturer"
