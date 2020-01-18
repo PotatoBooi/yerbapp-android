@@ -15,18 +15,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             card_view:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="5dp">
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp">
+                android:layout_margin="10dp">
 
                 <ImageView
                     android:id="@+id/ivPhoto"
                     android:layout_width="0dp"
-                    android:layout_height="300dp"
+                    android:layout_height="220dp"
                     android:scaleType="fitCenter"
                     app:productImage="@{product.photoUrl}"
                     app:layout_constraintDimensionRatio="4:3"
@@ -42,7 +41,7 @@
                     app:layout_constraintTop_toBottomOf="@id/ivPhoto"
                     android:text="@{product.name}"
                     android:textColor="@color/slate_black"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:gravity="center"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"/>
@@ -53,7 +52,8 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvName">
+                    app:layout_constraintTop_toBottomOf="@id/tvName"
+                    android:layout_marginBottom="10dp">
 
                     <TextView
                         android:id="@+id/tvOverall"
@@ -64,7 +64,7 @@
                         android:gravity="center"
                         app:textFloat="@{product.overallAverage}"
                         android:textColor="@color/colorAccent"
-                        android:textSize="20sp" />
+                        android:textSize="17sp" />
 
                     <com.willy.ratingbar.BaseRatingBar
                         android:id="@+id/rbOverall"
@@ -80,7 +80,7 @@
                         app:srb_starPadding="2dp"
                         app:srb_isIndicator="true"
                         app:srb_starHeight="20dp"
-                        app:srb_starWidth="20dp"/>
+                        app:srb_starWidth="20dp" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -22,7 +22,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_margin="15dp">
 
                 <TextView
                     android:id="@+id/tvTypeLabel"
@@ -32,7 +32,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/TYPE"
                     android:textColor="@color/colorAccent"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:layout_marginBottom="5dp"/>
 
                 <TextView
@@ -43,7 +43,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tvTypeLabel"
                     android:text="@string/MANUFACTURER"
                     android:textColor="@color/colorAccent"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:layout_marginBottom="5dp"/>
 
                 <TextView
@@ -54,7 +54,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tvManufacturerLabel"
                     android:text="@string/COUNTRY"
                     android:textColor="@color/colorAccent"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:layout_marginBottom="5dp"/>
 
                 <TextView
@@ -64,7 +64,7 @@
                     app:layout_constraintStart_toEndOf="@+id/tvTypeLabel"
                     app:layout_constraintBottom_toBottomOf="@id/tvTypeLabel"
                     android:text="@{viewmodel.productType.name}"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:layout_marginStart="5dp"/>
 
                 <TextView
@@ -74,7 +74,7 @@
                     app:layout_constraintStart_toEndOf="@+id/tvManufacturerLabel"
                     app:layout_constraintBottom_toBottomOf="@id/tvManufacturerLabel"
                     android:text="@{viewmodel.productManufacturer.name}"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:layout_marginStart="5dp"/>
 
                 <TextView
@@ -84,18 +84,9 @@
                     app:layout_constraintStart_toEndOf="@+id/tvCountryLabel"
                     app:layout_constraintBottom_toBottomOf="@id/tvCountryLabel"
                     android:text="@{viewmodel.productManufacturer.country}"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:layout_marginStart="5dp"/>
 
-<!--                <include-->
-<!--                    android:id="@+id/cvRates"-->
-<!--                    layout="@layout/product_preview_rates"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tvCountry"-->
-<!--                    bind:product = "@{viewmodel.product}"-->
-<!--                    android:layout_margin="10dp"/>-->
 
                 <TextView
                     android:id="@+id/tvDetails"
@@ -104,7 +95,8 @@
                     app:layout_constraintStart_toStartOf="@+id/tvCountryLabel"
                     app:layout_constraintTop_toBottomOf="@id/tvCountry"
                     android:text="@{viewmodel.product.details}"
-                    android:textSize="17sp" />
+                    android:textSize="15sp"
+                    android:layout_marginTop="8dp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
