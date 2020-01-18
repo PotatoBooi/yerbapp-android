@@ -143,34 +143,61 @@
                 android:text="@{viewmodel.productManufacturer.country}"
                 android:textSize="17sp"
                 android:layout_marginStart="5dp"/>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clAroma"
-                android:layout_width="wrap_content"
+            <include
+                android:id="@+id/prAroma"
+                layout="@layout/product_rating"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvCountry">
-
-                <include
-                    layout="@layout/product_rating"
-                    bind:label= "@{@string/AROMA}"
-                    bind:value = "@{viewmodel.product.aromaAverage}" />
-                
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@id/tvCountry"
+                android:layout_marginTop="10dp"
+                bind:label= "@{@string/AROMA}"
+                bind:value = "@{viewmodel.product.aromaAverage}" />
+            <include
+                android:id="@+id/prTaste"
+                layout="@layout/product_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/prAroma"
+                app:layout_constraintTop_toBottomOf="@id/prAroma"
+                bind:label= "@{@string/TASTE}"
+                bind:value = "@{viewmodel.product.tasteAverage}" />
+            <include
+                android:id="@+id/prEnergy"
+                layout="@layout/product_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/prTaste"
+                bind:label= "@{@string/ENERGY}"
+                bind:value = "@{viewmodel.product.energyAverage}" />
+            <include
+                android:id="@+id/prPrice"
+                layout="@layout/product_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/prEnergy"
+                bind:label= "@{@string/PRICE}"
+                bind:value = "@{viewmodel.product.priceAverage}" />
+            <include
+                android:id="@+id/prBitterness"
+                layout="@layout/product_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/prPrice"
+                bind:label= "@{@string/BITTERNESS}"
+                bind:value = "@{viewmodel.product.bitternessAverage}" />
 
             <TextView
                 android:id="@+id/tvDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@+id/tvCountryLabel"
-                app:layout_constraintTop_toBottomOf="@id/clAroma"
+                app:layout_constraintTop_toBottomOf="@id/prBitterness"
                 android:text="@{viewmodel.product.details}"
                 android:textSize="17sp" />
-
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
