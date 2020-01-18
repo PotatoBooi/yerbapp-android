@@ -2,7 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.polsl.yerbapp.presentation.ui.explore.product_preview.ProductPreviewFragment">
+    tools:context="com.polsl.yerbapp.presentation.ui.explore.product_preview.ProductPreviewFragment"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
@@ -103,15 +104,15 @@
                 android:layout_marginBottom="5dp"/>
 
             <TextView
-                android:id="@+id/tvCountryLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/tvManufacturerLabel"
-                app:layout_constraintTop_toBottomOf="@id/tvManufacturerLabel"
-                android:text="@string/COUNTRY"
-                android:textColor="@color/colorAccent"
-                android:textSize="17sp"
-                android:layout_marginBottom="5dp"/>
+            android:id="@+id/tvCountryLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/tvManufacturerLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvManufacturerLabel"
+            android:text="@string/COUNTRY"
+            android:textColor="@color/colorAccent"
+            android:textSize="17sp"
+            android:layout_marginBottom="5dp"/>
 
             <TextView
                 android:id="@+id/tvType"
@@ -143,14 +144,31 @@
                 android:textSize="17sp"
                 android:layout_marginStart="5dp"/>
 
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clAroma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCountry">
+
+                <include
+                    layout="@layout/product_rating"
+                    bind:label= "@{@string/AROMA}"
+                    bind:value = "@{viewmodel.product.aromaAverage}" />
+                
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <TextView
                 android:id="@+id/tvDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@+id/tvCountryLabel"
-                app:layout_constraintTop_toBottomOf="@id/tvCountryLabel"
+                app:layout_constraintTop_toBottomOf="@id/clAroma"
                 android:text="@{viewmodel.product.details}"
                 android:textSize="17sp" />
+
 
 
 
