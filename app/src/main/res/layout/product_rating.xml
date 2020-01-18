@@ -9,6 +9,9 @@
         <variable
             name="value"
             type="Float" />
+        <variable
+            name="isIndicator"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +39,7 @@
             app:srb_drawableFilled="@drawable/ic_logo"
             app:rate="@{value}"
             app:srb_starPadding="2dp"
-            app:srb_isIndicator="true"
+            app:isIndicator = "@{isIndicator }"
             app:srb_starHeight="20dp"
             app:srb_starWidth="20dp"/>
 

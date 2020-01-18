@@ -31,7 +31,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     card_view:layout_constraintTop_toTopOf="parent"
                     bind:label= "@{@string/AROMA}"
-                    bind:value = "@{product.aromaAverage}" />
+                    bind:value = "@{product.aromaAverage}"
+                    bind:isIndicator ="@{false}"/>
                 <include
                     android:id="@+id/prTaste"
                     layout="@layout/product_rating"
@@ -40,7 +41,8 @@
                     app:layout_constraintStart_toStartOf="@id/prAroma"
                     app:layout_constraintTop_toBottomOf="@id/prAroma"
                     bind:label= "@{@string/TASTE}"
-                    bind:value = "@{product.tasteAverage}" />
+                    bind:value = "@{product.tasteAverage}"
+                    bind:isIndicator ="@{true}"/>
                 <include
                     android:id="@+id/prEnergy"
                     layout="@layout/product_rating"
@@ -49,7 +51,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/prTaste"
                     bind:label= "@{@string/ENERGY}"
-                    bind:value = "@{product.energyAverage}" />
+                    bind:value = "@{product.energyAverage}"
+                    bind:isIndicator ="@{true}"/>
                 <include
                     android:id="@+id/prPrice"
                     layout="@layout/product_rating"
@@ -58,7 +61,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/prEnergy"
                     bind:label= "@{@string/PRICE}"
-                    bind:value = "@{product.priceAverage}" />
+                    bind:value = "@{product.priceAverage}"
+                    bind:isIndicator ="@{true}"/>
                 <include
                     android:id="@+id/prBitterness"
                     layout="@layout/product_rating"
@@ -67,7 +71,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/prPrice"
                     bind:label= "@{@string/BITTERNESS}"
-                    bind:value = "@{product.bitternessAverage}" />
+                    bind:value = "@{product.bitternessAverage}"
+                    bind:isIndicator ="@{true}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
