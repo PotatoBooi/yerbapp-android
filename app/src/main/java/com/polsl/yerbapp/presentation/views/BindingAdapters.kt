@@ -58,7 +58,7 @@ object BindingAdapters {
     @BindingAdapter("textFloat")
     @JvmStatic
     fun setText(textView: TextView, value: Float){
-        textView.text = value.toString()
+        textView.text = String.format("%.1f", value)
     }
 
 //    @InverseBindingAdapter(attribute = "rate")
