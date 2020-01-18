@@ -32,7 +32,7 @@
                     card_view:layout_constraintTop_toTopOf="parent"
                     bind:label= "@{@string/AROMA}"
                     bind:value = "@{product.aromaAverage}"
-                    bind:isIndicator ="@{false}"/>
+                    bind:isIndicator ="@{true}"/>
                 <include
                     android:id="@+id/prTaste"
                     layout="@layout/product_rating"

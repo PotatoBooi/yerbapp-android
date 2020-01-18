@@ -37,11 +37,11 @@
             android:numStars="5"
             app:srb_drawableEmpty="@drawable/ic_logo_empty"
             app:srb_drawableFilled="@drawable/ic_logo"
-            app:rate="@{value}"
+            app:rate="@={value}"
             app:srb_starPadding="2dp"
             app:isIndicator = "@{isIndicator }"
             app:srb_starHeight="20dp"
-            app:srb_starWidth="20dp"/>
+            app:srb_starWidth="20dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
