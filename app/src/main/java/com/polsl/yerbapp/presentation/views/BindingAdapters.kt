@@ -64,7 +64,6 @@ object BindingAdapters {
             InverseBindingMethod(
                 type = com.willy.ratingbar.BaseRatingBar::class,
                 attribute = "rate"
-//                method = "getRate"
             )
         )
 
@@ -73,7 +72,7 @@ object BindingAdapters {
             @BindingAdapter("app:rateAttrChanged")
             @JvmStatic
             fun setListener(ratingBar: BaseRatingBar, attrChange: InverseBindingListener){
-                ratingBar.setOnRatingChangeListener { ratingBar, rating, fromUser ->
+                ratingBar.setOnRatingChangeListener { _, _, _ ->
                     attrChange.onChange()
                 }
             }
@@ -89,59 +88,8 @@ object BindingAdapters {
                     ratingBar.rating = rate
                 }
             }
-
         }
-
     }
 
 }
-//ratingBar.setOnRatingChangeListener(new BaseRatingBar.OnRatingChangeListener() {
-//    @Override
-//    public void onRatingChange(BaseRatingBar ratingBar, int rating, boolean fromUser) {
-//        Log.e(TAG, "onRatingChange: " + rating);
-//    }
-//});
-
-//    @InverseBindingMethods({
-//        @InverseBindingMethod(
-//            type = com.willy.ratingbar.BaseRatingBar,
-//            attribute = "android:text",
-//            method = "getText"
-//        )}
-//    )
-
-
-//    @InverseBindingAdapter(attribute = "rate")
-//    @JvmStatic
-//    fun getRate(ratingBar: BaseRatingBar): Float{
-//        return ratingBar.rating
-//    }
-//
-//    @BindingAdapter("app:rateAttrChanged")
-//    @JvmStatic fun setListeners(
-//        rateingBar: BaseRatingBar,
-//        attrChange: InverseBindingListener
-//    ) {
-//
-//        // Set a listener for click, focus, touch, etc.
-//    }
-
-//    @BindingAdapter("editable")
-//    @JvmStatic
-//    fun editable(view: View, editable: Boolean){
-//
-//        view.isLongClickable = editable
-//        view.isClickable = editable
-//        view.isFocusableInTouchMode = editable
-//        view.isFocusable = editable
-//
-//        if(editable){
-//            view.setBackgroundResource(R.drawable.underline)
-//        }
-//        else{
-//            view.setBackgroundColor(Color.TRANSPARENT)
-//        }
-//    }
-
-
 
