@@ -48,6 +48,13 @@ object BindingAdapters {
         GlideApp.with(imageView).load(res).apply(RequestOptions().fitCenter()).into(imageView)
     }
 
+    @BindingAdapter("transparent")
+    @JvmStatic
+    fun setBackground(view: View, transparent: Boolean) {
+        if(!transparent) view.setBackgroundResource(R.color.white)
+    }
+
+
     @BindingAdapter("textFloat")
     @JvmStatic
     fun setText(textView: TextView, value: Float) {

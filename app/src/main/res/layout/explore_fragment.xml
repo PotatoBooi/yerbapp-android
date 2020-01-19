@@ -60,7 +60,9 @@
                 android:layout_height="match_parent"
                 app:visible="@{loading}">
 
-                <include layout="@layout/loading" />
+                <include
+                    layout="@layout/loading"
+                    app:transparent="@{true}"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
