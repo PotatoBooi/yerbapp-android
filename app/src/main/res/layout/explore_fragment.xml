@@ -49,7 +49,7 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/product_list"
+                android:id="@+id/productList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -71,11 +71,12 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_gravity="bottom|end"
-            android:id="@+id/floating_action_button"
+            android:id="@+id/fbAddProduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:onClick="@{() -> viewmodel.onAddProductClick()}"
-            app:srcCompat="@drawable/ic_add" />
+            app:srcCompat="@drawable/ic_add"
+            app:visible="@{viewmodel.isUserAuthorized}" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

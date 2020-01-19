@@ -1,6 +1,7 @@
 package com.polsl.yerbapp.presentation.ui.explore
 
 import androidx.core.os.bundleOf
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
@@ -12,15 +13,33 @@ import com.polsl.yerbapp.presentation.base.BaseViewModel
 import com.polsl.yerbapp.presentation.base.NavigationProps
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsDataFactory
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsListener
+import com.polsl.yerbapp.presentation.usecases.CurrentUserCase
 import com.polsl.yerbapp.presentation.usecases.ProductsCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
-class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel(), ProductsListener {
+class ExploreViewModel(
+    private val productsCase: ProductsCase,
+    private val currentUserCase: CurrentUserCase
+) : BaseViewModel(), ProductsListener {
 
     init {
+        checkAuthStatus()
         initPaging()
     }
 
+    private fun checkAuthStatus() {
+        viewModelScope.launch(Dispatchers.Main) {
+            try {
+                isUserAuthorized.set(currentUserCase.isUserAuthorized())
+            } catch (ex: Exception) {
+                // handleErrors(ex)
+            }
+        }
+    }
+
+    val isUserAuthorized = ObservableBoolean(false)
     val pagedProducts: LiveData<PagedList<ProductModel>>
         get() = _pagedProducts
     private lateinit var _pagedProducts: LiveData<PagedList<ProductModel>>
