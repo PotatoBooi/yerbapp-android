@@ -1,6 +1,7 @@
 package com.polsl.yerbapp.di
 
 import com.polsl.yerbapp.presentation.ui.explore.ExploreViewModel
+import com.polsl.yerbapp.presentation.ui.explore.ProductsSharedViewModel
 import com.polsl.yerbapp.presentation.ui.explore.add_product.AddProductViewModel
 import com.polsl.yerbapp.presentation.ui.explore.product_preview.ProductPreviewViewModel
 import com.polsl.yerbapp.presentation.ui.profile.ProfileSharedViewModel
@@ -22,4 +23,5 @@ val viewModelsModule = module {
     viewModel { AddProductViewModel(get()) }
     viewModel { TutorialViewModel() }
     viewModel { TrainingViewModel() }
+    viewModel { ProductsSharedViewModel() }
 }

@@ -4,7 +4,9 @@ import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.hadilq.liveevent.LiveEvent
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.domain.exceptions.NoConnectivityException
 import com.polsl.yerbapp.domain.exceptions.UnauthorizedException
@@ -37,6 +39,9 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
         get() = manufacturers[manufacturerInputIndex.get() - 1].id
     private val typeId: String?
         get() = types[typeInputIndex.get() - 1].id
+    val productAdded: LiveData<Unit>
+        get() = _productAdded
+    private val _productAdded = LiveEvent<Unit>()
 
     init {
         initTypes()
@@ -87,8 +92,7 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
                 )
                 if (!result.isNullOrEmpty()) {
                     _message.postValue(R.string.PRODUCT_ADDED)
-                    val navigationId = R.id.action_addProductFragment_to_exploreFragment
-                    _navigationProps.value = NavigationProps(navigationId, null)
+                    _productAdded.value = Unit
                 }
             } catch (ex: Exception) {
                 handleErrors(ex)

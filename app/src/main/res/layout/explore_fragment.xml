@@ -17,7 +17,8 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="false">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -51,8 +52,7 @@
                 android:id="@+id/product_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:visible="@{!loading}" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clLoading"
@@ -76,7 +76,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:onClick="@{() -> viewmodel.onAddProductClick()}"
-            app:srcCompat="@drawable/ic_add"
-            app:visible="@{!loading}" />
+            app:srcCompat="@drawable/ic_add" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

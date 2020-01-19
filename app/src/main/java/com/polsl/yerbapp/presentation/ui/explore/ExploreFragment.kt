@@ -14,6 +14,7 @@ import com.polsl.yerbapp.databinding.ExploreFragmentBinding
 import com.polsl.yerbapp.presentation.base.BaseFragment
 import com.polsl.yerbapp.presentation.ui.explore.adapters.ProductsAdapter
 import kotlinx.android.synthetic.main.explore_fragment.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -21,7 +22,11 @@ class ExploreFragment : BaseFragment<ExploreViewModel>(), MaterialSearchBar.OnSe
     override val viewModel: ExploreViewModel? by viewModel { parametersOf(this) }
     private lateinit var binding: ExploreFragmentBinding
     private lateinit var adapter: ProductsAdapter
-
+    private val productsSharedViewModel: ProductsSharedViewModel by sharedViewModel {
+        parametersOf(
+            this
+        )
+    }
     companion object {
         fun newInstance() = ExploreFragment()
     }
@@ -52,6 +57,9 @@ class ExploreFragment : BaseFragment<ExploreViewModel>(), MaterialSearchBar.OnSe
         })
         viewModel?.loading?.observe(viewLifecycleOwner, Observer {
             binding.loading = it
+        })
+        productsSharedViewModel.refreshList.observe(viewLifecycleOwner, Observer {
+            viewModel?.refreshList()
         })
     }
 

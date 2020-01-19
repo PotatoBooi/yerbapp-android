@@ -59,6 +59,10 @@ class ExploreViewModel(private val productsCase: ProductsCase) : BaseViewModel()
         productsDataFactory.searchByName(query)
         _pagedProducts.value?.dataSource?.invalidate()
     }
+
+    fun refreshList() {
+        _pagedProducts.value?.dataSource?.invalidate()
+    }
 }
 
 
