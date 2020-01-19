@@ -1,4 +1,3 @@
-
 query GetProducts ($personalizeForUer: ID, $searchByName: String, $perPage: Int, $offset: Int, $orderBy: String){
     products(personalizeForUser: $personalizeForUer, searchByName: $searchByName, perPage: $perPage, offset: $offset, orderBy: $orderBy )  {
         items{

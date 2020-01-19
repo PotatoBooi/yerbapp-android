@@ -19,7 +19,7 @@ val viewModelsModule = module {
     viewModel { ProfileSharedViewModel() }
     viewModel { ExploreViewModel(get()) }
     viewModel { (productId: String) -> ProductPreviewViewModel(productId, get(), get()) }
-    viewModel { AddProductViewModel( get()) }
+    viewModel { AddProductViewModel(get()) }
     viewModel { TutorialViewModel() }
     viewModel { TrainingViewModel() }
 }

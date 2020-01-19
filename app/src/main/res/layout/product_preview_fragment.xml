@@ -26,7 +26,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
 
                 <include
                     android:id="@+id/cvHeader"
@@ -35,8 +35,8 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    bind:product = "@{viewmodel.product}"
-                    android:layout_margin="20dp"/>
+                    bind:product="@{viewmodel.product}"
+                    android:layout_margin="20dp" />
 
                 <include
                     android:id="@+id/cvContent"
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cvHeader"
-                    bind:viewmodel = "@{viewmodel}"
+                    bind:viewmodel="@{viewmodel}"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp" />
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cvContent"
-                    bind:product = "@{viewmodel.product}"
+                    bind:product="@{viewmodel.product}"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp" />

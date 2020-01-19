@@ -21,7 +21,8 @@ class ProductPreviewFragment : BaseFragment<ProductPreviewViewModel>() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.product_preview_fragment, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.product_preview_fragment, container, false)
         binding.viewmodel = viewModel
         return binding.root
     }

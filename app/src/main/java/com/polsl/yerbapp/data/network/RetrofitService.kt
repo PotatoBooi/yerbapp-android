@@ -2,15 +2,14 @@ package com.polsl.yerbapp.data.network
 
 import com.polsl.yerbapp.data.device.SharedPreferencesManager
 import com.polsl.yerbapp.domain.models.dto.LoginDto
-import com.polsl.yerbapp.domain.models.reponse.rest.LoginResponse
 import com.polsl.yerbapp.domain.models.dto.RegisterDto
+import com.polsl.yerbapp.domain.models.reponse.rest.LoginResponse
 import com.polsl.yerbapp.domain.models.reponse.rest.RegisterResponse
 import com.polsl.yerbapp.domain.models.reponse.rest.UploadResponse
 import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
-import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -34,8 +33,10 @@ interface RetrofitService {
     suspend fun upload(@Part file: MultipartBody.Part): UploadResponse
 
     companion object {
-        operator fun invoke(connectivityInterceptor: ConnectivityInterceptor, 
-        sharedPreferencesManager: SharedPreferencesManager): RetrofitService {
+        operator fun invoke(
+            connectivityInterceptor: ConnectivityInterceptor,
+            sharedPreferencesManager: SharedPreferencesManager
+        ): RetrofitService {
             val token = sharedPreferencesManager.getUserData().accessToken
             val requestInterceptor = Interceptor { chain ->
 
@@ -44,7 +45,7 @@ interface RetrofitService {
                     .newBuilder()
                     .build()
 
-                val request = token.isNotEmpty().let{
+                val request = token.isNotEmpty().let {
                     chain.request()
                         .newBuilder()
                         .url(url)
@@ -55,7 +56,7 @@ interface RetrofitService {
                         .newBuilder()
                         .url(url)
                         .build()
-                 }
+                }
                 return@Interceptor chain.proceed(request)
             }
 

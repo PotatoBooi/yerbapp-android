@@ -3,12 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="label"
             type="String" />
+
         <variable
             name="value"
             type="Float" />
+
         <variable
             name="isIndicator"
             type="Boolean" />
@@ -39,7 +42,7 @@
             app:srb_drawableFilled="@drawable/ic_logo"
             app:rate="@={value}"
             app:srb_starPadding="2dp"
-            app:isIndicator = "@{isIndicator }"
+            app:isIndicator="@{isIndicator }"
             app:srb_starHeight="20dp"
             app:srb_starWidth="20dp" />
 

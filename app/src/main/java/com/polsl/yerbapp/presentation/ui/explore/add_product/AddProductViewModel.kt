@@ -34,17 +34,17 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
     val isImageSet = ObservableBoolean(false)
 
     private val manufacturerId: String?
-        get() = manufacturers[manufacturerInputIndex.get()-1].id
+        get() = manufacturers[manufacturerInputIndex.get() - 1].id
     private val typeId: String?
-        get() = types[typeInputIndex.get()-1].id
+        get() = types[typeInputIndex.get() - 1].id
 
-    init{
+    init {
         initTypes()
         initManufacturers()
     }
 
 
-    fun onRemovePhotoClick(){
+    fun onRemovePhotoClick() {
         productImagePath?.set("")
         isImageSet?.set(false)
     }
@@ -56,13 +56,13 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
                 return
             }
         }
-        when{
+        when {
             typeInputIndex.get() == 0 -> {
                 _message.value = R.string.TYPE_EMPTY
                 return
             }
         }
-        when{
+        when {
             manufacturerInputIndex.get() == 0 -> {
                 _message.value = R.string.MANUFACTURER_EMPTY
                 return
@@ -71,13 +71,13 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
         viewModelScope.launch(Dispatchers.Main) {
             try {
                 loading.set(true)
-                val file = productImagePath.get()?.let{
-                    if(it.isNotEmpty()){
+                val file = productImagePath.get()?.let {
+                    if (it.isNotEmpty()) {
                         File(it)
-                    }else{
+                    } else {
                         null
                     }
-                } ?: run {null}
+                } ?: run { null }
                 val result = productCase.addProduct(
                     nameInput.get() ?: "",
                     detailsInput.get() ?: "",
@@ -85,7 +85,7 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
                     manufacturerId ?: "",
                     file
                 )
-                if(!result.isNullOrEmpty()) {
+                if (!result.isNullOrEmpty()) {
                     _message.postValue(R.string.PRODUCT_ADDED)
                     val navigationId = R.id.action_addProductFragment_to_exploreFragment
                     _navigationProps.value = NavigationProps(navigationId, null)
@@ -98,30 +98,30 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
         }
     }
 
-    private fun initTypes(){
+    private fun initTypes() {
         viewModelScope.launch(Dispatchers.Main) {
-            try{
+            try {
                 loading.set(true)
                 val typesData = productCase.getProductTypes()
                 types.clear()
                 types.addAll(typesData)
                 loading.set(false)
-                }catch (ex: Exception) {
-                    loading.set(false)
-                    handleErrors(ex)
-                }
+            } catch (ex: Exception) {
+                loading.set(false)
+                handleErrors(ex)
+            }
         }
     }
 
-    private fun initManufacturers(){
+    private fun initManufacturers() {
         viewModelScope.launch(Dispatchers.Main) {
-            try{
+            try {
                 loading.set(true)
                 val manufacturersData = productCase.getProductManufacturers()
                 manufacturers.clear()
                 manufacturers.addAll(manufacturersData)
                 loading.set(false)
-            }catch (ex: Exception) {
+            } catch (ex: Exception) {
                 loading.set(false)
                 handleErrors(ex)
             }

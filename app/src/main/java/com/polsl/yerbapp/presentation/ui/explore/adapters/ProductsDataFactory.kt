@@ -8,8 +8,10 @@ import com.polsl.yerbapp.presentation.usecases.ProductsCase
 import kotlinx.coroutines.CoroutineScope
 
 
-class ProductsDataFactory(private val scope: CoroutineScope, 
-private val productsCase: ProductsCase) : DataSource.Factory<Int, ProductModel>(){
+class ProductsDataFactory(
+    private val scope: CoroutineScope,
+    private val productsCase: ProductsCase
+) : DataSource.Factory<Int, ProductModel>() {
 
     val liveData: LiveData<ProductsDataSource>
         get() = _mutableLiveData
@@ -18,12 +20,13 @@ private val productsCase: ProductsCase) : DataSource.Factory<Int, ProductModel>(
     var filter = ""
 
     override fun create(): DataSource<Int, ProductModel> {
-      val productDataSource =  ProductsDataSource(scope, productsCase, filter)
+        val productDataSource = ProductsDataSource(scope, productsCase, filter)
         _mutableLiveData.postValue(productDataSource)
         return productDataSource
     }
+
     fun searchByName(query: String) {
-       filter = query
+        filter = query
     }
 
 }

@@ -62,7 +62,7 @@
 
                 <include
                     layout="@layout/loading"
-                    app:transparent="@{true}"/>
+                    app:transparent="@{true}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

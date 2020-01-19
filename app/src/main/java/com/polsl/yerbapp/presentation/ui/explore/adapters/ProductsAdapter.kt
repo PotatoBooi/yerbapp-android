@@ -4,14 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.polsl.yerbapp.databinding.ProductItemBinding
 import com.polsl.yerbapp.domain.models.reponse.graphql.ProductModel
 
 
-class ProductsAdapter(private val productsListener: ProductsListener?) 
-: PagedListAdapter<ProductModel, ProductsAdapter.ViewHolder> (ProductDiffCallback()) {
+class ProductsAdapter(private val productsListener: ProductsListener?) :
+    PagedListAdapter<ProductModel, ProductsAdapter.ViewHolder>(ProductDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
@@ -47,6 +46,6 @@ class ProductsAdapter(private val productsListener: ProductsListener?)
 }
 
 
-interface ProductsListener{
+interface ProductsListener {
     fun onItemClick(item: ProductModel)
 }

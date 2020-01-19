@@ -8,7 +8,7 @@ import com.polsl.yerbapp.presentation.base.NavigationProps
 class TrainingViewModel : BaseViewModel() {
 
 
-    fun onStartTutorialClick(){
+    fun onStartTutorialClick() {
         val navigationId = R.id.action_trainingFragment_to_tutorialFragment
         _navigationProps.value = NavigationProps(navigationId, null)
     }

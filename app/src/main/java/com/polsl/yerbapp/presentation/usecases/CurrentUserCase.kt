@@ -20,7 +20,7 @@ class CurrentUserCase(private val usersRepository: UsersRepository) {
     fun logoutUser() = usersRepository.logoutUser()
 
     suspend fun getCurrentUser(): UserModel? = usersRepository.getCurrentUser()
-    suspend fun editCurrentUser(profile: ProfileModel){
+    suspend fun editCurrentUser(profile: ProfileModel) {
         // TODO mapper
         val profile = profile
         val editUserInput = EditUserInput

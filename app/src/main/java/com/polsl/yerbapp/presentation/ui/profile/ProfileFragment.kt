@@ -38,17 +38,17 @@ class ProfileFragment : BaseFragment<ProfileViewModel>(), AuthListener {
                 AuthStatus.LOADING -> {
                     clProfile.visibility = View.GONE
                     clLogin.visibility = View.GONE
-                    clLoading.visibility =  View.VISIBLE
+                    clLoading.visibility = View.VISIBLE
                 }
                 AuthStatus.AUTHORIZED -> {
                     clProfile.visibility = View.VISIBLE
                     clLogin.visibility = View.GONE
-                    clLoading.visibility =  View.GONE
+                    clLoading.visibility = View.GONE
                 }
                 AuthStatus.UNAUTHORIZED -> {
                     clProfile.visibility = View.GONE
                     clLogin.visibility = View.VISIBLE
-                    clLoading.visibility =  View.GONE
+                    clLoading.visibility = View.GONE
                 }
             }
         })

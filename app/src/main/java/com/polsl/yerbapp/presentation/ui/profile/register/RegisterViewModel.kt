@@ -28,7 +28,7 @@ class RegisterViewModel(private val registerUserCase: RegisterUserCase) : BaseVi
                 return
             }
             (loginInput.get()?.length ?: 0) < 7 -> {
-                    _message.value = R.string.USERNAME_TOO_SHORT
+                _message.value = R.string.USERNAME_TOO_SHORT
                 return
             }
         }
@@ -69,17 +69,17 @@ class RegisterViewModel(private val registerUserCase: RegisterUserCase) : BaseVi
     }
 
     private fun handleErrors(exception: Exception) {
-        when(exception){
+        when (exception) {
             is NoConnectivityException -> {
                 _message.postValue(R.string.NO_INTERNET)
             }
-            else ->  {
+            else -> {
                 _message.postValue(R.string.BAD_RESPONSE)
             }
         }
     }
 
-    fun loginClick(){
+    fun loginClick() {
         val navigationId = R.id.action_registerFragment_to_profileFragment
         _navigationProps.value = NavigationProps(navigationId, null)
     }

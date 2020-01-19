@@ -57,6 +57,7 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp()
     }
+
     fun showSnackbar(@StringRes stringRes: Int) {
         Flashbar.Builder(this)
             .gravity(Flashbar.Gravity.TOP)

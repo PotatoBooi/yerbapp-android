@@ -13,8 +13,8 @@ import com.polsl.yerbapp.presentation.usecases.CurrentUserCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-object AuthStatus{
-    const val LOADING :String = "loading"
+object AuthStatus {
+    const val LOADING: String = "loading"
     const val AUTHORIZED: String = "authorized"
     const val UNAUTHORIZED: String = "unauthorized"
 }
@@ -43,28 +43,29 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
         currentUserCase.logoutUser()
         checkAuthStatus()
     }
+
     fun saveClick() {
-      //TODO mapper
+        //TODO mapper
         val editedProfile = ProfileModel(
             priceImportance = price.get()!!.toInt(),
             aromaImportance = aroma.get()!!.toInt(),
             tasteImportance = taste.get()!!.toInt(),
             bitternessImportance = bitterness.get()!!.toInt(),
             energyImportance = energy.get()!!.toInt()
-            )
-            viewModelScope.launch (Dispatchers.Main) {
-                try{
-                    currentUserCase.editCurrentUser(editedProfile)
-                }catch (ex: Exception) {
-                    handleErrors(ex)
-                }
+        )
+        viewModelScope.launch(Dispatchers.Main) {
+            try {
+                currentUserCase.editCurrentUser(editedProfile)
+            } catch (ex: Exception) {
+                handleErrors(ex)
             }
+        }
     }
 
 
     fun checkAuthStatus() {
         viewModelScope.launch(Dispatchers.Main) {
-            try{
+            try {
                 _authStatus.postValue(AuthStatus.LOADING)
                 val isAuth = currentUserCase.isUserAuthorized()
                 if (isAuth) {
@@ -72,7 +73,7 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
                 } else {
                     _authStatus.postValue(AuthStatus.UNAUTHORIZED)
                 }
-            }catch (ex: Exception) {
+            } catch (ex: Exception) {
                 _authStatus.postValue(AuthStatus.UNAUTHORIZED)
                 handleErrors(ex)
             }
@@ -80,10 +81,10 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
         }
     }
 
-    private fun getUser(){
+    private fun getUser() {
         //TODO mapper
         viewModelScope.launch(Dispatchers.Main) {
-            try{
+            try {
                 val user = currentUserCase.getCurrentUser()
                 val profile = user?.profile
                 username.set(user?.username)
@@ -94,7 +95,7 @@ class ProfileViewModel(private val currentUserCase: CurrentUserCase) : BaseViewM
                 aroma.set(profile?.aromaImportance?.toFloat())
                 price.set(profile?.priceImportance?.toFloat())
                 _authStatus.postValue(AuthStatus.AUTHORIZED)
-            }catch (ex: Exception) {
+            } catch (ex: Exception) {
                 handleErrors(ex)
             }
 

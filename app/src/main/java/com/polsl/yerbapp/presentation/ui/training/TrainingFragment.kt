@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.databinding.TrainingFragmentBinding
 import com.polsl.yerbapp.presentation.base.BaseFragment
-import org.koin.core.parameter.parametersOf
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class TrainingFragment : BaseFragment<TrainingViewModel>() {
     override val viewModel: TrainingViewModel? by viewModel { parametersOf(this) }

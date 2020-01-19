@@ -8,14 +8,16 @@ import okhttp3.OkHttpClient
 
 private const val GRAPHQL_API_URL = "http://157.230.108.68:4000/graphql"
 
-class ApolloClientFactory( private val connectivityInterceptor: ConnectivityInterceptor,
-                           private val sharedPreferencesManager: SharedPreferencesManager) {
+class ApolloClientFactory(
+    private val connectivityInterceptor: ConnectivityInterceptor,
+    private val sharedPreferencesManager: SharedPreferencesManager
+) {
 
-    fun create() : ApolloClient{
+    fun create(): ApolloClient {
         return invoke(connectivityInterceptor, sharedPreferencesManager)
     }
 
-    companion object{
+    companion object {
         operator fun invoke(
             connectivityInterceptor: ConnectivityInterceptor,
             sharedPreferencesManager: SharedPreferencesManager
@@ -30,7 +32,7 @@ class ApolloClientFactory( private val connectivityInterceptor: ConnectivityInte
                 val request = chain.request()
                     .newBuilder()
                     .url(url)
-                    .addHeader("Authorization", "Bearer $token") 
+                    .addHeader("Authorization", "Bearer $token")
                     .build()
 
                 return@Interceptor chain.proceed(request)

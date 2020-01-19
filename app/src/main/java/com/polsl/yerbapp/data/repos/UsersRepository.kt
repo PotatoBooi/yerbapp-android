@@ -68,10 +68,9 @@ class UsersRepository(
             val token = sharedPreferencesManager.getUserData().accessToken
             val response = retrofitService.checkAuthorization("Bearer $token")
             response.code() == 200
-        }catch(ex: NoConnectivityException){
+        } catch (ex: NoConnectivityException) {
             throw ex
-        }
-        catch (ex: HttpException) {
+        } catch (ex: HttpException) {
             false
         } catch (ex: Exception) {
             false
@@ -96,24 +95,30 @@ class UsersRepository(
                     .toDeferred()
                     .await()
 
-            if(response.hasErrors()){
+            if (response.hasErrors()) {
                 val errorMessage = response.errors().first().message()
-                if(errorMessage == "{statusCode=401, error=Unauthorized}"){
+                if (errorMessage == "{statusCode=401, error=Unauthorized}") {
                     throw UnauthorizedException()
                 }
             }
 
             return response.data()?.user()?.let { u ->
-                    UserModel(u.id(), u.username(), u.email(), ProfileModel(u.profile().priceImportance(), u.profile().tasteImportance(), u.profile().energyImportance(),
-                        u.profile().aromaImportance(), u.profile().bitternessImportance()))
+                UserModel(
+                    u.id(), u.username(), u.email(), ProfileModel(
+                        u.profile().priceImportance(),
+                        u.profile().tasteImportance(),
+                        u.profile().energyImportance(),
+                        u.profile().aromaImportance(),
+                        u.profile().bitternessImportance()
+                    )
+                )
                 // TODO add extra function for mapping
-                } ?: run {
+            } ?: run {
                 throw IllegalStateException()
             }
-        }catch(ex: ApolloException){
+        } catch (ex: ApolloException) {
             throw ex
-        }
-        catch(ex: Exception){
+        } catch (ex: Exception) {
             throw ex
         }
     }
@@ -133,15 +138,14 @@ class UsersRepository(
                     .toDeferred()
                     .await()
 
-            if(response.hasErrors()){
-                if(response.errors().first().message()?.first()?.toInt() == 401 ){
+            if (response.hasErrors()) {
+                if (response.errors().first().message()?.first()?.toInt() == 401) {
                     throw UnauthorizedException()
                 }
             }
-        }catch(ex: ApolloException){
+        } catch (ex: ApolloException) {
             throw ex
-        }
-        catch(ex: Exception){
+        } catch (ex: Exception) {
             throw ex
         }
     }

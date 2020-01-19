@@ -9,7 +9,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.polsl.yerbapp.R
 import com.polsl.yerbapp.presentation.ui.helpers.GlideApp
 import com.willy.ratingbar.BaseRatingBar
-import java.nio.file.WatchEvent
 
 
 object BindingAdapters {
@@ -51,7 +50,7 @@ object BindingAdapters {
     @BindingAdapter("transparent")
     @JvmStatic
     fun setBackground(view: View, transparent: Boolean) {
-        if(!transparent) view.setBackgroundResource(R.color.white)
+        if (!transparent) view.setBackgroundResource(R.color.white)
     }
 
 
@@ -67,18 +66,18 @@ object BindingAdapters {
         ratingBar.setIsIndicator(value)
     }
 
-        @InverseBindingMethods(
-            InverseBindingMethod(
-                type = com.willy.ratingbar.BaseRatingBar::class,
-                attribute = "rate"
-            )
+    @InverseBindingMethods(
+        InverseBindingMethod(
+            type = com.willy.ratingbar.BaseRatingBar::class,
+            attribute = "rate"
         )
+    )
 
     class RatingBarBinder {
         companion object {
             @BindingAdapter("app:rateAttrChanged")
             @JvmStatic
-            fun setListener(ratingBar: BaseRatingBar, attrChange: InverseBindingListener){
+            fun setListener(ratingBar: BaseRatingBar, attrChange: InverseBindingListener) {
                 ratingBar.setOnRatingChangeListener { _, _, _ ->
                     attrChange.onChange()
                 }

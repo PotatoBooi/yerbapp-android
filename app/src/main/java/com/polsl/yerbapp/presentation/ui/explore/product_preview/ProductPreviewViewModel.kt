@@ -24,8 +24,8 @@ class ProductPreviewViewModel(
     val loading = ObservableBoolean(true)
 
     val product = ObservableField<ProductModel>()
-    val productType =  ObservableField<TypeModel>()
-    val productManufacturer =  ObservableField<ManufacturerModel>()
+    val productType = ObservableField<TypeModel>()
+    val productManufacturer = ObservableField<ManufacturerModel>()
 
     init {
         initProduct()
@@ -34,14 +34,14 @@ class ProductPreviewViewModel(
     private fun initProduct() {
         productId?.let {
             viewModelScope.launch(Dispatchers.Main) {
-                try{
+                try {
                     loading.set(true)
                     val productData = productCase.getProduct(it)
                     product.set(productData)
                     productManufacturer.set(productData.manufacturerModel)
                     productType.set(productData.typeModel)
                     loading.set(false)
-                }catch (ex: Exception) {
+                } catch (ex: Exception) {
                     loading.set(false)
                     handleErrors(ex)
                 }

@@ -9,12 +9,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
-class ProductsDataSource (private val scope: CoroutineScope, 
-private val productsCase: ProductsCase, private val filter: String?): PageKeyedDataSource<Int, ProductModel>() {
+class ProductsDataSource(
+    private val scope: CoroutineScope,
+    private val productsCase: ProductsCase, private val filter: String?
+) : PageKeyedDataSource<Int, ProductModel>() {
 
     val loading: LiveData<Boolean>
         get() = _loading
-    private val _loading =  MutableLiveData<Boolean>()
+    private val _loading = MutableLiveData<Boolean>()
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
@@ -22,11 +24,11 @@ private val productsCase: ProductsCase, private val filter: String?): PageKeyedD
     ) {
         _loading.postValue(true)
         scope.launch {
-            try{
-                val items = productsCase.getProducts(filter, params.requestedLoadSize, 0 )
+            try {
+                val items = productsCase.getProducts(filter, params.requestedLoadSize, 0)
                 _loading.postValue(false)
                 callback.onResult(items, null, params.requestedLoadSize)
-            } catch(ex: Exception){
+            } catch (ex: Exception) {
                 // TODO notification
             }
         }
@@ -38,11 +40,11 @@ private val productsCase: ProductsCase, private val filter: String?): PageKeyedD
     ) {
         _loading.postValue(true)
         scope.launch {
-            try{
+            try {
                 val items = productsCase.getProducts(filter, params.requestedLoadSize, params.key)
                 _loading.postValue(false)
                 callback.onResult(items, params.key + params.requestedLoadSize)
-            } catch(ex: Exception){
+            } catch (ex: Exception) {
                 // TODO notification
             }
         }

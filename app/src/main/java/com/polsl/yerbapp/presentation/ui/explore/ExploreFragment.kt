@@ -21,6 +21,7 @@ class ExploreFragment : BaseFragment<ExploreViewModel>(), MaterialSearchBar.OnSe
     override val viewModel: ExploreViewModel? by viewModel { parametersOf(this) }
     private lateinit var binding: ExploreFragmentBinding
     private lateinit var adapter: ProductsAdapter
+
     companion object {
         fun newInstance() = ExploreFragment()
     }
@@ -43,13 +44,15 @@ class ExploreFragment : BaseFragment<ExploreViewModel>(), MaterialSearchBar.OnSe
         super.onViewCreated(view, savedInstanceState)
         searchBar.setOnSearchActionListener(this)
     }
+
     override fun setupLiveData() {
         super.setupLiveData()
         viewModel?.pagedProducts?.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
         viewModel?.loading?.observe(viewLifecycleOwner, Observer {
-            binding.loading = it })
+            binding.loading = it
+        })
     }
 
     override fun onButtonClicked(buttonCode: Int) {

@@ -18,11 +18,12 @@ import yerba.GetProductQuery
 import yerba.GetProductsQuery
 import yerba.type.AddProductInput
 import java.io.File
-import java.lang.IllegalStateException
 
-class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
-                         private val retrofitService: RetrofitService,
-                         private val usersRepository: UsersRepository) {
+class ProductsRepository(
+    private val apolloClientFactory: ApolloClientFactory,
+    private val retrofitService: RetrofitService,
+    private val usersRepository: UsersRepository
+) {
 
 
     suspend fun getProducts(
@@ -49,7 +50,14 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
                     .await()
 
             return response.data()?.products()?.items()?.let { items ->
-                items.map { ProductModel(it.id(), it.name(), it.overallAverage().toFloat(), it.photoUrl()) }
+                items.map {
+                    ProductModel(
+                        it.id(),
+                        it.name(),
+                        it.overallAverage().toFloat(),
+                        it.photoUrl()
+                    )
+                }
             } ?: run {
                 throw IllegalStateException()
             }
@@ -112,9 +120,9 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
         image: File?
     ): String {
 
-        val url = image?.let{
+        val url = image?.let {
             uploadFile(image)
-        } ?: run {null}
+        } ?: run { null }
         val productInput = AddProductInput
             .builder()
             .name(name)
@@ -149,7 +157,7 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
             } ?: run {
                 throw IllegalStateException()
             }
-        } catch(ex: UnauthorizedException){
+        } catch (ex: UnauthorizedException) {
             throw UnauthorizedException()
         } catch (ex: ApolloException) {
             throw ex
@@ -158,12 +166,13 @@ class ProductsRepository(private val apolloClientFactory: ApolloClientFactory,
         }
     }
 
-        suspend fun uploadFile(file: File): String? {
-            val uri = Uri.fromFile(file)
-            val filePart = MultipartBody.Part.createFormData(
-                "file",
-                file.name,
-                RequestBody.create(MediaType.parse("image/jpeg"), file))
+    suspend fun uploadFile(file: File): String? {
+        val uri = Uri.fromFile(file)
+        val filePart = MultipartBody.Part.createFormData(
+            "file",
+            file.name,
+            RequestBody.create(MediaType.parse("image/jpeg"), file)
+        )
         try {
             val result = retrofitService.upload(
                 filePart

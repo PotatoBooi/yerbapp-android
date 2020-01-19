@@ -58,7 +58,7 @@ class LoginViewModel(private val loginUserCase: LoginUserCase) : BaseViewModel()
     }
 
     fun registerClick() {
-       val navigationId = R.id.action_profileFragment_to_registerFragment
+        val navigationId = R.id.action_profileFragment_to_registerFragment
         _navigationProps.value = NavigationProps(navigationId, null)
     }
 

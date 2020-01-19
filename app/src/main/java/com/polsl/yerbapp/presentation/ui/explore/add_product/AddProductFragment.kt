@@ -23,7 +23,7 @@ import org.koin.core.parameter.parametersOf
 class AddProductFragment : BaseFragment<AddProductViewModel>() {
     override val viewModel: AddProductViewModel? by viewModel { parametersOf(this) }
     private lateinit var binding: AddProductFragmentBinding
-    private lateinit var imageView:ImageView
+    private lateinit var imageView: ImageView
 
     companion object {
         fun newInstance() = AddProductFragment()
@@ -41,8 +41,20 @@ class AddProductFragment : BaseFragment<AddProductViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sManufacturer.setAdapter(HintSpinnerAdapter<ManufacturerModel>(context, viewModel!!.manufacturers, context?.resources?.getString(R.string.MANUFACTURER)))
-        sType.setAdapter(HintSpinnerAdapter<TypeModel>(context, viewModel!!.types, context?.resources?.getString(R.string.TYPE)))
+        sManufacturer.setAdapter(
+            HintSpinnerAdapter<ManufacturerModel>(
+                context,
+                viewModel!!.manufacturers,
+                context?.resources?.getString(R.string.MANUFACTURER)
+            )
+        )
+        sType.setAdapter(
+            HintSpinnerAdapter<TypeModel>(
+                context,
+                viewModel!!.types,
+                context?.resources?.getString(R.string.TYPE)
+            )
+        )
 
         imageView = ivPhoto
         ivPhoto.setOnClickListener {
@@ -57,11 +69,11 @@ class AddProductFragment : BaseFragment<AddProductViewModel>() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-            val images = ImagePicker.getImages(data)
+        val images = ImagePicker.getImages(data)
 
-            if(!images.isNullOrEmpty()){
-                viewModel?.productImagePath?.set(images[0].path)
-                viewModel?.isImageSet?.set(true) // can one observable depend on another automatically?
-            }
+        if (!images.isNullOrEmpty()) {
+            viewModel?.productImagePath?.set(images[0].path)
+            viewModel?.isImageSet?.set(true) // can one observable depend on another automatically?
+        }
     }
 }

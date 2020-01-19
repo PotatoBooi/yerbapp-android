@@ -7,6 +7,6 @@ class ProductsCase(private val productsRepository: ProductsRepository) {
 
     val ORDER_BY = "name"
     suspend fun getProducts(searchByName: String?, perPage: Int, offset: Int): List<ProductModel> {
-       return productsRepository.getProducts(searchByName, perPage, offset, ORDER_BY)
+        return productsRepository.getProducts(searchByName, perPage, offset, ORDER_BY)
     }
 }
