@@ -42,7 +42,7 @@
     <string name="ADD">Dodaj</string>
     <string name="GALLERY">Galeria</string>
     <string name="PRODUCT_NAME_EMPTY">Nazwa produktu nie może być pusta</string>
-    <string name="PRODUCT_ADDED">produkt został dodany!</string>
+    <string name="PRODUCT_ADDED">Produkt został dodany!</string>
     <string name="REMOVE">Usuń</string>
     <string name="START_TUTORIAL">Rozpocznij istruktaż</string>
     <string name="NEXT">Dalej</string>
@@ -53,7 +53,12 @@
     <string name="TUTORIAL_5">Wetknij bombillę w wolne miejsce między ścianką naczynia a kopcem z suszu, a następnie wlej wodę w temperaturze około 70-80 stopni. Pamietaj, aby nie mieszać napoju.</string>
     <string name="TUTORIAL_6">Tak przygotowaną yerba mate pozostaw na około 2-3 minuty, zaraz potem śmiało możesz zacząć delektować się swoim napojem!</string>
     <string name="PREVIOUS">Cofnij</string>
-    <string name="SEARCH">Wyszukaj..</string>
+    <string name="SEARCH">Wyszukaj...</string>
     <string name="TYPE_EMPTY">Wybierz typ produktu</string>
     <string name="MANUFACTURER_EMPTY">Wybierz producenta</string>
+    <string name="PRODUCT_DETAILS">Szczegóły produktu</string>
+    <string name="REGISTRATION">Rejestracja</string>
+    <string name="ADD_PRODUCT">Dodaj produkt</string>
+
+
 </resources>

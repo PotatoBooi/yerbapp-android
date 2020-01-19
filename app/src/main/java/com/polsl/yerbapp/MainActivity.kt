@@ -20,10 +20,7 @@ class MainActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this, R.id.navHostMain)
         bottomNav.setupWithNavController(navController)
         navController.addOnDestinationChangedListener(navigationChangedListener)
-
-//        supportActionBar?.setDisplayShowHomeEnabled(true)
-//        supportActionBar?.setLogo(R.mipmap.ic_logo)
-//        supportActionBar?.setDisplayUseLogoEnabled(true)
+        setSupportActionBar(appBar)
     }
 
     private val navigationChangedListener =
@@ -31,12 +28,35 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.registerFragment -> {
                     bottomNav.visibility = View.GONE
+                    setAppbar(getString(R.string.REGISTRATION), true)
                 }
-                else -> bottomNav.visibility = View.VISIBLE
+                R.id.productPreviewFragment -> {
+                    bottomNav.visibility = View.GONE
+                    setAppbar(getString(R.string.PRODUCT_DETAILS), true)
+                }
+                R.id.addProductFragment -> {
+                    bottomNav.visibility = View.GONE
+                    setAppbar(getString(R.string.ADD_PRODUCT), true)
+
+                }
+                else -> {
+                    bottomNav.visibility = View.VISIBLE
+                    setAppbar()
+                }
             }
 
         }
 
+    private fun setAppbar(title: String = "", isBackEnabled: Boolean = false) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(isBackEnabled)
+
+        appBarTitle.text = if (title.isEmpty()) getString(R.string.app_name) else title
+        appBarLogo.visibility = if (title.isEmpty() && !isBackEnabled) View.VISIBLE else View.GONE
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp()
+    }
     fun showSnackbar(@StringRes stringRes: Int) {
         Flashbar.Builder(this)
             .gravity(Flashbar.Gravity.TOP)

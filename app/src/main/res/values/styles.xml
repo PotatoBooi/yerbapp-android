@@ -12,4 +12,8 @@
         <item name="android:background">@drawable/rounded_button</item>
     </style>
 
+    <style name="ToolbarWhiteIcon" parent="AppTheme">
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+
 </resources>
