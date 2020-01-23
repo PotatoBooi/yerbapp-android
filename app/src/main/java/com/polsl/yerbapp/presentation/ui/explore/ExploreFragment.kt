@@ -18,6 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
+
 class ExploreFragment : BaseFragment<ExploreViewModel>(), MaterialSearchBar.OnSearchActionListener {
     override val viewModel: ExploreViewModel? by viewModel { parametersOf(this) }
     private lateinit var binding: ExploreFragmentBinding
@@ -64,9 +65,14 @@ class ExploreFragment : BaseFragment<ExploreViewModel>(), MaterialSearchBar.OnSe
     }
 
     override fun onButtonClicked(buttonCode: Int) {
+
     }
 
     override fun onSearchStateChanged(enabled: Boolean) {
+        // temporary but working(?) solution
+        if (!enabled) {
+            viewModel?.search("")
+        }
     }
 
     override fun onSearchConfirmed(text: CharSequence?) {
