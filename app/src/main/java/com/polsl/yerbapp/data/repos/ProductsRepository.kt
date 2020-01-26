@@ -100,7 +100,8 @@ class ProductsRepository(
                     priceAverage = it.priceAverage().toFloat(),
                     tasteAverage = it.tasteAverage().toFloat(),
                     manufacturerModel = manufacturer,
-                    typeModel = type
+                    typeModel = type,
+                    numberOfReviews = it.reviews()?.size
                 )
             } ?: run {
                 throw IllegalStateException()

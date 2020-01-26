@@ -59,7 +59,6 @@ object BindingAdapters {
     fun setText(textView: TextView, value: Float) {
         textView.text = String.format("%.1f", value)
     }
-
     @BindingAdapter("isIndicator")
     @JvmStatic
     fun setIsIndicator(ratingBar: BaseRatingBar, value: Boolean) {

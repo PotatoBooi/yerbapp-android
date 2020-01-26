@@ -17,5 +17,8 @@ query GetProduct( $productId:  ID!){
         type{
             name
         }
+        reviews{
+            id
+        }
     }
 }

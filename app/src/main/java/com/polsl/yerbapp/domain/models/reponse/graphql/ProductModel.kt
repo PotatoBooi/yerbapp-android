@@ -12,5 +12,6 @@ data class ProductModel(
     val tasteAverage: Float? = null,
     val details: String? = null,
     val manufacturerModel: ManufacturerModel? = null,
-    val typeModel: TypeModel? = null
+    val typeModel: TypeModel? = null,
+    val numberOfReviews: Int? = 0
 )

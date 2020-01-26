@@ -59,6 +59,7 @@
     <string name="PRODUCT_DETAILS">Szczegóły produktu</string>
     <string name="REGISTRATION">Rejestracja</string>
     <string name="ADD_PRODUCT">Dodaj produkt</string>
+    <string name="NUMBER_REVIEWS">na %d oceny</string>
 
 
 </resources>
