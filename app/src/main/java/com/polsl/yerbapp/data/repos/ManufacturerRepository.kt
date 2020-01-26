@@ -12,6 +12,7 @@ class ManufacturersRepository(private val apolloClientFactory: ApolloClientFacto
     suspend fun getManufacturers(): List<ManufacturerModel> {
         val manufacturerQuery = GetManufacturersQuery
             .builder()
+            .perPage(getNumberOfManufacturers())
             .build()
 
         try {
@@ -34,7 +35,7 @@ class ManufacturersRepository(private val apolloClientFactory: ApolloClientFacto
         }
     }
 
-    suspend fun getNumberOfManufacturers(): Int {
+    private suspend fun getNumberOfManufacturers(): Int {
         val numberOfManufacturers = GetNumberOfManufacturersQuery
             .builder()
             .build()
@@ -53,7 +54,6 @@ class ManufacturersRepository(private val apolloClientFactory: ApolloClientFacto
         } catch (ex: Exception) {
             throw  ex
         }
-        return 1
     }
 
 }

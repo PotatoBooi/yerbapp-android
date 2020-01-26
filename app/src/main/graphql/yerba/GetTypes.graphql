@@ -1,5 +1,5 @@
-query GetTypes {
-    types{
+query GetTypes($perPage: Int) {
+    types(perPage: $perPage){
         items{
             id,
             name

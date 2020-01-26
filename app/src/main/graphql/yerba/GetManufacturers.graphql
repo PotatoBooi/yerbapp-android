@@ -1,5 +1,5 @@
-query GetManufacturers {
-    manufacturers{
+query GetManufacturers( $perPage: Int) {
+    manufacturers(perPage: $perPage){
         items{
             id,
             name,

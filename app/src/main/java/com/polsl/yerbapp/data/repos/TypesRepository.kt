@@ -12,6 +12,7 @@ class TypesRepository(private val apolloClientFactory: ApolloClientFactory) {
     suspend fun getTypes(): List<TypeModel> {
         val typesQuery = GetTypesQuery
             .builder()
+            .perPage(getNumberOfTypes())
             .build()
 
         try {
@@ -34,7 +35,7 @@ class TypesRepository(private val apolloClientFactory: ApolloClientFactory) {
         }
     }
 
-    suspend fun getNumberOfTypes(): Int {
+    private suspend fun getNumberOfTypes(): Int {
         val numberOfTypesQuery = GetNumberOfTypesQuery
             .builder()
             .build()
@@ -53,6 +54,5 @@ class TypesRepository(private val apolloClientFactory: ApolloClientFactory) {
         } catch (ex: Exception) {
             throw  ex
         }
-        return 1
     }
 }
