@@ -1897,7 +1897,7 @@
               "name": "Int",
               "ofType": null
             },
-            "defaultValue": "1"
+            "defaultValue": "0"
           },
           {
             "name": "taste",
@@ -1907,7 +1907,7 @@
               "name": "Int",
               "ofType": null
             },
-            "defaultValue": "1"
+            "defaultValue": "0"
           },
           {
             "name": "bitterness",
@@ -1917,7 +1917,7 @@
               "name": "Int",
               "ofType": null
             },
-            "defaultValue": "1"
+            "defaultValue": "0"
           },
           {
             "name": "energy",
@@ -1927,7 +1927,7 @@
               "name": "Int",
               "ofType": null
             },
-            "defaultValue": "1"
+            "defaultValue": "0"
           },
           {
             "name": "price",
@@ -1937,7 +1937,7 @@
               "name": "Int",
               "ofType": null
             },
-            "defaultValue": "1"
+            "defaultValue": "0"
           },
           {
             "name": "overall",
@@ -1947,7 +1947,7 @@
               "name": "Int",
               "ofType": null
             },
-            "defaultValue": "1"
+            "defaultValue": "0"
           }
         ],
         "interfaces": null,
