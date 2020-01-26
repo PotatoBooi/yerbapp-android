@@ -13,6 +13,8 @@ class TypesRepository(private val apolloClientFactory: ApolloClientFactory) {
         val typesQuery = GetTypesQuery
             .builder()
             .perPage(getNumberOfTypes())
+            .orderBy("name")
+            .order("ASC")
             .build()
 
         try {

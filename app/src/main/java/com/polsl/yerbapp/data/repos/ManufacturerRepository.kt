@@ -13,6 +13,8 @@ class ManufacturersRepository(private val apolloClientFactory: ApolloClientFacto
         val manufacturerQuery = GetManufacturersQuery
             .builder()
             .perPage(getNumberOfManufacturers())
+            .orderBy("name")
+            .order("ASC")
             .build()
 
         try {
