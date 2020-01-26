@@ -87,7 +87,7 @@ class ProductsRepository(
                     country = it.manufacturer().country(),
                     name = it.manufacturer().name()
                 )
-                val type = TypeModel(name = it.type().name())
+                val type = TypeModel(name = it.type()?.name() ?: "-")
                 ProductModel(
                     id = it.id(),
                     name = it.name(),
