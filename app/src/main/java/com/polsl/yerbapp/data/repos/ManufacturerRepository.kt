@@ -5,6 +5,7 @@ import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.network.ApolloClientFactory
 import com.polsl.yerbapp.domain.models.reponse.graphql.ManufacturerModel
 import yerba.GetManufacturersQuery
+import yerba.GetNumberOfManufacturersQuery
 
 class ManufacturersRepository(private val apolloClientFactory: ApolloClientFactory) {
 
@@ -31,6 +32,28 @@ class ManufacturersRepository(private val apolloClientFactory: ApolloClientFacto
         } catch (ex: Exception) {
             throw  ex
         }
+    }
+
+    suspend fun getNumberOfManufacturers(): Int {
+        val numberOfManufacturers = GetNumberOfManufacturersQuery
+            .builder()
+            .build()
+
+        try {
+            val apolloClient = apolloClientFactory.create()
+            val response =
+                apolloClient
+                    .query(numberOfManufacturers)
+                    .toDeferred()
+                    .await()
+
+            return response.data()?.manufacturers()?.total() ?: 0
+        } catch (ex: ApolloException) {
+            throw ex
+        } catch (ex: Exception) {
+            throw  ex
+        }
+        return 1
     }
 
 }

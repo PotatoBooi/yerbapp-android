@@ -1,0 +1,5 @@
+query GetNumberOfTypes {
+    types{
+        total
+    }
+}

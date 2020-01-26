@@ -1,0 +1,5 @@
+query GetNumberOfManufacturers {
+    manufacturers{
+        total
+    }
+}

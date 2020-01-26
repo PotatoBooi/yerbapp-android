@@ -4,6 +4,7 @@ import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import com.polsl.yerbapp.data.network.ApolloClientFactory
 import com.polsl.yerbapp.domain.models.reponse.graphql.TypeModel
+import yerba.GetNumberOfTypesQuery
 import yerba.GetTypesQuery
 
 class TypesRepository(private val apolloClientFactory: ApolloClientFactory) {
@@ -31,5 +32,27 @@ class TypesRepository(private val apolloClientFactory: ApolloClientFactory) {
         } catch (ex: Exception) {
             throw  ex
         }
+    }
+
+    suspend fun getNumberOfTypes(): Int {
+        val numberOfTypesQuery = GetNumberOfTypesQuery
+            .builder()
+            .build()
+
+        try {
+            val apolloClient = apolloClientFactory.create()
+            val response =
+                apolloClient
+                    .query(numberOfTypesQuery)
+                    .toDeferred()
+                    .await()
+
+            return response.data()?.types()?.total() ?: 0
+        } catch (ex: ApolloException) {
+            throw ex
+        } catch (ex: Exception) {
+            throw  ex
+        }
+        return 1
     }
 }
