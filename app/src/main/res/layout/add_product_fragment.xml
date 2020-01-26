@@ -54,27 +54,37 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnRemovePhoto" />
 
-            <com.jaiselrahman.hintspinner.HintSpinner
+            <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
                 android:id="@+id/sType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:selectedItemPosition="@={viewmodel.typeInputIndex}"
-                android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etName" />
+                app:layout_constraintTop_toBottomOf="@id/etName"
+                app:smsp_isSearchable="true"
+                app:smsp_enableSearchHeader="false"
+                app:smsp_searchHint="@string/SEARCH"
+                app:smsp_hint="@string/TYPE"
+                app:smsp_selectedItemListColor="@color/colorPrimaryDark"
+                app:smsp_hintSize="16sp"
+                app:smsp_itemSize="16sp" />
 
-            <com.jaiselrahman.hintspinner.HintSpinner
+            <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
                 android:id="@+id/sManufacturer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:selectedItemPosition="@={viewmodel.manufacturerInputIndex}"
-                android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sType" />
+                app:layout_constraintTop_toBottomOf="@id/sType"
+                app:smsp_isSearchable="true"
+                app:smsp_enableSearchHeader="false"
+                app:smsp_searchHint="@string/SEARCH"
+                app:smsp_hint="@string/MANUFACTURER"
+                app:smsp_selectedItemListColor="@color/colorPrimaryDark"
+                app:smsp_hintSize="16sp"
+                app:smsp_itemSize="16sp" />
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -84,7 +94,8 @@
                 android:hint="@string/DETAILS"
                 android:text="@={viewmodel.detailsInput}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sManufacturer" />
+                app:layout_constraintTop_toBottomOf="@id/sManufacturer"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btnSave"

@@ -26,19 +26,32 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
     val nameInput = ObservableField<String>("")
     val detailsInput = ObservableField<String>("")
 
+
     val types = ObservableArrayList<TypeModel>()
-    val typeInputIndex = ObservableInt(0)
+    val typeInputIndex = ObservableInt(-1)
 
     val manufacturers = ObservableArrayList<ManufacturerModel>()
-    val manufacturerInputIndex = ObservableInt()
+    val manufacturerInputIndex = ObservableInt(-1)
 
     val productImagePath = ObservableField<String>()
     val isImageSet = ObservableBoolean(false)
 
     private val manufacturerId: String?
-        get() = manufacturers[manufacturerInputIndex.get() - 1].id
+        get() {
+            return try {
+                manufacturers[manufacturerInputIndex.get()].id
+            } catch (ex: Exception) {
+                null
+            }
+        }
     private val typeId: String?
-        get() = types[typeInputIndex.get() - 1].id
+        get() {
+            return try {
+                types[typeInputIndex.get()].id
+            } catch (ex: Exception) {
+                null
+            }
+        }
     val productAdded: LiveData<Unit>
         get() = _productAdded
     private val _productAdded = LiveEvent<Unit>()
@@ -50,8 +63,8 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
 
 
     fun onRemovePhotoClick() {
-        productImagePath?.set("")
-        isImageSet?.set(false)
+        productImagePath.set("")
+        isImageSet.set(false)
     }
 
     fun onSaveClick() {
@@ -62,13 +75,13 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
             }
         }
         when {
-            typeInputIndex.get() == 0 -> {
+            typeInputIndex.get() == -1 -> {
                 _message.value = R.string.TYPE_EMPTY
                 return
             }
         }
         when {
-            manufacturerInputIndex.get() == 0 -> {
+            manufacturerInputIndex.get() == -1 -> {
                 _message.value = R.string.MANUFACTURER_EMPTY
                 return
             }
@@ -90,7 +103,7 @@ class AddProductViewModel(private val productCase: ProductCase) : BaseViewModel(
                     manufacturerId ?: "",
                     file
                 )
-                if (!result.isNullOrEmpty()) {
+                if (result.isNotEmpty()) {
                     _message.postValue(R.string.PRODUCT_ADDED)
                     _productAdded.value = Unit
                 }
