@@ -45,8 +45,11 @@ class ExploreViewModel(
     private lateinit var _pagedProducts: LiveData<PagedList<ProductModel>>
     val loading: LiveData<Boolean>
         get() = _loading
-
     private lateinit var _loading: LiveData<Boolean>
+
+    val error: LiveData<Boolean>
+        get() = _error
+    private lateinit var _error: LiveData<Boolean>
 
     fun onAddProductClick() {
         val navigationId = R.id.action_exploreFragment_to_addProductFragment
@@ -58,6 +61,7 @@ class ExploreViewModel(
     private fun initPaging() {
         productsDataFactory = ProductsDataFactory(viewModelScope, productsCase)
         _loading = Transformations.switchMap(productsDataFactory.liveData) { it.loading }
+        _error = Transformations.switchMap(productsDataFactory.liveData) { it.error }
 
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
@@ -82,6 +86,11 @@ class ExploreViewModel(
     fun refreshList() {
         _pagedProducts.value?.dataSource?.invalidate()
     }
+
+    fun showErrorMessage() {
+        _message.postValue(R.string.ERROR)
+    }
+
 }
 
 

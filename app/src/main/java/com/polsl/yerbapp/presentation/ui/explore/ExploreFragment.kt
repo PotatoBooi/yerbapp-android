@@ -62,6 +62,9 @@ class ExploreFragment : BaseFragment<ExploreViewModel>(), MaterialSearchBar.OnSe
         productsSharedViewModel.refreshList.observe(viewLifecycleOwner, Observer {
             viewModel?.refreshList()
         })
+        viewModel?.error?.observe(viewLifecycleOwner, Observer {
+            viewModel?.showErrorMessage()
+        })
     }
 
     override fun onButtonClicked(buttonCode: Int) {

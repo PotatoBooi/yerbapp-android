@@ -18,6 +18,10 @@ class ProductsDataSource(
         get() = _loading
     private val _loading = LiveEvent<Boolean>()
 
+    val error: LiveData<Boolean>
+        get() = _error
+    private val _error = LiveEvent<Boolean>()
+
     override fun loadInitial(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, ProductModel>
@@ -28,7 +32,7 @@ class ProductsDataSource(
                 val items = productsCase.getProducts(filter, params.requestedLoadSize, 0)
                 callback.onResult(items, null, params.requestedLoadSize)
             } catch (ex: Exception) {
-                // TODO notification
+                _error.postValue(true)
             } finally {
                 _loading.postValue(false)
             }
@@ -45,7 +49,7 @@ class ProductsDataSource(
                 val items = productsCase.getProducts(filter, params.requestedLoadSize, params.key)
                 callback.onResult(items, params.key + params.requestedLoadSize)
             } catch (ex: Exception) {
-                // TODO notification
+                _error.postValue(true)
             } finally {
                 _loading.postValue(false)
             }
@@ -58,5 +62,14 @@ class ProductsDataSource(
         callback: LoadCallback<Int, ProductModel>
     ) {
     }
+
+//    private fun handleErrors(ex: Exception) {
+//        when (ex) {
+//            is NoConnectivityException -> {
+//                //_errorMessage.postValue("Nie masz połączenia z internetem.\nSpróbuj ponownie później.")
+//            }
+//            else -> _errorMessage.postValue("Wystąpił błąd. Spróbuj ponownie później")
+//        }
+//    }
 
 }

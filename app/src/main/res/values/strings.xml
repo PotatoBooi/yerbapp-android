@@ -15,6 +15,7 @@
     <string name="EMAIL_EMPTY">Email nie może być pusty</string>
     <string name="INVALID_CREDENTIALS">Nieprawidłowe dane logowania</string>
     <string name="USER_NOT_FOUND">Taki użytkownik nie istnieje</string>
+    <string name="ERROR">Wystąpił błąd. \nSprawdź swoje połączenia z internetem.</string>
     <string name="NO_INTERNET">Nie masz połączenia z internetem.\nSpróbuj ponownie później.</string>
     <string name="LOADING">Ładowanie</string>
     <string name="USERNAME_TOO_SHORT">Login musi się składać co najmniej z 7 znaków</string>
