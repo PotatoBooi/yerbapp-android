@@ -1,5 +1,5 @@
-query GetProducts ($personalizeForUer: ID, $searchByName: String, $perPage: Int, $offset: Int, $orderBy: String){
-    products(personalizeForUser: $personalizeForUer, searchByName: $searchByName, perPage: $perPage, offset: $offset, orderBy: $orderBy )  {
+query GetProducts ($personalizeForUer: ID, $searchByName: String, $perPage: Int, $offset: Int, $orderBy: String, $order: String){
+    products(personalizeForUser: $personalizeForUer, searchByName: $searchByName, perPage: $perPage, offset: $offset, orderBy: $orderBy, order: $order)  {
         items{
             id,
             name,

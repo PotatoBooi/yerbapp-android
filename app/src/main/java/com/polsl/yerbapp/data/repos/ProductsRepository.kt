@@ -29,15 +29,15 @@ class ProductsRepository(
     suspend fun getProducts(
         filter: String?,
         perPage: Int,
-        offset: Int,
-        orderBy: String
+        offset: Int
     ): List<ProductModel> {
         val productsQuery = GetProductsQuery
             .builder()
             .searchByName(filter)
             .perPage(perPage)
             .offset(offset)
-            .orderBy(orderBy)
+            .orderBy("overallAverage")
+            .order("DESC")
         if (usersRepository.checkUserAuthorized()) {
             productsQuery.personalizeForUer(usersRepository.getCurrentUserInfo().userId.toString())
         }
