@@ -66,9 +66,11 @@
                 app:smsp_enableSearchHeader="false"
                 app:smsp_searchHint="@string/SEARCH"
                 app:smsp_hint="@string/TYPE"
-                app:smsp_selectedItemListColor="@color/colorPrimaryDark"
+                app:smsp_selectedItemListColor="@color/colorPrimary"
                 app:smsp_hintSize="16sp"
-                app:smsp_itemSize="16sp" />
+                app:smsp_itemSize="16sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" />
 
             <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
                 android:id="@+id/sManufacturer"
@@ -82,9 +84,11 @@
                 app:smsp_enableSearchHeader="false"
                 app:smsp_searchHint="@string/SEARCH"
                 app:smsp_hint="@string/MANUFACTURER"
-                app:smsp_selectedItemListColor="@color/colorPrimaryDark"
+                app:smsp_selectedItemListColor="@color/colorPrimary"
                 app:smsp_hintSize="16sp"
-                app:smsp_itemSize="16sp" />
+                app:smsp_itemSize="16sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" />
 
 
             <com.google.android.material.textfield.TextInputEditText
