@@ -39,6 +39,7 @@ class RegisterViewModel(private val registerUserCase: RegisterUserCase) : BaseVi
             }
             (passwordInput.get()?.length ?: 0) < 8 -> {
                 _message.value = R.string.PASSWORD_TOO_SHORT
+                return
             }
         }
         when {
